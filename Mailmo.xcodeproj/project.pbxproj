@@ -3,19 +3,64 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		09E98D4C2605397900C4F4F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E98D4B2605397900C4F4F7 /* AppDelegate.swift */; };
 		09E98D4E2605397900C4F4F7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E98D4D2605397900C4F4F7 /* SceneDelegate.swift */; };
-		09E98D502605397900C4F4F7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E98D4F2605397900C4F4F7 /* ViewController.swift */; };
-		09E98D532605397900C4F4F7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09E98D512605397900C4F4F7 /* Main.storyboard */; };
 		09E98D562605397900C4F4F7 /* Mailmo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 09E98D542605397900C4F4F7 /* Mailmo.xcdatamodeld */; };
 		09E98D582605397A00C4F4F7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09E98D572605397A00C4F4F7 /* Assets.xcassets */; };
-		09E98D5B2605397A00C4F4F7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09E98D592605397A00C4F4F7 /* LaunchScreen.storyboard */; };
 		09E98D662605397A00C4F4F7 /* MailmoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E98D652605397A00C4F4F7 /* MailmoTests.swift */; };
 		09E98D712605397A00C4F4F7 /* MailmoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E98D702605397A00C4F4F7 /* MailmoUITests.swift */; };
+		09E98D94260539E000C4F4F7 /* welcomeAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 09E98D92260539E000C4F4F7 /* welcomeAnimation.json */; };
+		09E98D95260539E000C4F4F7 /* mailmoIconAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 09E98D93260539E000C4F4F7 /* mailmoIconAnimation.json */; };
+		09E98DC3260539E900C4F4F7 /* fa-solid-900.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09E98D9C260539E900C4F4F7 /* fa-solid-900.ttf */; };
+		09E98DC4260539E900C4F4F7 /* fa-regular-400.svg in Resources */ = {isa = PBXBuildFile; fileRef = 09E98D9D260539E900C4F4F7 /* fa-regular-400.svg */; };
+		09E98DC5260539E900C4F4F7 /* fa-regular-400.woff2 in Resources */ = {isa = PBXBuildFile; fileRef = 09E98D9E260539E900C4F4F7 /* fa-regular-400.woff2 */; };
+		09E98DC6260539E900C4F4F7 /* fa-solid-900.eot in Resources */ = {isa = PBXBuildFile; fileRef = 09E98D9F260539E900C4F4F7 /* fa-solid-900.eot */; };
+		09E98DC7260539E900C4F4F7 /* fa-brands-400.svg in Resources */ = {isa = PBXBuildFile; fileRef = 09E98DA0260539E900C4F4F7 /* fa-brands-400.svg */; };
+		09E98DC8260539E900C4F4F7 /* fa-regular-400.woff in Resources */ = {isa = PBXBuildFile; fileRef = 09E98DA1260539E900C4F4F7 /* fa-regular-400.woff */; };
+		09E98DC9260539E900C4F4F7 /* fa-brands-400.eot in Resources */ = {isa = PBXBuildFile; fileRef = 09E98DA2260539E900C4F4F7 /* fa-brands-400.eot */; };
+		09E98DCA260539E900C4F4F7 /* fa-solid-900.svg in Resources */ = {isa = PBXBuildFile; fileRef = 09E98DA3260539E900C4F4F7 /* fa-solid-900.svg */; };
+		09E98DCB260539E900C4F4F7 /* fa-solid-900.woff in Resources */ = {isa = PBXBuildFile; fileRef = 09E98DA4260539E900C4F4F7 /* fa-solid-900.woff */; };
+		09E98DCC260539E900C4F4F7 /* fa-regular-400.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09E98DA5260539E900C4F4F7 /* fa-regular-400.ttf */; };
+		09E98DCD260539E900C4F4F7 /* fa-solid-900.woff2 in Resources */ = {isa = PBXBuildFile; fileRef = 09E98DA6260539E900C4F4F7 /* fa-solid-900.woff2 */; };
+		09E98DCE260539E900C4F4F7 /* fa-brands-400.woff2 in Resources */ = {isa = PBXBuildFile; fileRef = 09E98DA7260539E900C4F4F7 /* fa-brands-400.woff2 */; };
+		09E98DCF260539E900C4F4F7 /* fa-brands-400.woff in Resources */ = {isa = PBXBuildFile; fileRef = 09E98DA8260539E900C4F4F7 /* fa-brands-400.woff */; };
+		09E98DD0260539E900C4F4F7 /* fa-brands-400.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09E98DA9260539E900C4F4F7 /* fa-brands-400.ttf */; };
+		09E98DD1260539E900C4F4F7 /* fa-regular-400.eot in Resources */ = {isa = PBXBuildFile; fileRef = 09E98DAA260539E900C4F4F7 /* fa-regular-400.eot */; };
+		09E98DD2260539E900C4F4F7 /* fontawesome-all.css in Resources */ = {isa = PBXBuildFile; fileRef = 09E98DAC260539E900C4F4F7 /* fontawesome-all.css */; };
+		09E98DD3260539E900C4F4F7 /* copyright.txt in Resources */ = {isa = PBXBuildFile; fileRef = 09E98DAE260539E900C4F4F7 /* copyright.txt */; };
+		09E98DD4260539E900C4F4F7 /* LICENCE-FAQ.txt in Resources */ = {isa = PBXBuildFile; fileRef = 09E98DAF260539E900C4F4F7 /* LICENCE-FAQ.txt */; };
+		09E98DD5260539E900C4F4F7 /* Ubuntu-M.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09E98DB0260539E900C4F4F7 /* Ubuntu-M.ttf */; };
+		09E98DD6260539E900C4F4F7 /* CONTRIBUTING.txt in Resources */ = {isa = PBXBuildFile; fileRef = 09E98DB1260539E900C4F4F7 /* CONTRIBUTING.txt */; };
+		09E98DD7260539E900C4F4F7 /* FONTLOG.txt in Resources */ = {isa = PBXBuildFile; fileRef = 09E98DB2260539E900C4F4F7 /* FONTLOG.txt */; };
+		09E98DD8260539E900C4F4F7 /* Ubuntu-L.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09E98DB3260539E900C4F4F7 /* Ubuntu-L.ttf */; };
+		09E98DD9260539E900C4F4F7 /* UbuntuMono-BI.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09E98DB4260539E900C4F4F7 /* UbuntuMono-BI.ttf */; };
+		09E98DDA260539E900C4F4F7 /* Ubuntu-BI.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09E98DB5260539E900C4F4F7 /* Ubuntu-BI.ttf */; };
+		09E98DDB260539E900C4F4F7 /* LICENCE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 09E98DB6260539E900C4F4F7 /* LICENCE.txt */; };
+		09E98DDC260539E900C4F4F7 /* TRADEMARKS.txt in Resources */ = {isa = PBXBuildFile; fileRef = 09E98DB7260539E900C4F4F7 /* TRADEMARKS.txt */; };
+		09E98DDD260539E900C4F4F7 /* Ubuntu-Th.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09E98DB8260539E900C4F4F7 /* Ubuntu-Th.ttf */; };
+		09E98DDE260539E900C4F4F7 /* Ubuntu-MI.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09E98DB9260539E900C4F4F7 /* Ubuntu-MI.ttf */; };
+		09E98DDF260539E900C4F4F7 /* Ubuntu-R.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09E98DBA260539E900C4F4F7 /* Ubuntu-R.ttf */; };
+		09E98DE0260539E900C4F4F7 /* Ubuntu-LI.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09E98DBB260539E900C4F4F7 /* Ubuntu-LI.ttf */; };
+		09E98DE1260539E900C4F4F7 /* Ubuntu-B.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09E98DBC260539E900C4F4F7 /* Ubuntu-B.ttf */; };
+		09E98DE2260539E900C4F4F7 /* Ubuntu-C.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09E98DBD260539E900C4F4F7 /* Ubuntu-C.ttf */; };
+		09E98DE3260539E900C4F4F7 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 09E98DBE260539E900C4F4F7 /* README.txt */; };
+		09E98DE4260539E900C4F4F7 /* UbuntuMono-RI.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09E98DBF260539E900C4F4F7 /* UbuntuMono-RI.ttf */; };
+		09E98DE5260539E900C4F4F7 /* UbuntuMono-R.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09E98DC0260539E900C4F4F7 /* UbuntuMono-R.ttf */; };
+		09E98DE6260539E900C4F4F7 /* Ubuntu-RI.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09E98DC1260539E900C4F4F7 /* Ubuntu-RI.ttf */; };
+		09E98DE7260539E900C4F4F7 /* UbuntuMono-B.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09E98DC2260539E900C4F4F7 /* UbuntuMono-B.ttf */; };
+		09E98E4226053A6300C4F4F7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09E98E3E26053A6300C4F4F7 /* LaunchScreen.storyboard */; };
+		09E98E4326053A6300C4F4F7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09E98E4026053A6300C4F4F7 /* Main.storyboard */; };
+		09E98E4A26053A6B00C4F4F7 /* Main_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E98E4826053A6B00C4F4F7 /* Main_VC.swift */; };
+		09E98E4B26053A6B00C4F4F7 /* SignIn_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E98E4926053A6B00C4F4F7 /* SignIn_VC.swift */; };
+		09EBB535260553A70090E8E9 /* New_AskPermission_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EBB534260553A70090E8E9 /* New_AskPermission_VC.swift */; };
+		09EBB542260582690090E8E9 /* dotsAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 09EBB541260582690090E8E9 /* dotsAnimation.json */; };
+		3CBB65EABAAD35963A1AC3D6 /* Pods_Mailmo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D0FF59A3BADA9E5F2060F55 /* Pods_Mailmo.framework */; };
+		474A6C2B269743740854BEF3 /* Pods_MailmoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12359E55CFD6BA1DF18D0FEF /* Pods_MailmoTests.framework */; };
+		E9AB2EEE0A76219C45A40A8E /* Pods_Mailmo_MailmoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6903071BCBC8E5D4F5717192 /* Pods_Mailmo_MailmoUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,11 +84,8 @@
 		09E98D482605397900C4F4F7 /* Mailmo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mailmo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09E98D4B2605397900C4F4F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		09E98D4D2605397900C4F4F7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		09E98D4F2605397900C4F4F7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		09E98D522605397900C4F4F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		09E98D552605397900C4F4F7 /* Mailmo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Mailmo.xcdatamodel; sourceTree = "<group>"; };
 		09E98D572605397A00C4F4F7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		09E98D5A2605397A00C4F4F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		09E98D5C2605397A00C4F4F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		09E98D612605397A00C4F4F7 /* MailmoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MailmoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		09E98D652605397A00C4F4F7 /* MailmoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailmoTests.swift; sourceTree = "<group>"; };
@@ -51,6 +93,60 @@
 		09E98D6C2605397A00C4F4F7 /* MailmoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MailmoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		09E98D702605397A00C4F4F7 /* MailmoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailmoUITests.swift; sourceTree = "<group>"; };
 		09E98D722605397A00C4F4F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		09E98D92260539E000C4F4F7 /* welcomeAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = welcomeAnimation.json; sourceTree = "<group>"; };
+		09E98D93260539E000C4F4F7 /* mailmoIconAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = mailmoIconAnimation.json; sourceTree = "<group>"; };
+		09E98D9C260539E900C4F4F7 /* fa-solid-900.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fa-solid-900.ttf"; sourceTree = "<group>"; };
+		09E98D9D260539E900C4F4F7 /* fa-regular-400.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "fa-regular-400.svg"; sourceTree = "<group>"; };
+		09E98D9E260539E900C4F4F7 /* fa-regular-400.woff2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fa-regular-400.woff2"; sourceTree = "<group>"; };
+		09E98D9F260539E900C4F4F7 /* fa-solid-900.eot */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fa-solid-900.eot"; sourceTree = "<group>"; };
+		09E98DA0260539E900C4F4F7 /* fa-brands-400.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "fa-brands-400.svg"; sourceTree = "<group>"; };
+		09E98DA1260539E900C4F4F7 /* fa-regular-400.woff */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fa-regular-400.woff"; sourceTree = "<group>"; };
+		09E98DA2260539E900C4F4F7 /* fa-brands-400.eot */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fa-brands-400.eot"; sourceTree = "<group>"; };
+		09E98DA3260539E900C4F4F7 /* fa-solid-900.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "fa-solid-900.svg"; sourceTree = "<group>"; };
+		09E98DA4260539E900C4F4F7 /* fa-solid-900.woff */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fa-solid-900.woff"; sourceTree = "<group>"; };
+		09E98DA5260539E900C4F4F7 /* fa-regular-400.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fa-regular-400.ttf"; sourceTree = "<group>"; };
+		09E98DA6260539E900C4F4F7 /* fa-solid-900.woff2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fa-solid-900.woff2"; sourceTree = "<group>"; };
+		09E98DA7260539E900C4F4F7 /* fa-brands-400.woff2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fa-brands-400.woff2"; sourceTree = "<group>"; };
+		09E98DA8260539E900C4F4F7 /* fa-brands-400.woff */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fa-brands-400.woff"; sourceTree = "<group>"; };
+		09E98DA9260539E900C4F4F7 /* fa-brands-400.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fa-brands-400.ttf"; sourceTree = "<group>"; };
+		09E98DAA260539E900C4F4F7 /* fa-regular-400.eot */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fa-regular-400.eot"; sourceTree = "<group>"; };
+		09E98DAC260539E900C4F4F7 /* fontawesome-all.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "fontawesome-all.css"; sourceTree = "<group>"; };
+		09E98DAE260539E900C4F4F7 /* copyright.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = copyright.txt; sourceTree = "<group>"; };
+		09E98DAF260539E900C4F4F7 /* LICENCE-FAQ.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "LICENCE-FAQ.txt"; sourceTree = "<group>"; };
+		09E98DB0260539E900C4F4F7 /* Ubuntu-M.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-M.ttf"; sourceTree = "<group>"; };
+		09E98DB1260539E900C4F4F7 /* CONTRIBUTING.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CONTRIBUTING.txt; sourceTree = "<group>"; };
+		09E98DB2260539E900C4F4F7 /* FONTLOG.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FONTLOG.txt; sourceTree = "<group>"; };
+		09E98DB3260539E900C4F4F7 /* Ubuntu-L.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-L.ttf"; sourceTree = "<group>"; };
+		09E98DB4260539E900C4F4F7 /* UbuntuMono-BI.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "UbuntuMono-BI.ttf"; sourceTree = "<group>"; };
+		09E98DB5260539E900C4F4F7 /* Ubuntu-BI.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-BI.ttf"; sourceTree = "<group>"; };
+		09E98DB6260539E900C4F4F7 /* LICENCE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENCE.txt; sourceTree = "<group>"; };
+		09E98DB7260539E900C4F4F7 /* TRADEMARKS.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TRADEMARKS.txt; sourceTree = "<group>"; };
+		09E98DB8260539E900C4F4F7 /* Ubuntu-Th.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-Th.ttf"; sourceTree = "<group>"; };
+		09E98DB9260539E900C4F4F7 /* Ubuntu-MI.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-MI.ttf"; sourceTree = "<group>"; };
+		09E98DBA260539E900C4F4F7 /* Ubuntu-R.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-R.ttf"; sourceTree = "<group>"; };
+		09E98DBB260539E900C4F4F7 /* Ubuntu-LI.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-LI.ttf"; sourceTree = "<group>"; };
+		09E98DBC260539E900C4F4F7 /* Ubuntu-B.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-B.ttf"; sourceTree = "<group>"; };
+		09E98DBD260539E900C4F4F7 /* Ubuntu-C.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-C.ttf"; sourceTree = "<group>"; };
+		09E98DBE260539E900C4F4F7 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		09E98DBF260539E900C4F4F7 /* UbuntuMono-RI.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "UbuntuMono-RI.ttf"; sourceTree = "<group>"; };
+		09E98DC0260539E900C4F4F7 /* UbuntuMono-R.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "UbuntuMono-R.ttf"; sourceTree = "<group>"; };
+		09E98DC1260539E900C4F4F7 /* Ubuntu-RI.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Ubuntu-RI.ttf"; sourceTree = "<group>"; };
+		09E98DC2260539E900C4F4F7 /* UbuntuMono-B.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "UbuntuMono-B.ttf"; sourceTree = "<group>"; };
+		09E98E3F26053A6300C4F4F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		09E98E4126053A6300C4F4F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		09E98E4826053A6B00C4F4F7 /* Main_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Main_VC.swift; sourceTree = "<group>"; };
+		09E98E4926053A6B00C4F4F7 /* SignIn_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignIn_VC.swift; sourceTree = "<group>"; };
+		09EBB534260553A70090E8E9 /* New_AskPermission_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = New_AskPermission_VC.swift; sourceTree = "<group>"; };
+		09EBB541260582690090E8E9 /* dotsAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dotsAnimation.json; sourceTree = "<group>"; };
+		12359E55CFD6BA1DF18D0FEF /* Pods_MailmoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MailmoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		24D29AEB57FAA99D3E4A6369 /* Pods-MailmoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MailmoTests.debug.xcconfig"; path = "Target Support Files/Pods-MailmoTests/Pods-MailmoTests.debug.xcconfig"; sourceTree = "<group>"; };
+		4D0FF59A3BADA9E5F2060F55 /* Pods_Mailmo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mailmo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4FDC0EEB62AF24BF444961DB /* Pods-MailmoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MailmoTests.release.xcconfig"; path = "Target Support Files/Pods-MailmoTests/Pods-MailmoTests.release.xcconfig"; sourceTree = "<group>"; };
+		6903071BCBC8E5D4F5717192 /* Pods_Mailmo_MailmoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mailmo_MailmoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		98E715687F090D7228E54142 /* Pods-Mailmo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mailmo.release.xcconfig"; path = "Target Support Files/Pods-Mailmo/Pods-Mailmo.release.xcconfig"; sourceTree = "<group>"; };
+		D7370C9BC2ADA5073B55BA93 /* Pods-Mailmo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mailmo.debug.xcconfig"; path = "Target Support Files/Pods-Mailmo/Pods-Mailmo.debug.xcconfig"; sourceTree = "<group>"; };
+		DD1FFC4ED1737D5419C2FC7D /* Pods-Mailmo-MailmoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mailmo-MailmoUITests.debug.xcconfig"; path = "Target Support Files/Pods-Mailmo-MailmoUITests/Pods-Mailmo-MailmoUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		E3A1FAEB756C80E7F9254FEF /* Pods-Mailmo-MailmoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mailmo-MailmoUITests.release.xcconfig"; path = "Target Support Files/Pods-Mailmo-MailmoUITests/Pods-Mailmo-MailmoUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +154,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CBB65EABAAD35963A1AC3D6 /* Pods_Mailmo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +162,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				474A6C2B269743740854BEF3 /* Pods_MailmoTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,6 +170,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9AB2EEE0A76219C45A40A8E /* Pods_Mailmo_MailmoUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,6 +184,8 @@
 				09E98D642605397A00C4F4F7 /* MailmoTests */,
 				09E98D6F2605397A00C4F4F7 /* MailmoUITests */,
 				09E98D492605397900C4F4F7 /* Products */,
+				EC42162165D4EB1B36544E0D /* Pods */,
+				9A61292CDCD3C9BA69B1615B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -103,12 +204,11 @@
 			children = (
 				09E98D4B2605397900C4F4F7 /* AppDelegate.swift */,
 				09E98D4D2605397900C4F4F7 /* SceneDelegate.swift */,
-				09E98D4F2605397900C4F4F7 /* ViewController.swift */,
-				09E98D512605397900C4F4F7 /* Main.storyboard */,
-				09E98D572605397A00C4F4F7 /* Assets.xcassets */,
-				09E98D592605397A00C4F4F7 /* LaunchScreen.storyboard */,
 				09E98D5C2605397A00C4F4F7 /* Info.plist */,
 				09E98D542605397900C4F4F7 /* Mailmo.xcdatamodeld */,
+				09E98E5B26053A9F00C4F4F7 /* Assets */,
+				09E98E3D26053A6300C4F4F7 /* Storyboards */,
+				09E98E4726053A6B00C4F4F7 /* View Controllers */,
 			);
 			path = Mailmo;
 			sourceTree = "<group>";
@@ -131,6 +231,144 @@
 			path = MailmoUITests;
 			sourceTree = "<group>";
 		};
+		09E98D91260539E000C4F4F7 /* Lottie Animations */ = {
+			isa = PBXGroup;
+			children = (
+				09E98D92260539E000C4F4F7 /* welcomeAnimation.json */,
+				09E98D93260539E000C4F4F7 /* mailmoIconAnimation.json */,
+				09EBB541260582690090E8E9 /* dotsAnimation.json */,
+			);
+			path = "Lottie Animations";
+			sourceTree = "<group>";
+		};
+		09E98D99260539E900C4F4F7 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				09E98D9A260539E900C4F4F7 /* fontawesome */,
+				09E98DAD260539E900C4F4F7 /* Ubuntu Font Family */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		09E98D9A260539E900C4F4F7 /* fontawesome */ = {
+			isa = PBXGroup;
+			children = (
+				09E98D9B260539E900C4F4F7 /* webfonts */,
+				09E98DAB260539E900C4F4F7 /* font */,
+			);
+			path = fontawesome;
+			sourceTree = "<group>";
+		};
+		09E98D9B260539E900C4F4F7 /* webfonts */ = {
+			isa = PBXGroup;
+			children = (
+				09E98D9C260539E900C4F4F7 /* fa-solid-900.ttf */,
+				09E98D9D260539E900C4F4F7 /* fa-regular-400.svg */,
+				09E98D9E260539E900C4F4F7 /* fa-regular-400.woff2 */,
+				09E98D9F260539E900C4F4F7 /* fa-solid-900.eot */,
+				09E98DA0260539E900C4F4F7 /* fa-brands-400.svg */,
+				09E98DA1260539E900C4F4F7 /* fa-regular-400.woff */,
+				09E98DA2260539E900C4F4F7 /* fa-brands-400.eot */,
+				09E98DA3260539E900C4F4F7 /* fa-solid-900.svg */,
+				09E98DA4260539E900C4F4F7 /* fa-solid-900.woff */,
+				09E98DA5260539E900C4F4F7 /* fa-regular-400.ttf */,
+				09E98DA6260539E900C4F4F7 /* fa-solid-900.woff2 */,
+				09E98DA7260539E900C4F4F7 /* fa-brands-400.woff2 */,
+				09E98DA8260539E900C4F4F7 /* fa-brands-400.woff */,
+				09E98DA9260539E900C4F4F7 /* fa-brands-400.ttf */,
+				09E98DAA260539E900C4F4F7 /* fa-regular-400.eot */,
+			);
+			path = webfonts;
+			sourceTree = "<group>";
+		};
+		09E98DAB260539E900C4F4F7 /* font */ = {
+			isa = PBXGroup;
+			children = (
+				09E98DAC260539E900C4F4F7 /* fontawesome-all.css */,
+			);
+			path = font;
+			sourceTree = "<group>";
+		};
+		09E98DAD260539E900C4F4F7 /* Ubuntu Font Family */ = {
+			isa = PBXGroup;
+			children = (
+				09E98DAE260539E900C4F4F7 /* copyright.txt */,
+				09E98DAF260539E900C4F4F7 /* LICENCE-FAQ.txt */,
+				09E98DB0260539E900C4F4F7 /* Ubuntu-M.ttf */,
+				09E98DB1260539E900C4F4F7 /* CONTRIBUTING.txt */,
+				09E98DB2260539E900C4F4F7 /* FONTLOG.txt */,
+				09E98DB3260539E900C4F4F7 /* Ubuntu-L.ttf */,
+				09E98DB4260539E900C4F4F7 /* UbuntuMono-BI.ttf */,
+				09E98DB5260539E900C4F4F7 /* Ubuntu-BI.ttf */,
+				09E98DB6260539E900C4F4F7 /* LICENCE.txt */,
+				09E98DB7260539E900C4F4F7 /* TRADEMARKS.txt */,
+				09E98DB8260539E900C4F4F7 /* Ubuntu-Th.ttf */,
+				09E98DB9260539E900C4F4F7 /* Ubuntu-MI.ttf */,
+				09E98DBA260539E900C4F4F7 /* Ubuntu-R.ttf */,
+				09E98DBB260539E900C4F4F7 /* Ubuntu-LI.ttf */,
+				09E98DBC260539E900C4F4F7 /* Ubuntu-B.ttf */,
+				09E98DBD260539E900C4F4F7 /* Ubuntu-C.ttf */,
+				09E98DBE260539E900C4F4F7 /* README.txt */,
+				09E98DBF260539E900C4F4F7 /* UbuntuMono-RI.ttf */,
+				09E98DC0260539E900C4F4F7 /* UbuntuMono-R.ttf */,
+				09E98DC1260539E900C4F4F7 /* Ubuntu-RI.ttf */,
+				09E98DC2260539E900C4F4F7 /* UbuntuMono-B.ttf */,
+			);
+			path = "Ubuntu Font Family";
+			sourceTree = "<group>";
+		};
+		09E98E3D26053A6300C4F4F7 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				09E98E3E26053A6300C4F4F7 /* LaunchScreen.storyboard */,
+				09E98E4026053A6300C4F4F7 /* Main.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		09E98E4726053A6B00C4F4F7 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				09E98E4926053A6B00C4F4F7 /* SignIn_VC.swift */,
+				09E98E4826053A6B00C4F4F7 /* Main_VC.swift */,
+				09EBB534260553A70090E8E9 /* New_AskPermission_VC.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		09E98E5B26053A9F00C4F4F7 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				09E98D572605397A00C4F4F7 /* Assets.xcassets */,
+				09E98D99260539E900C4F4F7 /* Fonts */,
+				09E98D91260539E000C4F4F7 /* Lottie Animations */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		9A61292CDCD3C9BA69B1615B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4D0FF59A3BADA9E5F2060F55 /* Pods_Mailmo.framework */,
+				6903071BCBC8E5D4F5717192 /* Pods_Mailmo_MailmoUITests.framework */,
+				12359E55CFD6BA1DF18D0FEF /* Pods_MailmoTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EC42162165D4EB1B36544E0D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D7370C9BC2ADA5073B55BA93 /* Pods-Mailmo.debug.xcconfig */,
+				98E715687F090D7228E54142 /* Pods-Mailmo.release.xcconfig */,
+				DD1FFC4ED1737D5419C2FC7D /* Pods-Mailmo-MailmoUITests.debug.xcconfig */,
+				E3A1FAEB756C80E7F9254FEF /* Pods-Mailmo-MailmoUITests.release.xcconfig */,
+				24D29AEB57FAA99D3E4A6369 /* Pods-MailmoTests.debug.xcconfig */,
+				4FDC0EEB62AF24BF444961DB /* Pods-MailmoTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -138,9 +376,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 09E98D752605397A00C4F4F7 /* Build configuration list for PBXNativeTarget "Mailmo" */;
 			buildPhases = (
+				5F5829135B0E90E8796F4CC9 /* [CP] Check Pods Manifest.lock */,
 				09E98D442605397900C4F4F7 /* Sources */,
 				09E98D452605397900C4F4F7 /* Frameworks */,
 				09E98D462605397900C4F4F7 /* Resources */,
+				23596BEF3E6A2206DBDF618D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -155,6 +395,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 09E98D782605397A00C4F4F7 /* Build configuration list for PBXNativeTarget "MailmoTests" */;
 			buildPhases = (
+				B36740D9DC254B0F9B48B70E /* [CP] Check Pods Manifest.lock */,
 				09E98D5D2605397A00C4F4F7 /* Sources */,
 				09E98D5E2605397A00C4F4F7 /* Frameworks */,
 				09E98D5F2605397A00C4F4F7 /* Resources */,
@@ -173,9 +414,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 09E98D7B2605397A00C4F4F7 /* Build configuration list for PBXNativeTarget "MailmoUITests" */;
 			buildPhases = (
+				59B75C94FA20C29249B4CA11 /* [CP] Check Pods Manifest.lock */,
 				09E98D682605397A00C4F4F7 /* Sources */,
 				09E98D692605397A00C4F4F7 /* Frameworks */,
 				09E98D6A2605397A00C4F4F7 /* Resources */,
+				8E675E524B00AF2E0D00AE8E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -234,9 +477,49 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				09E98D5B2605397A00C4F4F7 /* LaunchScreen.storyboard in Resources */,
+				09E98DDB260539E900C4F4F7 /* LICENCE.txt in Resources */,
+				09E98DDA260539E900C4F4F7 /* Ubuntu-BI.ttf in Resources */,
+				09E98DCE260539E900C4F4F7 /* fa-brands-400.woff2 in Resources */,
+				09E98DD9260539E900C4F4F7 /* UbuntuMono-BI.ttf in Resources */,
+				09E98E4326053A6300C4F4F7 /* Main.storyboard in Resources */,
+				09E98DE6260539E900C4F4F7 /* Ubuntu-RI.ttf in Resources */,
+				09E98D95260539E000C4F4F7 /* mailmoIconAnimation.json in Resources */,
+				09E98DE1260539E900C4F4F7 /* Ubuntu-B.ttf in Resources */,
+				09E98DCF260539E900C4F4F7 /* fa-brands-400.woff in Resources */,
+				09E98DE4260539E900C4F4F7 /* UbuntuMono-RI.ttf in Resources */,
+				09E98DC7260539E900C4F4F7 /* fa-brands-400.svg in Resources */,
+				09E98D94260539E000C4F4F7 /* welcomeAnimation.json in Resources */,
+				09EBB542260582690090E8E9 /* dotsAnimation.json in Resources */,
+				09E98DD8260539E900C4F4F7 /* Ubuntu-L.ttf in Resources */,
+				09E98DC4260539E900C4F4F7 /* fa-regular-400.svg in Resources */,
+				09E98DC3260539E900C4F4F7 /* fa-solid-900.ttf in Resources */,
+				09E98DCC260539E900C4F4F7 /* fa-regular-400.ttf in Resources */,
+				09E98DC6260539E900C4F4F7 /* fa-solid-900.eot in Resources */,
+				09E98DD7260539E900C4F4F7 /* FONTLOG.txt in Resources */,
+				09E98DE3260539E900C4F4F7 /* README.txt in Resources */,
+				09E98DD4260539E900C4F4F7 /* LICENCE-FAQ.txt in Resources */,
+				09E98DE0260539E900C4F4F7 /* Ubuntu-LI.ttf in Resources */,
+				09E98DD3260539E900C4F4F7 /* copyright.txt in Resources */,
+				09E98DC5260539E900C4F4F7 /* fa-regular-400.woff2 in Resources */,
+				09E98DE7260539E900C4F4F7 /* UbuntuMono-B.ttf in Resources */,
+				09E98DE2260539E900C4F4F7 /* Ubuntu-C.ttf in Resources */,
+				09E98DE5260539E900C4F4F7 /* UbuntuMono-R.ttf in Resources */,
+				09E98DD6260539E900C4F4F7 /* CONTRIBUTING.txt in Resources */,
+				09E98DD1260539E900C4F4F7 /* fa-regular-400.eot in Resources */,
+				09E98DCD260539E900C4F4F7 /* fa-solid-900.woff2 in Resources */,
+				09E98DDD260539E900C4F4F7 /* Ubuntu-Th.ttf in Resources */,
+				09E98DDC260539E900C4F4F7 /* TRADEMARKS.txt in Resources */,
+				09E98DD0260539E900C4F4F7 /* fa-brands-400.ttf in Resources */,
+				09E98DDE260539E900C4F4F7 /* Ubuntu-MI.ttf in Resources */,
+				09E98DCA260539E900C4F4F7 /* fa-solid-900.svg in Resources */,
+				09E98DDF260539E900C4F4F7 /* Ubuntu-R.ttf in Resources */,
+				09E98DD2260539E900C4F4F7 /* fontawesome-all.css in Resources */,
 				09E98D582605397A00C4F4F7 /* Assets.xcassets in Resources */,
-				09E98D532605397900C4F4F7 /* Main.storyboard in Resources */,
+				09E98DCB260539E900C4F4F7 /* fa-solid-900.woff in Resources */,
+				09E98E4226053A6300C4F4F7 /* LaunchScreen.storyboard in Resources */,
+				09E98DD5260539E900C4F4F7 /* Ubuntu-M.ttf in Resources */,
+				09E98DC9260539E900C4F4F7 /* fa-brands-400.eot in Resources */,
+				09E98DC8260539E900C4F4F7 /* fa-regular-400.woff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,12 +539,117 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		23596BEF3E6A2206DBDF618D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Mailmo/Pods-Mailmo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Mailmo/Pods-Mailmo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Mailmo/Pods-Mailmo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		59B75C94FA20C29249B4CA11 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Mailmo-MailmoUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5F5829135B0E90E8796F4CC9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Mailmo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8E675E524B00AF2E0D00AE8E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Mailmo-MailmoUITests/Pods-Mailmo-MailmoUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Mailmo-MailmoUITests/Pods-Mailmo-MailmoUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Mailmo-MailmoUITests/Pods-Mailmo-MailmoUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B36740D9DC254B0F9B48B70E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MailmoTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		09E98D442605397900C4F4F7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				09E98D502605397900C4F4F7 /* ViewController.swift in Sources */,
+				09E98E4A26053A6B00C4F4F7 /* Main_VC.swift in Sources */,
+				09E98E4B26053A6B00C4F4F7 /* SignIn_VC.swift in Sources */,
+				09EBB535260553A70090E8E9 /* New_AskPermission_VC.swift in Sources */,
 				09E98D4C2605397900C4F4F7 /* AppDelegate.swift in Sources */,
 				09E98D562605397900C4F4F7 /* Mailmo.xcdatamodeld in Sources */,
 				09E98D4E2605397900C4F4F7 /* SceneDelegate.swift in Sources */,
@@ -300,20 +688,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		09E98D512605397900C4F4F7 /* Main.storyboard */ = {
+		09E98E3E26053A6300C4F4F7 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				09E98D522605397900C4F4F7 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		09E98D592605397A00C4F4F7 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				09E98D5A2605397A00C4F4F7 /* Base */,
+				09E98E3F26053A6300C4F4F7 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		09E98E4026053A6300C4F4F7 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				09E98E4126053A6300C4F4F7 /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -437,6 +825,7 @@
 		};
 		09E98D762605397A00C4F4F7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D7370C9BC2ADA5073B55BA93 /* Pods-Mailmo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -456,6 +845,7 @@
 		};
 		09E98D772605397A00C4F4F7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 98E715687F090D7228E54142 /* Pods-Mailmo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -475,6 +865,7 @@
 		};
 		09E98D792605397A00C4F4F7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 24D29AEB57FAA99D3E4A6369 /* Pods-MailmoTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -497,6 +888,7 @@
 		};
 		09E98D7A2605397A00C4F4F7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4FDC0EEB62AF24BF444961DB /* Pods-MailmoTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -519,6 +911,7 @@
 		};
 		09E98D7C2605397A00C4F4F7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DD1FFC4ED1737D5419C2FC7D /* Pods-Mailmo-MailmoUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -539,6 +932,7 @@
 		};
 		09E98D7D2605397A00C4F4F7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E3A1FAEB756C80E7F9254FEF /* Pods-Mailmo-MailmoUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
