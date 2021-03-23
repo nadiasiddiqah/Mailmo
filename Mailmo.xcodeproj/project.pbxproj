@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		097333DC260961370045F5AB /* voiceAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 097333DB260961370045F5AB /* voiceAnimation.json */; };
+		097561622609357600F01055 /* New_Permitted_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097561612609357600F01055 /* New_Permitted_VC.swift */; };
+		0975616726093BE600F01055 /* recordAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 0975616626093BE500F01055 /* recordAnimation.json */; };
 		09E98D4C2605397900C4F4F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E98D4B2605397900C4F4F7 /* AppDelegate.swift */; };
 		09E98D4E2605397900C4F4F7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E98D4D2605397900C4F4F7 /* SceneDelegate.swift */; };
 		09E98D562605397900C4F4F7 /* Mailmo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 09E98D542605397900C4F4F7 /* Mailmo.xcdatamodeld */; };
@@ -81,6 +84,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		097333DB260961370045F5AB /* voiceAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = voiceAnimation.json; sourceTree = "<group>"; };
+		097561612609357600F01055 /* New_Permitted_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = New_Permitted_VC.swift; sourceTree = "<group>"; };
+		0975616626093BE500F01055 /* recordAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = recordAnimation.json; sourceTree = "<group>"; };
 		09E98D482605397900C4F4F7 /* Mailmo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mailmo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09E98D4B2605397900C4F4F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		09E98D4D2605397900C4F4F7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -236,7 +242,9 @@
 			children = (
 				09E98D92260539E000C4F4F7 /* welcomeAnimation.json */,
 				09E98D93260539E000C4F4F7 /* mailmoIconAnimation.json */,
+				097333DB260961370045F5AB /* voiceAnimation.json */,
 				09EBB541260582690090E8E9 /* dotsAnimation.json */,
+				0975616626093BE500F01055 /* recordAnimation.json */,
 			);
 			path = "Lottie Animations";
 			sourceTree = "<group>";
@@ -332,6 +340,7 @@
 				09E98E4926053A6B00C4F4F7 /* SignIn_VC.swift */,
 				09E98E4826053A6B00C4F4F7 /* Main_VC.swift */,
 				09EBB534260553A70090E8E9 /* New_AskPermission_VC.swift */,
+				097561612609357600F01055 /* New_Permitted_VC.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -488,10 +497,12 @@
 				09E98DCF260539E900C4F4F7 /* fa-brands-400.woff in Resources */,
 				09E98DE4260539E900C4F4F7 /* UbuntuMono-RI.ttf in Resources */,
 				09E98DC7260539E900C4F4F7 /* fa-brands-400.svg in Resources */,
+				097333DC260961370045F5AB /* voiceAnimation.json in Resources */,
 				09E98D94260539E000C4F4F7 /* welcomeAnimation.json in Resources */,
 				09EBB542260582690090E8E9 /* dotsAnimation.json in Resources */,
 				09E98DD8260539E900C4F4F7 /* Ubuntu-L.ttf in Resources */,
 				09E98DC4260539E900C4F4F7 /* fa-regular-400.svg in Resources */,
+				0975616726093BE600F01055 /* recordAnimation.json in Resources */,
 				09E98DC3260539E900C4F4F7 /* fa-solid-900.ttf in Resources */,
 				09E98DCC260539E900C4F4F7 /* fa-regular-400.ttf in Resources */,
 				09E98DC6260539E900C4F4F7 /* fa-solid-900.eot in Resources */,
@@ -650,6 +661,7 @@
 				09E98E4A26053A6B00C4F4F7 /* Main_VC.swift in Sources */,
 				09E98E4B26053A6B00C4F4F7 /* SignIn_VC.swift in Sources */,
 				09EBB535260553A70090E8E9 /* New_AskPermission_VC.swift in Sources */,
+				097561622609357600F01055 /* New_Permitted_VC.swift in Sources */,
 				09E98D4C2605397900C4F4F7 /* AppDelegate.swift in Sources */,
 				09E98D562605397900C4F4F7 /* Mailmo.xcdatamodeld in Sources */,
 				09E98D4E2605397900C4F4F7 /* SceneDelegate.swift in Sources */,
