@@ -23,7 +23,6 @@ class New_Permitted_VC: UIViewController {
     lazy var dotsAnimation: AnimationView = {
         let animationView = AnimationView()
         animationView.animation = Animation.named("dotsAnimation")
-        animationView.frame = dotsView.bounds
         dotsView.addSubview(animationView)
         
         animationView.translatesAutoresizingMaskIntoConstraints = false
@@ -39,7 +38,6 @@ class New_Permitted_VC: UIViewController {
     lazy var recordAnimation: AnimationView = {
         let animationView = AnimationView()
         animationView.animation = Animation.named("recordAnimation")
-        animationView.frame = recordButton.bounds
         recordButton.addSubview(animationView)
         
         animationView.translatesAutoresizingMaskIntoConstraints = false
@@ -82,6 +80,7 @@ class New_Permitted_VC: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         dotsAnimation.pause()
+        voiceAnimation.pause()
     }
     
     // MARK: - Action Methods

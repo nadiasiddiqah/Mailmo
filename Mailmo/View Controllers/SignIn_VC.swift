@@ -21,9 +21,9 @@ class SignIn_VC: UIViewController {
         let animationView = AnimationView()
         animationView.animation = Animation.named("mailmoIconAnimation")
         mailmoIcon.addSubview(animationView)
-        
+
         animationView.translatesAutoresizingMaskIntoConstraints = false
-        
+
         animationView.topAnchor.constraint(equalTo: mailmoIcon.topAnchor).isActive = true
         animationView.bottomAnchor.constraint(equalTo: mailmoIcon.bottomAnchor).isActive = true
         animationView.leftAnchor.constraint(equalTo: mailmoIcon.leftAnchor).isActive = true
