@@ -18,6 +18,8 @@
 		09BA6C0D260AB74F003DBFD3 /* SendLater_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BA6C0C260AB74F003DBFD3 /* SendLater_VC.swift */; };
 		09BA6C1A260AB873003DBFD3 /* sendLaterAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 09BA6C19260AB873003DBFD3 /* sendLaterAnimation.json */; };
 		09BA6C1F260AE7D9003DBFD3 /* History_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BA6C1E260AE7D9003DBFD3 /* History_VC.swift */; };
+		09BA6C27260C131F003DBFD3 /* Settings_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BA6C26260C131F003DBFD3 /* Settings_VC.swift */; };
+		09BA6C2C260C133B003DBFD3 /* HistoryDetails_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BA6C2B260C133B003DBFD3 /* HistoryDetails_VC.swift */; };
 		09E98D4C2605397900C4F4F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E98D4B2605397900C4F4F7 /* AppDelegate.swift */; };
 		09E98D4E2605397900C4F4F7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E98D4D2605397900C4F4F7 /* SceneDelegate.swift */; };
 		09E98D562605397900C4F4F7 /* Mailmo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 09E98D542605397900C4F4F7 /* Mailmo.xcdatamodeld */; };
@@ -103,6 +105,8 @@
 		09BA6C0C260AB74F003DBFD3 /* SendLater_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendLater_VC.swift; sourceTree = "<group>"; };
 		09BA6C19260AB873003DBFD3 /* sendLaterAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sendLaterAnimation.json; sourceTree = "<group>"; };
 		09BA6C1E260AE7D9003DBFD3 /* History_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History_VC.swift; sourceTree = "<group>"; };
+		09BA6C26260C131F003DBFD3 /* Settings_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings_VC.swift; sourceTree = "<group>"; };
+		09BA6C2B260C133B003DBFD3 /* HistoryDetails_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDetails_VC.swift; sourceTree = "<group>"; };
 		09E98D482605397900C4F4F7 /* Mailmo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mailmo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09E98D4B2605397900C4F4F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		09E98D4D2605397900C4F4F7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -365,6 +369,8 @@
 				09BA6C07260AB73D003DBFD3 /* SendLaterPicker_VC.swift */,
 				09BA6C0C260AB74F003DBFD3 /* SendLater_VC.swift */,
 				09BA6C1E260AE7D9003DBFD3 /* History_VC.swift */,
+				09BA6C2B260C133B003DBFD3 /* HistoryDetails_VC.swift */,
+				09BA6C26260C131F003DBFD3 /* Settings_VC.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -687,6 +693,7 @@
 				09E98E4A26053A6B00C4F4F7 /* Main_VC.swift in Sources */,
 				09BA6C1F260AE7D9003DBFD3 /* History_VC.swift in Sources */,
 				09E98E4B26053A6B00C4F4F7 /* SignIn_VC.swift in Sources */,
+				09BA6C2C260C133B003DBFD3 /* HistoryDetails_VC.swift in Sources */,
 				09BA6C08260AB73E003DBFD3 /* SendLaterPicker_VC.swift in Sources */,
 				09BA6C0D260AB74F003DBFD3 /* SendLater_VC.swift in Sources */,
 				09EBB535260553A70090E8E9 /* New_AskPermission_VC.swift in Sources */,
@@ -695,6 +702,7 @@
 				09BA6BDA260A7DAF003DBFD3 /* SendPicker_VC.swift in Sources */,
 				09E98D4C2605397900C4F4F7 /* AppDelegate.swift in Sources */,
 				09BA6BE4260A84D8003DBFD3 /* SendNow_VC.swift in Sources */,
+				09BA6C27260C131F003DBFD3 /* Settings_VC.swift in Sources */,
 				09E98D562605397900C4F4F7 /* Mailmo.xcdatamodeld in Sources */,
 				09E98D4E2605397900C4F4F7 /* SceneDelegate.swift in Sources */,
 			);
