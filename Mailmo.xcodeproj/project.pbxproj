@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0924F0562612730A00C0E909 /* New_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0924F0552612730A00C0E909 /* New_VC.swift */; };
 		097333DC260961370045F5AB /* voiceAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 097333DB260961370045F5AB /* voiceAnimation.json */; };
-		097561622609357600F01055 /* New_Permitted_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097561612609357600F01055 /* New_Permitted_VC.swift */; };
 		0975616726093BE600F01055 /* recordAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 0975616626093BE500F01055 /* recordAnimation.json */; };
 		09BA6BD5260A5DEA003DBFD3 /* New_Edit_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BA6BD4260A5DEA003DBFD3 /* New_Edit_VC.swift */; };
 		09BA6BDA260A7DAF003DBFD3 /* SendPicker_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BA6BD9260A7DAF003DBFD3 /* SendPicker_VC.swift */; };
@@ -69,7 +69,6 @@
 		09E98E4326053A6300C4F4F7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09E98E4026053A6300C4F4F7 /* Main.storyboard */; };
 		09E98E4A26053A6B00C4F4F7 /* Main_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E98E4826053A6B00C4F4F7 /* Main_VC.swift */; };
 		09E98E4B26053A6B00C4F4F7 /* SignIn_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E98E4926053A6B00C4F4F7 /* SignIn_VC.swift */; };
-		09EBB535260553A70090E8E9 /* New_AskPermission_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EBB534260553A70090E8E9 /* New_AskPermission_VC.swift */; };
 		09EBB542260582690090E8E9 /* dotsAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 09EBB541260582690090E8E9 /* dotsAnimation.json */; };
 		3CBB65EABAAD35963A1AC3D6 /* Pods_Mailmo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D0FF59A3BADA9E5F2060F55 /* Pods_Mailmo.framework */; };
 		474A6C2B269743740854BEF3 /* Pods_MailmoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12359E55CFD6BA1DF18D0FEF /* Pods_MailmoTests.framework */; };
@@ -94,8 +93,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0924F0552612730A00C0E909 /* New_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = New_VC.swift; sourceTree = "<group>"; };
 		097333DB260961370045F5AB /* voiceAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = voiceAnimation.json; sourceTree = "<group>"; };
-		097561612609357600F01055 /* New_Permitted_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = New_Permitted_VC.swift; sourceTree = "<group>"; };
 		0975616626093BE500F01055 /* recordAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = recordAnimation.json; sourceTree = "<group>"; };
 		09BA6BD4260A5DEA003DBFD3 /* New_Edit_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = New_Edit_VC.swift; sourceTree = "<group>"; };
 		09BA6BD9260A7DAF003DBFD3 /* SendPicker_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendPicker_VC.swift; sourceTree = "<group>"; };
@@ -163,7 +162,6 @@
 		09E98E4126053A6300C4F4F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		09E98E4826053A6B00C4F4F7 /* Main_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Main_VC.swift; sourceTree = "<group>"; };
 		09E98E4926053A6B00C4F4F7 /* SignIn_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignIn_VC.swift; sourceTree = "<group>"; };
-		09EBB534260553A70090E8E9 /* New_AskPermission_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = New_AskPermission_VC.swift; sourceTree = "<group>"; };
 		09EBB541260582690090E8E9 /* dotsAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dotsAnimation.json; sourceTree = "<group>"; };
 		12359E55CFD6BA1DF18D0FEF /* Pods_MailmoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MailmoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		24D29AEB57FAA99D3E4A6369 /* Pods-MailmoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MailmoTests.debug.xcconfig"; path = "Target Support Files/Pods-MailmoTests/Pods-MailmoTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -363,8 +361,7 @@
 			children = (
 				09E98E4926053A6B00C4F4F7 /* SignIn_VC.swift */,
 				09E98E4826053A6B00C4F4F7 /* Main_VC.swift */,
-				09EBB534260553A70090E8E9 /* New_AskPermission_VC.swift */,
-				097561612609357600F01055 /* New_Permitted_VC.swift */,
+				0924F0552612730A00C0E909 /* New_VC.swift */,
 				09BA6BD4260A5DEA003DBFD3 /* New_Edit_VC.swift */,
 				09BA6BD9260A7DAF003DBFD3 /* SendPicker_VC.swift */,
 				09BA6BE3260A84D8003DBFD3 /* SendNow_VC.swift */,
@@ -698,9 +695,8 @@
 				09BA6C2C260C133B003DBFD3 /* HistoryDetails_VC.swift in Sources */,
 				09BA6C08260AB73E003DBFD3 /* SendLaterPicker_VC.swift in Sources */,
 				09BA6C0D260AB74F003DBFD3 /* SendLater_VC.swift in Sources */,
-				09EBB535260553A70090E8E9 /* New_AskPermission_VC.swift in Sources */,
 				09BA6BD5260A5DEA003DBFD3 /* New_Edit_VC.swift in Sources */,
-				097561622609357600F01055 /* New_Permitted_VC.swift in Sources */,
+				0924F0562612730A00C0E909 /* New_VC.swift in Sources */,
 				09BA6BDA260A7DAF003DBFD3 /* SendPicker_VC.swift in Sources */,
 				09E98D4C2605397900C4F4F7 /* AppDelegate.swift in Sources */,
 				09BA6BE4260A84D8003DBFD3 /* SendNow_VC.swift in Sources */,
