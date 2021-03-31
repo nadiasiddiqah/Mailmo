@@ -41,7 +41,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="478"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="-25" translatesAutoresizingMaskIntoConstraints="NO" id="wLd-g8-Taz">
-                                <rect key="frame" x="120.66666666666669" y="124.99999999999999" width="173" height="227.66666666666663"/>
+                                <rect key="frame" x="120.66666666666669" y="123.99999999999999" width="173" height="229.66666666666663"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Gaj-Wl-sbN">
                                         <rect key="frame" x="0.0" y="0.0" width="173" height="173"/>
@@ -53,10 +53,10 @@
                                         </constraints>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dsZ-k9-TsL">
-                                        <rect key="frame" x="0.0" y="148" width="173" height="79.666666666666686"/>
+                                        <rect key="frame" x="0.0" y="148" width="173" height="81.666666666666686"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mailmo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="SAO-ak-Aj6">
-                                                <rect key="frame" x="0.0" y="0.0" width="173" height="65.333333333333329"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="173" height="67.666666666666671"/>
                                                 <fontDescription key="fontDescription" name="Ubuntu-Medium" family="Ubuntu" pointSize="58"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -65,7 +65,7 @@
                                                 </variation>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="send memos with mailmo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.25" translatesAutoresizingMaskIntoConstraints="NO" id="EqL-dz-W5v">
-                                                <rect key="frame" x="0.0" y="46" width="173" height="33.666666666666657"/>
+                                                <rect key="frame" x="0.0" y="46.666666666666686" width="173" height="35"/>
                                                 <fontDescription key="fontDescription" name="Ubuntu-BoldItalic" family="Ubuntu" pointSize="30"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -83,7 +83,7 @@
                                 <variation key="heightClass=regular-widthClass=regular" spacing="-40"/>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Let's Get Started!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="amT-Pk-OhY">
-                                <rect key="frame" x="55" y="533" width="304.66666666666669" height="33.666666666666629"/>
+                                <rect key="frame" x="55" y="533.66666666666663" width="304.66666666666669" height="35"/>
                                 <fontDescription key="fontDescription" name="Ubuntu-Bold" family="Ubuntu" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -92,7 +92,7 @@
                                 </variation>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KbT-F9-cgh">
-                                <rect key="frame" x="25" y="592" width="364" height="59.333333333333371"/>
+                                <rect key="frame" x="25" y="594" width="364" height="59.333333333333371"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="KbT-F9-cgh" secondAttribute="height" multiplier="49:8" id="bPU-sP-VKu"/>
                                 </constraints>
@@ -379,7 +379,7 @@
                                 <rect key="frame" x="0.0" y="124.99999999999997" width="414" height="390.33333333333326"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have 30s left!" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="HUa-4U-WkZ">
-                                        <rect key="frame" x="268" y="31.333333333333346" width="106" height="14.666666666666668"/>
+                                        <rect key="frame" x="268" y="30.666666666666654" width="106" height="15.333333333333332"/>
                                         <fontDescription key="fontDescription" name="Ubuntu-Bold" family="Ubuntu" pointSize="13"/>
                                         <color key="textColor" red="0.99416750669999998" green="0.62556493280000003" blue="0.51368534560000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
@@ -409,34 +409,33 @@
                                             <constraint firstAttribute="width" secondItem="53z-n0-xn6" secondAttribute="height" multiplier="2" id="F7B-6z-5ba"/>
                                         </constraints>
                                     </imageView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tJM-wo-COW">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OjY-oP-9pB" customClass="AudioVisualizerView" customModule="Mailmo" customModuleProvider="target">
                                         <rect key="frame" x="15" y="262" width="384" height="128.33333333333337"/>
-                                        <accessibility key="accessibilityConfiguration">
-                                            <accessibilityTraits key="traits" image="YES" notEnabled="YES"/>
-                                        </accessibility>
-                                    </imageView>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" name="AccentColor"/>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" notEnabled="YES"/>
                                 </accessibility>
                                 <constraints>
+                                    <constraint firstItem="OjY-oP-9pB" firstAttribute="width" secondItem="eHX-Ls-Kmz" secondAttribute="width" multiplier="0.927536" id="3mO-Hl-4dd"/>
                                     <constraint firstItem="A85-0y-PlD" firstAttribute="top" secondItem="HUa-4U-WkZ" secondAttribute="bottom" constant="4" id="5h4-VZ-ajf"/>
                                     <constraint firstItem="HUa-4U-WkZ" firstAttribute="width" secondItem="A85-0y-PlD" secondAttribute="width" multiplier="0.304598" id="7f6-dA-Pgz"/>
-                                    <constraint firstAttribute="bottom" secondItem="tJM-wo-COW" secondAttribute="bottom" id="C0J-lO-yyl"/>
+                                    <constraint firstItem="OjY-oP-9pB" firstAttribute="centerX" secondItem="eHX-Ls-Kmz" secondAttribute="centerX" id="9xJ-rZ-fPb"/>
                                     <constraint firstItem="53z-n0-xn6" firstAttribute="centerX" secondItem="A85-0y-PlD" secondAttribute="centerX" id="CAn-PO-182"/>
                                     <constraint firstItem="53z-n0-xn6" firstAttribute="width" secondItem="A85-0y-PlD" secondAttribute="width" multiplier="0.5" id="Cs3-DX-xZR"/>
                                     <constraint firstItem="A85-0y-PlD" firstAttribute="height" secondItem="eHX-Ls-Kmz" secondAttribute="height" multiplier="0.608563" constant="-25.559746999999987" id="McN-z5-9nf"/>
                                     <constraint firstItem="HUa-4U-WkZ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="eHX-Ls-Kmz" secondAttribute="leading" constant="20" symbolic="YES" id="Pjc-5j-AXg"/>
+                                    <constraint firstAttribute="bottom" secondItem="OjY-oP-9pB" secondAttribute="bottom" id="SQ8-it-Bvw"/>
                                     <constraint firstItem="53z-n0-xn6" firstAttribute="centerY" secondItem="A85-0y-PlD" secondAttribute="centerY" id="US4-Hm-rem"/>
                                     <constraint firstItem="nwV-yY-x3p" firstAttribute="width" secondItem="A85-0y-PlD" secondAttribute="width" multiplier="0.930556" id="W6y-aI-Wbo"/>
-                                    <constraint firstItem="tJM-wo-COW" firstAttribute="width" secondItem="eHX-Ls-Kmz" secondAttribute="width" multiplier="0.926791" id="aJm-hm-0MY"/>
-                                    <constraint firstItem="tJM-wo-COW" firstAttribute="centerX" secondItem="eHX-Ls-Kmz" secondAttribute="centerX" id="aQd-uM-WaI"/>
                                     <constraint firstItem="A85-0y-PlD" firstAttribute="width" secondItem="eHX-Ls-Kmz" secondAttribute="width" multiplier="0.84058" id="ay5-FG-Wze"/>
                                     <constraint firstItem="A85-0y-PlD" firstAttribute="trailing" secondItem="HUa-4U-WkZ" secondAttribute="trailing" constant="7" id="bw5-vE-uQG"/>
                                     <constraint firstItem="nwV-yY-x3p" firstAttribute="centerX" secondItem="A85-0y-PlD" secondAttribute="centerX" id="eOf-ao-k7N"/>
                                     <constraint firstItem="nwV-yY-x3p" firstAttribute="centerY" secondItem="A85-0y-PlD" secondAttribute="centerY" id="g93-jx-CCf"/>
-                                    <constraint firstItem="tJM-wo-COW" firstAttribute="top" secondItem="A85-0y-PlD" secondAttribute="bottom" id="j4A-ba-9s9"/>
+                                    <constraint firstItem="OjY-oP-9pB" firstAttribute="top" secondItem="A85-0y-PlD" secondAttribute="bottom" id="hiq-ah-94f"/>
                                     <constraint firstItem="A85-0y-PlD" firstAttribute="centerX" secondItem="eHX-Ls-Kmz" secondAttribute="centerX" id="rjW-E7-c3k"/>
                                     <constraint firstItem="nwV-yY-x3p" firstAttribute="height" secondItem="A85-0y-PlD" secondAttribute="height" multiplier="0.899604" id="rlT-CE-Dr5"/>
                                     <constraint firstItem="A85-0y-PlD" firstAttribute="top" secondItem="eHX-Ls-Kmz" secondAttribute="top" constant="50" id="wYb-3M-ZdJ">
@@ -448,24 +447,24 @@
                                 <rect key="frame" x="0.0" y="515.33333333333337" width="414" height="220.66666666666663"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sj2-EI-zcy" userLabel="Record Button">
-                                        <rect key="frame" x="67" y="0.0" width="280" height="201"/>
+                                        <rect key="frame" x="69.333333333333343" y="0.0" width="275.33333333333326" height="201"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </button>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="restart_button" translatesAutoresizingMaskIntoConstraints="NO" id="Uum-pW-gj6">
-                                        <rect key="frame" x="68" y="110" width="40" height="40"/>
+                                        <rect key="frame" x="69.666666666666671" y="110" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="Uum-pW-gj6" secondAttribute="height" multiplier="1:1" id="27w-Bd-7I6"/>
                                         </constraints>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zfe-z5-2TL" userLabel="Pause Button">
-                                        <rect key="frame" x="306" y="110" width="40" height="40"/>
+                                        <rect key="frame" x="304.33333333333331" y="110" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="Zfe-z5-2TL" secondAttribute="height" multiplier="1:1" id="0mX-Pm-eYj"/>
                                         </constraints>
                                         <state key="normal" backgroundImage="pause_button"/>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to start" textAlignment="center" lineBreakMode="tailTruncation" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="62N-d7-I6D">
-                                        <rect key="frame" x="117.33333333333333" y="161.66666666666663" width="179.33333333333337" height="39.333333333333343"/>
+                                        <rect key="frame" x="119.00000000000001" y="160" width="176.33333333333337" height="41"/>
                                         <fontDescription key="fontDescription" name="Ubuntu-Light" family="Ubuntu" pointSize="35"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -474,7 +473,7 @@
                                         </variation>
                                     </label>
                                     <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CTB-cn-wFe">
-                                        <rect key="frame" x="108" y="0.0" width="198" height="201"/>
+                                        <rect key="frame" x="109.66666666666667" y="0.0" width="194.66666666666663" height="201"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" name="AccentColor"/>
                                         <connections>
@@ -525,12 +524,12 @@
                     <navigationItem key="navigationItem" id="cEa-t5-CLf"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="audioView" destination="OjY-oP-9pB" id="LEJ-Nf-qod"/>
                         <outlet property="dotsView" destination="53z-n0-xn6" id="mAx-NE-3JN"/>
                         <outlet property="recordView" destination="Sj2-EI-zcy" id="fQx-JS-z8K"/>
                         <outlet property="speakButton" destination="CTB-cn-wFe" id="ftJ-Ey-IQh"/>
                         <outlet property="speechTextView" destination="nwV-yY-x3p" id="brG-SO-g6s"/>
                         <outlet property="tapToLabel" destination="62N-d7-I6D" id="t6r-Tn-ePA"/>
-                        <outlet property="voiceView" destination="tJM-wo-COW" id="KCM-Rr-RKZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yfQ-4a-lzI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1533,7 +1532,7 @@
         <segue reference="pM6-0u-Ghd"/>
         <segue reference="PAb-cM-oFA"/>
         <segue reference="ZXc-tv-FpL"/>
-        <segue reference="g4Y-5d-r2g"/>
+        <segue reference="4Py-mk-3fq"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="back_arrow" width="25" height="25"/>
