@@ -10,21 +10,25 @@ import Lottie
 import Speech
 import AVFoundation
 import Accelerate
-import WaveformView_iOS
 
 class New_VC: UIViewController {
     
     // MARK: - Outlet Variables
+    @IBOutlet weak var speechTimerLabel: UILabel!
     @IBOutlet weak var speechTextView: UITextView!
     @IBOutlet weak var dotsView: UIImageView!
     @IBOutlet weak var audioView: AudioVisualizerView!
     
-    @IBOutlet weak var recordView: UIButton!
+    @IBOutlet weak var micAnimation: UIButton!
     @IBOutlet weak var speakButton: UIButton!
     @IBOutlet weak var tapToLabel: UILabel!
     
     // MARK: - Speech Variables
     var isButtonEnabled: Bool = false
+    var didStartRecognizer: Bool = false
+    
+    var speechTimer: Timer?
+    var timeLeft: Int = 10
     
     private let audioEngine = AVAudioEngine()
     private let speechRecognizer = SFSpeechRecognizer()
@@ -35,14 +39,13 @@ class New_VC: UIViewController {
     private var recordingTs: Double = 0
     private var silenceTs: Double = 0
     
-    
     // MARK: - Lottie Animation Variables
     lazy var dotsAnimation: AnimationView = {
         loadAnimation(fileName: "dotsAnimation", loadingView: dotsView)
     }()
     
     lazy var recordAnimation: AnimationView = {
-        loadAnimation(fileName: "recordAnimation", loadingView: recordView)
+        loadAnimation(fileName: "recordAnimation", loadingView: micAnimation)
     }()
     
 
@@ -52,7 +55,6 @@ class New_VC: UIViewController {
         
         requestPermission()
         setupAnimations()
-        setupAudioView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -70,26 +72,25 @@ class New_VC: UIViewController {
     
     // Triggers speech recognizer to start or stop
     @IBAction func didTapToSpeak(_ sender: UIButton) {
-        // Check if audio engine is running
-        if audioEngine.isRunning {
-            audioEngine.stop()
-            recognitionRequest?.endAudio()
-            
-            speakButton.isEnabled = false
-            recordAnimation.stop()
-            audioView.isHidden = true
-        } else {
+        if !audioEngine.isRunning {
+            // Tap to start
+            startSpeechTimer()
             startSpeechRecognizer()
-            tapToLabel.text = "Tap to finish"
-            audioView.isHidden = false
-            recordAnimation.play(fromProgress: 0, toProgress: 1, loopMode: .loop, completion: nil)
+            
+            // Start record animation, enable speak button, show audioView
+            UIView.animate(withDuration: 1.0, delay: 0,
+                           options: .curveEaseIn, animations: {  [self] in
+                recordAnimation.play(fromProgress: 0, toProgress: 1, loopMode: .loop, completion: nil)
+                tapToLabel.text = "Tap to finish"
+            }, completion: nil)
+
+        } else {
+            // Tap to stop
+            cancelSpeechRecognizer()
         }
     }
     
     // MARK: - Methods
-    func setupAudioView() {
-        audioView.isHidden = true
-    }
     
     func setupAnimations() {
         dotsAnimation.play(fromProgress: 0, toProgress: 1, loopMode: .loop, completion: nil)
@@ -124,13 +125,31 @@ class New_VC: UIViewController {
         }
     }
     
-    func startSpeechRecognizer() {
-        
-        // Cancel any existing recognitionTask
-        if recognitionTask != nil {
-            recognitionTask?.cancel()
-            recognitionTask = nil
+    func startSpeechTimer() {
+        speechTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self,
+                                           selector: #selector(updateSpeechTimer),
+                                           userInfo: nil, repeats: true)
+    }
+    
+    @objc func updateSpeechTimer() {
+        if timeLeft > 0 {
+            timeLeft -= 1
+            speechTimerLabel.text = "You have \(timeLeft)s left!"
+        } else if recognitionTask == nil {
+            if let speechTimer = speechTimer {
+                speechTimer.invalidate()
+                speechTimerLabel.text = "You have \(timeLeft)s left!"
+            }
+        } else {
+            if let speechTimer = speechTimer {
+                speechTimer.invalidate()
+                speechTimerLabel.text = "Time's up!"
+                cancelSpeechRecognizer()
+            }
         }
+    }
+    
+    func startSpeechRecognizer() {
         
         // Set up audio session properties
         let audioSession = AVAudioSession.sharedInstance()
@@ -171,17 +190,21 @@ class New_VC: UIViewController {
             let level: Float = -50
             let length: UInt32 = 1024
             buffer.frameLength = length
+            
             let channels = UnsafeBufferPointer(start: buffer.floatChannelData, count: Int(buffer.format.channelCount))
             var value: Float = 0
             vDSP_meamgv(channels[0], 1, &value, vDSP_Length(length))
+            
             var average: Float = ((value == 0) ? -100 : 20.0 * log10f(value))
             if average > 0 {
                 average = 0
             } else if average < -100 {
                 average = -100
             }
+            
             let silent = average < level
             let ts = NSDate().timeIntervalSince1970
+            
             if ts - self.renderTs > 0.1 {
                 let floats = UnsafeBufferPointer(start: channels[0], count: Int(buffer.frameLength))
                 let frame = floats.map({ (f) -> Int in
@@ -238,6 +261,23 @@ class New_VC: UIViewController {
                 
                 self.speakButton.isEnabled = true
             }
+        })
+    }
+    
+    func cancelSpeechRecognizer() {
+        audioEngine.stop()
+        recognitionRequest?.endAudio()
+        
+        recognitionTask?.cancel()
+        recognitionTask = nil
+        
+        // Hide audio view, stop record animation, disable speak button
+        UIView.animate(withDuration: 1.0, delay: 0,
+                       options: .curveEaseOut, animations: {  [self] in
+            recordAnimation.stop()
+            speakButton.isEnabled = false
+        }, completion: { _ in
+            self.performSegue(withIdentifier: "showNewEdit", sender: nil)
         })
     }
 

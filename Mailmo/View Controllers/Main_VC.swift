@@ -15,19 +15,7 @@ class Main_VC: UIViewController {
     
     // MARK: - Lazy Variables
     lazy var welcomeAnimation: AnimationView = {
-        let animationView = AnimationView()
-        animationView.animation = Animation.named("welcomeAnimation")
-        animationView.frame = welcomeIcon.bounds
-        welcomeIcon.addSubview(animationView)
-        
-        animationView.translatesAutoresizingMaskIntoConstraints = false
-        
-        animationView.topAnchor.constraint(equalTo: welcomeIcon.topAnchor).isActive = true
-        animationView.bottomAnchor.constraint(equalTo: welcomeIcon.bottomAnchor).isActive = true
-        animationView.leftAnchor.constraint(equalTo: welcomeIcon.leftAnchor).isActive = true
-        animationView.rightAnchor.constraint(equalTo: welcomeIcon.rightAnchor).isActive = true
-
-        return animationView
+        loadAnimation(fileName: "welcomeAnimation", loadingView: welcomeIcon)
     }()
 
     // MARK: - View Controller Methods
