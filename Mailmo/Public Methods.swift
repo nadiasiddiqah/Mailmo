@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import Lottie
 
+// MARK: - Methods
 func loadAnimation(fileName: String, loadingView: UIView) -> AnimationView {
     let animationView = AnimationView()
     animationView.animation = Animation.named(fileName)
@@ -22,4 +23,17 @@ func loadAnimation(fileName: String, loadingView: UIView) -> AnimationView {
     animationView.rightAnchor.constraint(equalTo: loadingView.rightAnchor).isActive = true
 
     return animationView
+}
+
+
+// MARK: - UIView Extensions
+extension UIView {
+    func fadeTransition(_ duration: CFTimeInterval) {
+        let animation = CATransition()
+        animation.timingFunction = CAMediaTimingFunction(name:
+            CAMediaTimingFunctionName.easeInEaseOut)
+        animation.type = CATransitionType.fade
+        animation.duration = duration
+        layer.add(animation, forKey: CATransitionType.fade.rawValue)
+    }
 }
