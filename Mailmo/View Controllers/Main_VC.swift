@@ -21,13 +21,12 @@ class Main_VC: UIViewController {
     // MARK: - View Controller Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        playAnimation()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = true
+        welcomeAnimation.play(fromProgress: 0, toProgress: 1, loopMode: .loop, completion: nil)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -36,19 +35,11 @@ class Main_VC: UIViewController {
     }
     
     // MARK: - Methods
-    func playAnimation() {
-        welcomeAnimation.play(fromProgress: 0, toProgress: 1, loopMode: .loop, completion: nil)
-    }
     
+    // MARK: - Navigation Methods
 
-    /*
-    // MARK: - Navigation
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//    }
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
