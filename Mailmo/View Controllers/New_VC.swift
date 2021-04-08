@@ -7,6 +7,8 @@
 
 import UIKit
 import Lottie
+import Gifu
+import TinyConstraints
 import Speech
 import AVFoundation
 import Accelerate
@@ -22,8 +24,7 @@ class New_VC: UIViewController, SFSpeechRecognizerDelegate {
     @IBOutlet weak var restartButton: UIButton!
     @IBOutlet weak var pauseButton: UIButton!
     @IBOutlet weak var recordView: UIImageView!
-//    @IBOutlet weak var micView: UIButton!
-    @IBOutlet weak var speakButton: UIButton!
+    @IBOutlet weak var speechOrNextButton: UIButton!
     @IBOutlet weak var tapToLabel: UILabel!
     
     // MARK: - Speech Variables
@@ -40,6 +41,8 @@ class New_VC: UIViewController, SFSpeechRecognizerDelegate {
     private var recognitionTask: SFSpeechRecognitionTask?
     
     var savedText = String()
+    let noVoice = "Voice not detected, try again..."
+    let introText = "Say something, I'm listening!"
     
     private var renderTs: Double = 0
     private var recordingTs: Double = 0
@@ -53,6 +56,16 @@ class New_VC: UIViewController, SFSpeechRecognizerDelegate {
     lazy var recordAnimation: AnimationView = {
         loadAnimation(fileName: "recordAnimation", loadingView: recordView)
     }()
+    
+//    lazy var nextButtonGif: GIFImageView = {
+//        let gif = GIFImageView(frame: CGRect(x: speakButton.frame.origin.x, y: speakButton.frame.origin.y,
+//                                             width: speakButton.frame.width, height: speakButton.frame.height))
+//        gif.frame = speakButton.frame
+//        gif.contentMode = .scaleAspectFit
+//        gif.animate(withGIFNamed: "nextButton")
+//
+//        return gif
+//    }()
     
     // MARK: - View Controller Methods
     override func viewDidLoad() {
@@ -69,48 +82,109 @@ class New_VC: UIViewController, SFSpeechRecognizerDelegate {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        dotsAnimation.pause()
         stopSpeechRecognizer()
     }
     
-    // MARK: - Action Methods
-    
-    // Triggers speech recognizer to start or stop
-    @IBAction func didTapToSpeak(_ sender: UIButton) {
-        if !audioEngine.isRunning && speakButton.currentImage == nil {
-            // Tap to start
-            startTimer()
-            startSpeechRecognizer()
-            
-            // Enable record animation + update text, pause/restart buttons
-            recordAnimation.play(fromProgress: 0, toProgress: 1, loopMode: .loop, completion: nil)
-            restartButton.isEnabled = true
-            pauseButton.isEnabled = true
-            tapToLabel.text = "Tap to finish"
-        } else {
-            // Tap to finish
-            stopSpeechRecognizer()
-            showNextButton()
-        }
+    // MARK: - Navigation Methods
+    @IBAction func backToMain(_ sender: Any) {
+        resetNewVC()
+        navigationController?.popViewController(animated: true)
     }
     
-    func showNextButton() {
-        if speakButton.currentImage != nil {
-            performSegue(withIdentifier: "showNewEdit", sender: nil)
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//    }
+    
+    // MARK: - Action Methods
+    
+    // Triggers speech recognizer to start, retry, resume, or stop
+    @IBAction func didTapSpeechOrNextButton(_ sender: UIButton) {
+        if !audioEngine.isRunning && speechOrNextButton.currentImage == nil &&
+            didPressPause == false && speechTextView.text != noVoice {
+            // Tap to start
+            print("tap to start")
+            
+            // Start speech recognizer
+            showTapToFinish(showDots: true, isPaused: false)
+            
+            // Stop timer after 5s if no voice detected
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) { [self] in
+                if speechTextView.text == introText {
+                    voiceNotDetected()
+                }
+            }
+        } else if speechTextView.text == noVoice {
+            // Tap to retry
+            print("tap to retry")
+            
+            // Start speech recognizer
+            showTapToFinish(showDots: true, isPaused: false)
+
+            // Stop timer after 5s if no voice detected
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) { [self] in
+                if speechTextView.text == introText || speechTextView.text == savedText {
+                    voiceNotDetected()
+                }
+            }
+        } else if didPressPause {
+            // Tap to resume
+            print("tap to resume")
+            
+            // Start speech recognizer
+            showTapToFinish(showDots: false, isPaused: true)
+            
+            // Stop timer after 5s if no voice detected
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) { [self] in
+                if speechTextView.text == savedText {
+                    voiceNotDetected()
+                }
+            }
         } else {
-            recordAnimation.isHidden = true
-            speakButton.setImage(UIImage(named: "next_button"), for: .normal)
-            tapToLabel.text = "Next"
+            print("tap to finish")
+            // Tap to finish
+            determineNextStep()
         }
     }
     
     @IBAction func restartButton(_ sender: Any) {
+        resetNewVC()
+    }
+
+    @IBAction func pauseButton(_ sender: Any) {
+        stopSpeechRecognizer()
+        
+        // Pause speechTimer
+        timer?.invalidate()
+        
+        // Enable controls
+        restartButton.isEnabled = true
+        pauseButton.isEnabled = true
+        
+        // Update tapToLabel
+        tapToLabel.text = "Tap to resume"
+        
+        didPressPause = true
+    }
+    
+    
+    // MARK: - General Methods
+    func setupInitialUI() {
+        
+        // Update text
+        speechTextView.text = "↓Tap to start recording..."
+        savedText = ""
+        
+        // Disable record animation, restart/pause buttons
+        recordAnimation.stop()
+        restartButton.isEnabled = false
+        pauseButton.isEnabled = false
+    }
+    
+    func resetNewVC() {
         stopSpeechRecognizer()
         
         // Restart speechTextView
         speechTextView.fadeTransition(0.6)
-        speechTextView.text = ""
-        savedText = ""
+        setupInitialUI()
         didPressPause = false
         
         // Restart speechTimer
@@ -121,46 +195,87 @@ class New_VC: UIViewController, SFSpeechRecognizerDelegate {
         
         // Restart speechButton
         recordAnimation.isHidden = false
-        recordAnimation.stop()
-        speakButton.isEnabled = true
-        speakButton.setImage(nil, for: .normal)
+        speechOrNextButton.isEnabled = true
+        speechOrNextButton.setImage(nil, for: .normal)
         tapToLabel.text = "Tap to start"
     }
     
-    @IBAction func pauseButton(_ sender: Any) {
-        stopSpeechRecognizer()
-        
-        // Pause speechTimer
-        timer?.invalidate()
+    // MARK: - DidTapSpeechOrNextButton Methods
+    
+    // Starts speech recognizer
+    func showTapToFinish(showDots: Bool, isPaused: Bool) {
+        startSpeechRecognizer()
         
         // Enable controls
-        speakButton.isEnabled = true
+        tapToLabel.text = "Tap to finish"
         restartButton.isEnabled = true
         pauseButton.isEnabled = true
         
-        // Update tapToLabel
-        tapToLabel.text = "Tap to resume"
-        
-        didPressPause = true
+        // Update speechTextView
+        if !isPaused {
+            speechTextView.fadeTransition(0.6)
+            speechTextView.text = introText
+        }
+
+        // Play animations + start timer
+        recordAnimation.play(fromProgress: 0, toProgress: 1, loopMode: .loop, completion: nil)
+        if showDots {
+            dotsAnimation.play(fromProgress: 0, toProgress: 1, loopMode: .loop, completion: nil)
+        }
+        startTimer()
     }
     
-    // MARK: - Lottie Methods
-    func setupInitialUI() {
-        // Enable dots animation
-        dotsAnimation.play(fromProgress: 0, toProgress: 1, loopMode: .loop, completion: nil)
+    // Stops speech recognizer if no voice is detected
+    func voiceNotDetected() {
+        stopSpeechRecognizer()
         
-        // Disable record animation, restart/pause buttons
-        speechTextView.text = ""
-        savedText = ""
-        recordAnimation.pause()
-        restartButton.isEnabled = false
-        pauseButton.isEnabled = false
+        // Stop timer
+        timer?.invalidate()
+        timerLabel.fadeTransition(0.6)
+        timerLabel.text = ""
+        
+        // Update speakButton image
+        recordAnimation.isHidden = false
+        recordAnimation.stop()
+        speechOrNextButton.setImage(nil, for: .normal)
+        
+        // Update speechTextView + tapToLabel
+        speechTextView.fadeTransition(0.6)
+        speechTextView.text = noVoice
+        tapToLabel.fadeTransition(0.6)
+        tapToLabel.text = "Tap to start"
+    }
+    
+    // TO-DO: Fix for pause button
+    // Determines whether to segue, show next button, or restart
+    func determineNextStep() {
+        stopSpeechRecognizer()
+        if speechOrNextButton.currentImage != nil {
+            // If tapped + nextButton is shown -> segue to New_Edit
+            performSegue(withIdentifier: "showNewEdit", sender: nil)
+        } else if speechTextView.text != introText || speechTextView.text != noVoice {
+            // If tapped + speech-to-text is successful -> show nextButton
+            recordAnimation.isHidden = true
+//            speakButton.addSubview(nextButtonGif)
+            speechOrNextButton.setImage(UIImage(named: "next_button"), for: .normal)
+            tapToLabel.text = "Next Step"
+            print("successful speech-to-text")
+        } else {
+            // If tapped + speech-to-text is not successful -> restart!
+            timer?.invalidate()
+            timeLeft = 10
+            speechOrNextButton.isEnabled = true
+            speechOrNextButton.setImage(nil, for: .normal)
+            tapToLabel.text = "Tap to start"
+            print("unsuccessful speech-to-text")
+        }
     }
     
     // MARK: - Speech Recognizer Permission Methods
+    
     // Request speech recognition / microphone permissions
     func requestPermission() {
-        speakButton.isEnabled = false
+        speechOrNextButton.isEnabled = false
         speechRecognizer?.delegate = self
     
         // Requests + checks speech recognition authStatus
@@ -177,7 +292,7 @@ class New_VC: UIViewController, SFSpeechRecognizerDelegate {
      
             // Enable speakButton based on authStatus
             OperationQueue.main.addOperation {
-                self.speakButton.isEnabled = isButtonEnabled
+                self.speechOrNextButton.isEnabled = isButtonEnabled
                 
                 if isButtonEnabled == false {
                     handlePermissionFailed()
@@ -186,12 +301,13 @@ class New_VC: UIViewController, SFSpeechRecognizerDelegate {
         }
     }
     
+    // Check speech recognizer availability
     func speechRecognizer(_ speechRecognizer: SFSpeechRecognizer,
                           availabilityDidChange available: Bool) {
         if available {
-            speakButton.isEnabled = true
+            speechOrNextButton.isEnabled = true
         } else {
-            speakButton.isEnabled = false
+            speechOrNextButton.isEnabled = false
             tapToLabel.text = "Speech recognition not available."
         }
     }
@@ -204,20 +320,19 @@ class New_VC: UIViewController, SFSpeechRecognizerDelegate {
     }
     
     @objc func updateTimer() {
-        if timeLeft > 0 {
+        if timeLeft > 1 {
             timeLeft -= 1
             timerLabel.text = "You have \(timeLeft)s left!"
         } else if recognitionTask == nil {
-            if let speechTimer = timer {
-                speechTimer.invalidate()
+            if let timer = timer {
+                timer.invalidate()
                 timerLabel.text = "You have \(timeLeft)s left!"
             }
         } else {
             if let timer = timer {
                 timer.invalidate()
                 timerLabel.text = "Time's up!"
-                stopSpeechRecognizer()
-                showNextButton()
+                determineNextStep()
             }
         }
     }
@@ -311,13 +426,6 @@ class New_VC: UIViewController, SFSpeechRecognizerDelegate {
             print(error.localizedDescription)
         }
         
-        // Initialize speechTextView after starting audioEngine
-        if didPressPause {
-            speechTextView.text = savedText
-        } else {
-            speechTextView.text = "Say something, I'm listening!"
-        }
-        
         // Set up speech recognizer task
         recognitionRequest.shouldReportPartialResults = true
         
@@ -339,17 +447,20 @@ class New_VC: UIViewController, SFSpeechRecognizerDelegate {
                     speechTextView.text = bestString
                 }
             }
-            
+    
             // Check if there is non-nil error
             if error != nil {
                 // Update savedText (for pauses)
-                savedText = speechTextView.text
+                if speechTextView.text != noVoice || speechTextView.text != introText {
+                    savedText = speechTextView.text
+                    print("savedText: \(savedText)")
+                }
                 
                 // Stop speech recognizer
                 inputNode.removeTap(onBus: 0)
                 stopSpeechRecognizer()
 
-                speakButton.isEnabled = true
+                speechOrNextButton.isEnabled = true
             }
         })
     }
@@ -392,15 +503,5 @@ class New_VC: UIViewController, SFSpeechRecognizerDelegate {
         }))
         present(alert, animated: true, completion: nil)
     }
-    
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 }

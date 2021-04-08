@@ -15,18 +15,7 @@ class SendLater_VC: UIViewController {
     
     // MARK: - Lazy Variables
     lazy var sendLaterAnimation: AnimationView = {
-        let animationView = AnimationView()
-        animationView.animation = Animation.named("sendLaterAnimation")
-        sendLaterView.addSubview(animationView)
-        
-        animationView.translatesAutoresizingMaskIntoConstraints = false
-        
-        animationView.topAnchor.constraint(equalTo: sendLaterView.topAnchor).isActive = true
-        animationView.bottomAnchor.constraint(equalTo: sendLaterView.bottomAnchor).isActive = true
-        animationView.leftAnchor.constraint(equalTo: sendLaterView.leftAnchor).isActive = true
-        animationView.rightAnchor.constraint(equalTo: sendLaterView.rightAnchor).isActive = true
-
-        return animationView
+        loadAnimation(fileName: "sendLaterAnimation", loadingView: sendLaterView)
     }()
 
     // MARK: - View Controller Methods
@@ -43,14 +32,14 @@ class SendLater_VC: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-         navigationController?.isNavigationBarHidden = true
+        navigationController?.isNavigationBarHidden = true
         sendLaterAnimation.pause()
     }
     
     // MARK: - Methods
     func playAnimation() {
         sendLaterAnimation.play(fromProgress: 0, toProgress: 0.999, loopMode: .playOnce) { _ in
-            self.performSegue(withIdentifier: "backToMain", sender: nil)
+            self.performSegue(withIdentifier: "backToMain_Later", sender: nil)
         }
     }
     
