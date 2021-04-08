@@ -13,13 +13,13 @@ class SendNow_VC: UIViewController {
     
     // MARK: - Lazy Variables
     lazy var sendNowAnimation: GIFImageView = {
-        let gifImageView = GIFImageView()
+        let gif = GIFImageView()
         
-        gifImageView.animate(withGIFNamed: "sendNowAnimation", loopCount: 1, preparationBlock: nil) {
-            self.performSegue(withIdentifier: "backToMain", sender: nil)
+        gif.animate(withGIFNamed: "sendNowAnimation", loopCount: 1, preparationBlock: nil) {
+            self.performSegue(withIdentifier: "backToMain_Now", sender: self)
         }
 
-        return  gifImageView
+        return  gif
     }()
 
     // MARK: - View Controller Methods
