@@ -9,6 +9,8 @@ import Foundation
 import UIKit
 import Lottie
 
+// MARK: - Variables
+
 // MARK: - Methods
 func loadAnimation(fileName: String, loadingView: UIView) -> AnimationView {
     let animationView = AnimationView()
