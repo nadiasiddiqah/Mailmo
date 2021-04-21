@@ -11,7 +11,7 @@ class SendPicker_VC: UIViewController {
     
     // Passed From New_Edit_VC
     var mailmoSubject = String()
-    var mailmoContent = String()
+    var mailmoBody = String()
 
     override func viewDidLoad() {
         super.viewDidLoad()

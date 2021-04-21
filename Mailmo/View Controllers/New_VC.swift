@@ -97,7 +97,7 @@ class New_VC: UIViewController, SFSpeechRecognizerDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showNewEdit" {
             let controller = segue.destination as! New_Edit_VC
-            controller.editText = speechTextView.text
+            controller.email.body = speechTextView.text
         }
     }
     
@@ -211,7 +211,6 @@ class New_VC: UIViewController, SFSpeechRecognizerDelegate {
     // Starts speech recognizer
     func showTapToFinish(showDots: Bool, isPaused: Bool) {
         
-        print("start speech recognizer")
         startSpeechRecognizer()
         
         // Enable controls
@@ -345,6 +344,7 @@ class New_VC: UIViewController, SFSpeechRecognizerDelegate {
     
     // MARK: - Speech Recognizer Methods
     func startSpeechRecognizer() {
+        print("start speech recognizer")
         
         // Create new speech recognition request
         recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
