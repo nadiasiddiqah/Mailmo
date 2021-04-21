@@ -30,6 +30,7 @@ class New_Edit_VC: UIViewController {
     // Semaphore object (to ensure one thread accesses SendGrid at a time)
     var semaphore = DispatchSemaphore(value: 0)
     var sendSuccess = false
+    var api = String()
     
     // MARK: - View Controller Methods
     override func viewDidLoad() {
@@ -116,11 +117,27 @@ class New_Edit_VC: UIViewController {
         let emailData = emailString.data(using: .utf8)
         
         // Create SendGrid urlRequest
+        
+        
+        
         var urlRequest = URLRequest(url: URL(string: "https://api.sendgrid.com/v3/mail/send")!,
                                  timeoutInterval: Double.infinity)
-        // Add Authorization and Content-Type Values
-        urlRequest.addValue("Bearer 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",
+        // Access sendGridAPI environment var for Authorization Value
+        
+        
+        
+        if let api = ProcessInfo.processInfo.environment["sendGridAPI"] {
+            self.api = api
+        }
+        let authorizationValue = "Bearer + \(api)"
+        print(authorizationValue)
+        urlRequest.addValue(authorizationValue,
                          forHTTPHeaderField: "Authorization")
+//        if let sendGridAPI = ProcessInfo.processInfo.environment["sendGridAPI"] {
+//            urlRequest.addValue("Bearer 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",
+//                             forHTTPHeaderField: "Authorization")
+//        }
+        // Add Content-Type value
         urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         // "POST"/send emailData to SendGrid URL
@@ -131,6 +148,7 @@ class New_Edit_VC: UIViewController {
         let dataTask = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
             guard let data = data else {
                 // Show error if no data received from SendGrid + suspend semaphore
+                self.sendSuccess = false
                 print(String(describing: error))
                 self.semaphore.signal()
                 return
