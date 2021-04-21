@@ -11,6 +11,16 @@ import Lottie
 
 // MARK: - Variables
 
+struct EmailInfo {
+    var email: String
+    var name: String?
+}
+
+struct EmailContent {
+    var subject: String
+    var body: String
+}
+
 // MARK: - Methods
 func loadAnimation(fileName: String, loadingView: UIView) -> AnimationView {
     let animationView = AnimationView()
@@ -25,6 +35,32 @@ func loadAnimation(fileName: String, loadingView: UIView) -> AnimationView {
     animationView.rightAnchor.constraint(equalTo: loadingView.rightAnchor).isActive = true
 
     return animationView
+}
+
+func emailFormatter(to: String, toName: String,
+                    from: String, fromName: String,
+                    subject: String, body: String,
+                    sendAt: Int?) -> String {
+    // TO-DO: Condense by putting first email into variable and adding if sendAt != nil statement
+    var email = ""
+    if sendAt == nil {
+        email = "{ \"personalizations\": " +
+            "[{ \"to\": [{ \"email\": \"\(to)\", \"name\": \"\(toName)\" }] } ], " +
+            "\"from\": { \"email\": \"\(from)\", \"name\": \"\(fromName)\" }, " +
+            "\"subject\": \"\(subject)\", " +
+            "\"content\": [{ \"type\": \"text/html\", " +
+            "\"value\": \"\(body)\" }] }"
+    } else {
+        email = "{ \"personalizations\": " +
+            "[{ \"to\": [{ \"email\": \"\(to)\", \"name\": \"\(toName)\" }] } ], " +
+            "\"from\": { \"email\": \"\(from)\", \"name\": \"\(fromName)\" }, " +
+            "\"subject\": \"\(subject)\", " +
+            "\"content\": [{ \"type\": \"text/html\", " +
+            "\"value\": \"\(body)\" }], " +
+            "\"send_at\": \(sendAt!) }"
+    }
+    
+    return email
 }
 
 
