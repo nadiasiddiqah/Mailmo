@@ -6,22 +6,30 @@
 //
 
 import UIKit
+import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
-class New_Edit_VC: UIViewController, UITextFieldDelegate, UITextViewDelegate {
+class New_Edit_VC: UIViewController {
     
     // MARK: - Outlets
     @IBOutlet weak var subjectTextField: UITextField!
     @IBOutlet weak var editTextView: UITextView!
-    @IBOutlet weak var sendToEmail: UIButton!
-    @IBOutlet weak var sendToEmail_iCloud: UIButton!
+    @IBOutlet weak var sendNowButton: UIButton!
+    @IBOutlet weak var sendLaterButton: UIButton!
     
     // MARK: - Variables
-    var today = Date()
-    var subjectFormatter = DateFormatter()
+    var mailmoSubject = String()
+    var to = EmailInfo(email: "nadiasiddiqah@gmail.com", name: "Nadia")
+    var from = EmailInfo(email: "nadiasiddiqah@gmail.com", name: "Mailmo")
     
-    // Passed From New_VC
-    var editText = String()
-    var subjectText = String()
+    // Body passed from New_VC
+    var email = EmailContent(subject: "", body: "")
+    
+    // Semaphore object (to ensure one thread accesses SendGrid at a time)
+    var semaphore = DispatchSemaphore(value: 0)
+    var sendSuccess = false
     
     // MARK: - View Controller Methods
     override func viewDidLoad() {
@@ -35,38 +43,42 @@ class New_Edit_VC: UIViewController, UITextFieldDelegate, UITextViewDelegate {
         subjectTextField.delegate = self
         editTextView.delegate = self
         
-        // Initialize subject formatter (if subjectTextField blank)
-        subjectFormatter.dateFormat = "M/d/yy H:mma"
-        
         // Initialize editTextView from var passed from New_VC
-        editTextView.text = editText
+        editTextView.text = email.body
         
         // Swipe/tap on screen to hide keyboard
         gesturesToHideKeyboard()
     }
     
     // MARK: - Send Methods
-    @IBAction func emailButton(_ sender: Any) {
-        performSegue(withIdentifier: "showSendPicker", sender: nil)
+    @IBAction func sendNow(_ sender: Any) {
+        sendEmail()
+        if sendSuccess {
+            performSegue(withIdentifier: "showSendNow", sender: nil)
+        }
     }
     
-    @IBAction func email_iCloudButton(_ sender: Any) {
-        performSegue(withIdentifier: "showSendPicker", sender: nil)
+    @IBAction func sendLater(_ sender: Any) {
+        performSegue(withIdentifier: "showSendLaterPicker", sender: nil)
     }
     
     // MARK: - Navigation Methods
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showSendPicker" {
-            let controller = segue.destination as! SendPicker_VC
-            controller.mailmoSubject = subjectTextField.text ?? "New Mailmo \(subjectFormatter.string(from: today))"
-            controller.mailmoContent = editTextView.text
-            print("subjectFormatter: \(String(describing: subjectTextField.text))")
-            print("editTextView: \(String(describing: editTextView.text))")
+        if segue.identifier == "showSendNow" {
+           _ = segue.destination as! SendNow_VC
+        } else if segue.identifier == "showSendLaterPicker" {
+            let controller = segue.destination as! SendLaterPicker_VC
+            controller.to = to
+            controller.from = from
+            controller.email.subject = subjectTextField.text ?? ""
+            controller.email.body = editTextView.text
         }
     }
     
-    // MARK: - Helper Methods
+    @IBAction func unwindFromSendLaterPicker(_ unwindSegue: UIStoryboardSegue) {
+    }
     
+    // MARK: - Helper Methods
     func gesturesToHideKeyboard() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         view.addGestureRecognizer(tap)
@@ -77,10 +89,68 @@ class New_Edit_VC: UIViewController, UITextFieldDelegate, UITextViewDelegate {
         view.endEditing(true)
     }
     
-    // MARK: - Text Field Delegate Methods
+    func checkforEmptySubject() {
+        let today = Date()
+        let defaultSubject = DateFormatter()
+        defaultSubject.dateFormat = "M/d/yy h:mma"
+        
+        if let subject = subjectTextField.text {
+            if subject == "" {
+                email.subject = "New Mailmo \(defaultSubject.string(from: today))"
+            } else {
+                email.subject = subject
+            }
+            print(email.subject)
+        }
+    }
+    
+    func sendEmail() {
+        // Email String Object (w/ personalization parameters)
+        checkforEmptySubject()
+        let emailString = emailFormatter(to: to.email, toName: to.name ?? "",
+                                         from: from.email, fromName: from.name ?? "",
+                                         subject: email.subject, body: email.body,
+                                         sendAt: nil)
+        
+        // Convert Email String -> UTF8 Data Object
+        let emailData = emailString.data(using: .utf8)
+        
+        // Create SendGrid urlRequest
+        var urlRequest = URLRequest(url: URL(string: "https://api.sendgrid.com/v3/mail/send")!,
+                                 timeoutInterval: Double.infinity)
+        // Add Authorization and Content-Type Values
+        urlRequest.addValue("Bearer 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",
+                         forHTTPHeaderField: "Authorization")
+        urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        // "POST"/send emailData to SendGrid URL
+        urlRequest.httpMethod = "POST"
+        urlRequest.httpBody = emailData
+        
+        // Create shared SendGrid URLSession dataTask object
+        let dataTask = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
+            guard let data = data else {
+                // Show error if no data received from SendGrid + suspend semaphore
+                print(String(describing: error))
+                self.semaphore.signal()
+                return
+            }
+            // Suspend semaphore if data is received from SendGrid
+            self.sendSuccess = true
+            print(String(data: data, encoding: .utf8)!)
+            self.semaphore.signal()
+        }
+        //  Resume task (post emailData to SendGrid) + start semaphore
+        dataTask.resume()
+        semaphore.wait()
+    }
+}
+
+// MARK: - Text Field Delegate Methods
+extension New_Edit_VC: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         if let enteredSubject = subjectTextField.text {
-            subjectText = enteredSubject
+            mailmoSubject = enteredSubject
         }
         view.endEditing(true)
     }
@@ -88,32 +158,28 @@ class New_Edit_VC: UIViewController, UITextFieldDelegate, UITextViewDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         // Ends all editing
         view.endEditing(true)
-        return true
+        return false
     }
-    
-    // MARK: - Text View Delegate Methods
+}
+
+// MARK: - Text View Delegate Methods
+extension New_Edit_VC: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
-        if editTextView.text == "" {
-            sendToEmail.isEnabled = false
-            sendToEmail_iCloud.isEnabled = false
+        if textView.text == "" {
+            sendNowButton.isEnabled = false
+            sendLaterButton.isEnabled = false
         } else {
-            sendToEmail.isEnabled = true
-            sendToEmail_iCloud.isEnabled = true
+            sendNowButton.isEnabled = true
+            sendLaterButton.isEnabled = true
         }
-    }
-    
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        if text == "\n" {
-            textView.resignFirstResponder()
-            return false
-        }
-        return true
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
         if let enteredText = editTextView.text {
-            editText = enteredText
+            let textWithBreaks = enteredText.replacingOccurrences(of: "\n", with: "<br>")
+            email.body = textWithBreaks
         }
+//        print(mailmoBody)
         view.endEditing(true)
     }
 }

@@ -13,7 +13,6 @@
 		097333DC260961370045F5AB /* voiceAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 097333DB260961370045F5AB /* voiceAnimation.json */; };
 		0975616726093BE600F01055 /* recordAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 0975616626093BE500F01055 /* recordAnimation.json */; };
 		09BA6BD5260A5DEA003DBFD3 /* New_Edit_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BA6BD4260A5DEA003DBFD3 /* New_Edit_VC.swift */; };
-		09BA6BDA260A7DAF003DBFD3 /* SendPicker_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BA6BD9260A7DAF003DBFD3 /* SendPicker_VC.swift */; };
 		09BA6BE4260A84D8003DBFD3 /* SendNow_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BA6BE3260A84D8003DBFD3 /* SendNow_VC.swift */; };
 		09BA6BF4260A87DB003DBFD3 /* sendNowAnimation.gif in Resources */ = {isa = PBXBuildFile; fileRef = 09BA6BF3260A87DB003DBFD3 /* sendNowAnimation.gif */; };
 		09BA6C08260AB73E003DBFD3 /* SendLaterPicker_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BA6C07260AB73D003DBFD3 /* SendLaterPicker_VC.swift */; };
@@ -103,7 +102,6 @@
 		097333DB260961370045F5AB /* voiceAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = voiceAnimation.json; sourceTree = "<group>"; };
 		0975616626093BE500F01055 /* recordAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = recordAnimation.json; sourceTree = "<group>"; };
 		09BA6BD4260A5DEA003DBFD3 /* New_Edit_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = New_Edit_VC.swift; sourceTree = "<group>"; };
-		09BA6BD9260A7DAF003DBFD3 /* SendPicker_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendPicker_VC.swift; sourceTree = "<group>"; };
 		09BA6BE3260A84D8003DBFD3 /* SendNow_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendNow_VC.swift; sourceTree = "<group>"; };
 		09BA6BF3260A87DB003DBFD3 /* sendNowAnimation.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = sendNowAnimation.gif; path = ../sendNowAnimation.gif; sourceTree = "<group>"; };
 		09BA6C07260AB73D003DBFD3 /* SendLaterPicker_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendLaterPicker_VC.swift; sourceTree = "<group>"; };
@@ -371,7 +369,6 @@
 				09E98E4826053A6B00C4F4F7 /* Main_VC.swift */,
 				09016C732614173000B11BF0 /* New_VC.swift */,
 				09BA6BD4260A5DEA003DBFD3 /* New_Edit_VC.swift */,
-				09BA6BD9260A7DAF003DBFD3 /* SendPicker_VC.swift */,
 				09BA6BE3260A84D8003DBFD3 /* SendNow_VC.swift */,
 				09BA6C07260AB73D003DBFD3 /* SendLaterPicker_VC.swift */,
 				09BA6C0C260AB74F003DBFD3 /* SendLater_VC.swift */,
@@ -713,7 +710,6 @@
 				09BA6C0D260AB74F003DBFD3 /* SendLater_VC.swift in Sources */,
 				0924F1002613CD1300C0E909 /* AudioVisualizerView.swift in Sources */,
 				09BA6BD5260A5DEA003DBFD3 /* New_Edit_VC.swift in Sources */,
-				09BA6BDA260A7DAF003DBFD3 /* SendPicker_VC.swift in Sources */,
 				09E98D4C2605397900C4F4F7 /* AppDelegate.swift in Sources */,
 				09BA6BE4260A84D8003DBFD3 /* SendNow_VC.swift in Sources */,
 				09BA6C27260C131F003DBFD3 /* Settings_VC.swift in Sources */,
