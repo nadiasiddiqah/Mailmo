@@ -119,7 +119,7 @@ class New_Edit_VC: UIViewController {
         var urlRequest = URLRequest(url: URL(string: "https://api.sendgrid.com/v3/mail/send")!,
                                  timeoutInterval: Double.infinity)
         // Add Authorization and Content-Type Values
-        urlRequest.addValue("Bearer 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",
+        urlRequest.addValue("Bearer",
                          forHTTPHeaderField: "Authorization")
         urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
