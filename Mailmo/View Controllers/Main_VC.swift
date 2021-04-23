@@ -34,12 +34,13 @@ class Main_VC: UIViewController {
         welcomeAnimation.pause()
     }
     
-    // MARK: - Methods
-    
     // MARK: - Navigation Methods
-
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//    }
-
-
+    @IBAction func unwindFromEditToMain(_ unwindSegue: UIStoryboardSegue) {
+    }
+    
+    @IBAction func unwindFromHistoryToMain(_ unwindSegue: UIStoryboardSegue) {
+    }
+    
+    @IBAction func unwindFromNewToMain(_ unwindSegue: UIStoryboardSegue) {
+    }
 }
