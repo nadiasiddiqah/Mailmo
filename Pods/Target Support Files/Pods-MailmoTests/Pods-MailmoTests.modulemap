@@ -1,0 +1,6 @@
+framework module Pods_MailmoTests {
+  umbrella header "Pods-MailmoTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
