@@ -23,6 +23,7 @@ class New_Edit_VC: UIViewController {
     var mailmoSubject = String()
     var to = EmailInfo(email: "nadiasiddiqah@gmail.com", name: "Nadia")
     var from = EmailInfo(email: "nadiasiddiqah@gmail.com", name: "Mailmo")
+    let today = Date()
     
     // Body passed from New_VC
     var email = EmailContent(subject: "", body: "")
@@ -30,7 +31,7 @@ class New_Edit_VC: UIViewController {
     // Semaphore object (to ensure one thread accesses SendGrid at a time)
     var semaphore = DispatchSemaphore(value: 0)
     var sendSuccess = false
-    var api = String()
+    var backToMain = false
     
     // MARK: - View Controller Methods
     override func viewDidLoad() {
@@ -55,6 +56,7 @@ class New_Edit_VC: UIViewController {
     @IBAction func sendNow(_ sender: Any) {
         sendEmail()
         if sendSuccess {
+            updateHistory()
             performSegue(withIdentifier: "showSendNow", sender: nil)
         }
     }
@@ -91,9 +93,8 @@ class New_Edit_VC: UIViewController {
     }
     
     func checkforEmptySubject() {
-        let today = Date()
         let defaultSubject = DateFormatter()
-        defaultSubject.dateFormat = "M/d/yy h:mma"
+        defaultSubject.dateFormat = "M-d h:mm"
         
         if let subject = subjectTextField.text {
             if subject == "" {
@@ -103,6 +104,17 @@ class New_Edit_VC: UIViewController {
             }
             print(email.subject)
         }
+    }
+    
+    func updateHistory() {
+        let sendTimeFormatter = DateFormatter()
+        sendTimeFormatter.dateFormat = "M/d/yy h:mma"
+        let sendTime = sendTimeFormatter.string(from: today)
+        
+        sentEmails.append(CellInfo(statusColor: #colorLiteral(red: 0.8039215686, green: 0.9450980392, blue: 1, alpha: 1), statusIcon: UIImage(named: "sent_now")!,
+                                   detailIcon: UIImage(named: "mail_now")!,
+                                   subject: email.subject, body: email.body,
+                                   sendTime: sendTime))
     }
     
     func sendEmail() {
@@ -117,26 +129,16 @@ class New_Edit_VC: UIViewController {
         let emailData = emailString.data(using: .utf8)
         
         // Create SendGrid urlRequest
-        
-        
-        
         var urlRequest = URLRequest(url: URL(string: "https://api.sendgrid.com/v3/mail/send")!,
                                  timeoutInterval: Double.infinity)
-        // Access sendGridAPI environment var for Authorization Value
-        
-        
-        
-        if let api = ProcessInfo.processInfo.environment["sendGridAPI"] {
-            self.api = api
+        // Check if sendGrid API key is broken
+        guard let apiKey = ProcessInfo.processInfo.environment["sendGridAPI"] else {
+            sendSuccess = false
+            handleInvalidAPI()
+            return
         }
-        let authorizationValue = "Bearer + \(api)"
-        print(authorizationValue)
-        urlRequest.addValue(authorizationValue,
-                         forHTTPHeaderField: "Authorization")
-//        if let sendGridAPI = ProcessInfo.processInfo.environment["sendGridAPI"] {
-//            urlRequest.addValue("Bearer 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",
-//                             forHTTPHeaderField: "Authorization")
-//        }
+        // Access sendGridAPI environment var for Authorization Value
+        urlRequest.addValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
         // Add Content-Type value
         urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
@@ -161,6 +163,16 @@ class New_Edit_VC: UIViewController {
         //  Resume task (post emailData to SendGrid) + start semaphore
         dataTask.resume()
         semaphore.wait()
+    }
+    
+    // MARK: - Error Handling Methods
+    func handleInvalidAPI() {
+        let alert = UIAlertController(title: "Error has occurred",
+                                      message: "Mailmo email server is currently unavailable.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Back to Main", style: .cancel, handler: { (_) in
+            self.performSegue(withIdentifier: "unwindFromEditToMain", sender: nil)
+        }))
+        present(alert, animated: true, completion: nil)
     }
 }
 
