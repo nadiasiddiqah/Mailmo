@@ -10,6 +10,7 @@
 		09016C742614173000B11BF0 /* New_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09016C732614173000B11BF0 /* New_VC.swift */; };
 		09016C7F2614178C00B11BF0 /* Public Methods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09016C7E2614178C00B11BF0 /* Public Methods.swift */; };
 		0924F1002613CD1300C0E909 /* AudioVisualizerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0924F0FF2613CD1300C0E909 /* AudioVisualizerView.swift */; };
+		093D27B32631023000C4CBCB /* HistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093D27B22631023000C4CBCB /* HistoryCell.swift */; };
 		097333DC260961370045F5AB /* voiceAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 097333DB260961370045F5AB /* voiceAnimation.json */; };
 		0975616726093BE600F01055 /* recordAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 0975616626093BE500F01055 /* recordAnimation.json */; };
 		09BA6BD5260A5DEA003DBFD3 /* New_Edit_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BA6BD4260A5DEA003DBFD3 /* New_Edit_VC.swift */; };
@@ -99,6 +100,7 @@
 		0924F0B02613BAD200C0E909 /* AudioKit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AudioKit.xcframework; path = ../../Downloads/AudioKit.xcframework; sourceTree = "<group>"; };
 		0924F0BC2613BB6300C0E909 /* AudioKit */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = AudioKit; path = "../../Downloads/AudioKit.xcframework/AudioKit.xcframework/ios-arm64_armv7/AudioKit.framework/AudioKit"; sourceTree = "<group>"; };
 		0924F0FF2613CD1300C0E909 /* AudioVisualizerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioVisualizerView.swift; sourceTree = "<group>"; };
+		093D27B22631023000C4CBCB /* HistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCell.swift; sourceTree = "<group>"; };
 		097333DB260961370045F5AB /* voiceAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = voiceAnimation.json; sourceTree = "<group>"; };
 		0975616626093BE500F01055 /* recordAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = recordAnimation.json; sourceTree = "<group>"; };
 		09BA6BD4260A5DEA003DBFD3 /* New_Edit_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = New_Edit_VC.swift; sourceTree = "<group>"; };
@@ -241,6 +243,7 @@
 				09E98E4726053A6B00C4F4F7 /* View Controllers */,
 				0924F0FF2613CD1300C0E909 /* AudioVisualizerView.swift */,
 				09016C7E2614178C00B11BF0 /* Public Methods.swift */,
+				093D27B22631023000C4CBCB /* HistoryCell.swift */,
 			);
 			path = Mailmo;
 			sourceTree = "<group>";
@@ -714,6 +717,7 @@
 				09BA6BE4260A84D8003DBFD3 /* SendNow_VC.swift in Sources */,
 				09BA6C27260C131F003DBFD3 /* Settings_VC.swift in Sources */,
 				09E98D562605397900C4F4F7 /* Mailmo.xcdatamodeld in Sources */,
+				093D27B32631023000C4CBCB /* HistoryCell.swift in Sources */,
 				09E98D4E2605397900C4F4F7 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
