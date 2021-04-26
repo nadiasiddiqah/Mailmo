@@ -10,15 +10,23 @@ import UIKit
 import Lottie
 
 // MARK: - Variables
+var sentEmails = [CellInfo]()
+var scheduledEmails = [CellInfo]()
 
+// MARK: - Classes / Structs
 struct EmailInfo {
     var email: String
     var name: String?
 }
 
 struct EmailContent {
-    var subject: String
-    var body: String
+    var subject, body: String
+}
+
+struct CellInfo {
+    var statusColor: UIColor
+    var statusIcon, detailIcon: UIImage
+    var subject, body, sendTime: String
 }
 
 // MARK: - Methods
@@ -41,7 +49,6 @@ func emailFormatter(to: String, toName: String,
                     from: String, fromName: String,
                     subject: String, body: String,
                     sendAt: Int?) -> String {
-    // TO-DO: Condense by putting first email into variable and adding if sendAt != nil statement
     var email = ""
     if sendAt == nil {
         email = "{ \"personalizations\": " +
@@ -59,7 +66,6 @@ func emailFormatter(to: String, toName: String,
             "\"value\": \"\(body)\" }], " +
             "\"send_at\": \(sendAt!) }"
     }
-    
     return email
 }
 

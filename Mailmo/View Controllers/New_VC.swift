@@ -87,11 +87,14 @@ class New_VC: UIViewController, SFSpeechRecognizerDelegate {
     // MARK: - Navigation Methods
     @IBAction func backToMain(_ sender: Any) {
         resetNewView()
-        navigationController?.popViewController(animated: true)
+        performSegue(withIdentifier: "unwindFromNewToMain", sender: nil)
     }
     
-    @IBAction func unwindFromNewEdit(_ unwindSegue: UIStoryboardSegue) {
+    @IBAction func unwindFromEditToNew(_ unwindSegue: UIStoryboardSegue) {
         resetNewView()
+    }
+    
+    @IBAction func unwindFromHistoryToNew(_ unwindSegue: UIStoryboardSegue) {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
