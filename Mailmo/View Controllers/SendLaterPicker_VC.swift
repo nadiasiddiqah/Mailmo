@@ -40,6 +40,7 @@ class SendLaterPicker_VC: UIViewController {
         sendEmail()
         
         if sendSuccess {
+            updateHistory()
             performSegue(withIdentifier: "showSendLater", sender: nil)
         }
     }
@@ -64,12 +65,23 @@ class SendLaterPicker_VC: UIViewController {
     
     func checkforEmptySubject() {
         let subjectFormatter = DateFormatter()
-        subjectFormatter.dateFormat = "M/d/yy h:mma"
+        subjectFormatter.dateFormat = "M-d h:mm"
         
         if email.subject == "" {
-            email.subject = "New Mailmo \(subjectFormatter.string(from: datePicker.date))"
+            email.subject = "Memo \(subjectFormatter.string(from: datePicker.date))"
         }
         print(email.subject)
+    }
+    
+    func updateHistory() {
+        let sendTimeFormatter = DateFormatter()
+        sendTimeFormatter.dateFormat = "M/d/yy h:mma"
+        let sendTime = sendTimeFormatter.string(from: datePicker.date)
+        
+        scheduledEmails.append(CellInfo(statusColor: #colorLiteral(red: 1, green: 0.9015662074, blue: 0.8675737381, alpha: 1), statusIcon: UIImage(named: "sent_later")!,
+                                   detailIcon: UIImage(named: "mail_later")!,
+                                   subject: email.subject, body: email.body,
+                                   sendTime: sendTime))
     }
     
     func calculateSendAt() {
@@ -78,6 +90,7 @@ class SendLaterPicker_VC: UIViewController {
     }
     
     func sendEmail() {
+        // Email String Object (w/ personalization parameters)
         checkforEmptySubject()
         let emailString = emailFormatter(to: to.email, toName: to.name ?? "",
                                          from: from.email, fromName: from.name ?? "",
@@ -86,14 +99,19 @@ class SendLaterPicker_VC: UIViewController {
         
         // Convert Email String -> UTF8 Data Object
         let emailData = emailString.data(using: .utf8)
-
         
         // Create SendGrid urlRequest
         var urlRequest = URLRequest(url: URL(string: "https://api.sendgrid.com/v3/mail/send")!,
                                  timeoutInterval: Double.infinity)
-        // Add Authorization and Content-Type Values
-        urlRequest.addValue("Bearer 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",
-                         forHTTPHeaderField: "Authorization")
+        // Check if sendGrid API key is broken
+        guard let apiKey = ProcessInfo.processInfo.environment["sendGridAPI"] else {
+            sendSuccess = false
+            handleInvalidAPI()
+            return
+        }
+        // Access sendGridAPI environment var for Authorization Value
+        urlRequest.addValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+        // Add Content-Type value
         urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         // "POST"/send emailData to SendGrid URL
@@ -104,6 +122,7 @@ class SendLaterPicker_VC: UIViewController {
         let dataTask = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
             guard let data = data else {
                 // Show error if no data received from SendGrid + suspend semaphore
+                self.sendSuccess = false
                 print(String(describing: error))
                 self.semaphore.signal()
                 return
@@ -116,5 +135,15 @@ class SendLaterPicker_VC: UIViewController {
         //  Resume task (post emailData to SendGrid) + start semaphore
         dataTask.resume()
         semaphore.wait()
+    }
+    
+    // MARK: - Error Handling Methods
+    func handleInvalidAPI() {
+        let alert = UIAlertController(title: "Error has occurred",
+                                      message: "Mailmo email server is currently unavailable.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Back to Main", style: .cancel, handler: { (_) in
+            self.performSegue(withIdentifier: "unwindFromEditToMain", sender: nil)
+        }))
+        present(alert, animated: true, completion: nil)
     }
 }
