@@ -104,7 +104,7 @@
 		0924F0FF2613CD1300C0E909 /* AudioVisualizerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioVisualizerView.swift; sourceTree = "<group>"; };
 		093D27B22631023000C4CBCB /* HistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCell.swift; sourceTree = "<group>"; };
 		095ABFF02642326E00031A77 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		095AC0312644C6CA00031A77 /* SendGrid-Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "SendGrid-Config.xcconfig"; sourceTree = "<group>"; };
+		095AC07F2645B45800031A77 /* SendGrid_Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = SendGrid_Config.xcconfig; sourceTree = "<group>"; };
 		097333DB260961370045F5AB /* voiceAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = voiceAnimation.json; sourceTree = "<group>"; };
 		0975616626093BE500F01055 /* recordAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = recordAnimation.json; sourceTree = "<group>"; };
 		09A6E2F6264221F600C67575 /* SignUp_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp_VC.swift; sourceTree = "<group>"; };
@@ -250,7 +250,7 @@
 				0924F0FF2613CD1300C0E909 /* AudioVisualizerView.swift */,
 				09016C7E2614178C00B11BF0 /* Public Methods.swift */,
 				093D27B22631023000C4CBCB /* HistoryCell.swift */,
-				095AC0312644C6CA00031A77 /* SendGrid-Config.xcconfig */,
+				095AC07F2645B45800031A77 /* SendGrid_Config.xcconfig */,
 			);
 			path = Mailmo;
 			sourceTree = "<group>";
@@ -817,7 +817,7 @@
 /* Begin XCBuildConfiguration section */
 		09E98D732605397A00C4F4F7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 095AC0312644C6CA00031A77 /* SendGrid-Config.xcconfig */;
+			baseConfigurationReference = 095AC07F2645B45800031A77 /* SendGrid_Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -879,7 +879,7 @@
 		};
 		09E98D742605397A00C4F4F7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 095AC0312644C6CA00031A77 /* SendGrid-Config.xcconfig */;
+			baseConfigurationReference = 095AC07F2645B45800031A77 /* SendGrid_Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
