@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class SendLaterPicker_VC: UIViewController {
     
@@ -14,7 +15,6 @@ class SendLaterPicker_VC: UIViewController {
     
     // MARK: - Variables
     var initialDate = Date()
-    var sendAt = Int()
     var minDate = Date()
     var maxDate = Date()
     
@@ -25,7 +25,10 @@ class SendLaterPicker_VC: UIViewController {
     // Passed from New_Edit_VC
     var to = EmailInfo(email: "", name: "")
     var from = EmailInfo(email: "", name: "")
-    var email = EmailContent(subject: "", body: "")
+    var email = SendGridData(subject: "", body: "", sendAt: 0)
+    
+    let firebaseAuth = Auth.auth()
+    let firebaseData = Database.database().reference()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +43,7 @@ class SendLaterPicker_VC: UIViewController {
         sendEmail()
         
         if sendSuccess {
-            updateHistory()
+            postData()
             performSegue(withIdentifier: "showSendLater", sender: nil)
         }
     }
@@ -73,29 +76,33 @@ class SendLaterPicker_VC: UIViewController {
         print(email.subject)
     }
     
-    func updateHistory() {
-        let sendTimeFormatter = DateFormatter()
-        sendTimeFormatter.dateFormat = "M/d/yy h:mma"
-        let sendTime = sendTimeFormatter.string(from: datePicker.date)
+    func postData() {
+        let sendTime = dateFormatter(date: datePicker.date)
         
-        scheduledEmails.append(CellInfo(statusColor: #colorLiteral(red: 1, green: 0.9015662074, blue: 0.8675737381, alpha: 1), statusIcon: UIImage(named: "sent_later")!,
-                                   detailIcon: UIImage(named: "mail_later")!,
-                                   subject: email.subject, body: email.body,
-                                   sendTime: sendTime))
+        allEmails.append(FirebaseData(subject: email.subject, body: email.body,
+                                      sendAtString: sendTime))
+        
+        // Post data to Firebase
+        if let uid = firebaseAuth.currentUser?.uid {
+            print("Successfully posted data to Firebase")
+            firebaseData.child("posts/\(uid)").child(calculateSendTime()).setValue(["subject": email.subject,
+                                                                                    "body": email.body,
+                                                                                    "sendAtString": sendTime])
+        }
     }
     
     func calculateSendAt() {
         let selectedDate = datePicker.date
-        sendAt = Int(selectedDate.timeIntervalSince1970 / 60) * 60
+        email.sendAt = Int(selectedDate.timeIntervalSince1970 / 60) * 60
     }
     
     func sendEmail() {
         // Email String Object (w/ personalization parameters)
         checkforEmptySubject()
         let emailString = emailFormatter(to: to.email, toName: to.name ?? "",
-                                         from: from.email, fromName: from.name ?? "",
+                                         from: from.email, fromName: from.name!,
                                          subject: email.subject, body: email.body,
-                                         sendAt: sendAt)
+                                         sendAt: email.sendAt)
         
         // Convert Email String -> UTF8 Data Object
         let emailData = emailString.data(using: .utf8)
@@ -104,7 +111,7 @@ class SendLaterPicker_VC: UIViewController {
         var urlRequest = URLRequest(url: URL(string: "https://api.sendgrid.com/v3/mail/send")!,
                                  timeoutInterval: Double.infinity)
         // Check if sendGrid API key is broken
-        guard let apiKey = ProcessInfo.processInfo.environment["sendGridAPI"] else {
+        guard let apiKey = Bundle.main.infoDictionary?["SendGridAPI_Key"] as? String else {
             sendSuccess = false
             handleInvalidAPI()
             return

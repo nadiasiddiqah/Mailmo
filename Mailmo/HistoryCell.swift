@@ -13,14 +13,24 @@ class HistoryCell: UITableViewCell {
     @IBOutlet weak var cellBackgroundView: UIView!
     @IBOutlet weak var statusImage: UIImageView!
     @IBOutlet weak var subjectLabel: UILabel!
-    @IBOutlet weak var sendTimeLabel: UILabel!
+    @IBOutlet weak var sendAtLabel: UILabel!
 
     // MARK: - Helper Methods
-    func configureHistoryCell(info: CellInfo) {
-        cellBackgroundView.backgroundColor = info.statusColor
-        statusImage.image = info.statusIcon
+    func configureHistoryCell(info: FirebaseData) {
+        let timeNow = dateFormatter(date: Date())
+        
+        if timeNow >= info.sendAtString {
+            // If timeNow >= sendAtString -> email is sent
+            cellBackgroundView.backgroundColor = #colorLiteral(red: 0.8039215686, green: 0.9450980392, blue: 1, alpha: 1)
+            statusImage.image = UIImage(named: "sent_now")!
+        } else {
+            cellBackgroundView.backgroundColor = #colorLiteral(red: 1, green: 0.9015662074, blue: 0.8675737381, alpha: 1)
+            statusImage.image = UIImage(named: "sent_later")
+        }
+        
         subjectLabel.text = info.subject
-        sendTimeLabel.text = info.sendTime
+        sendAtLabel.text = info.sendAtString
     }
     
 }
+

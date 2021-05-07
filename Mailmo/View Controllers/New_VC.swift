@@ -101,7 +101,7 @@ class New_VC: UIViewController, SFSpeechRecognizerDelegate {
         if segue.identifier == "showNewEdit" {
             let controller = segue.destination as! New_Edit_VC
             controller.email.body = speechTextView.text
-        }
+        } 
     }
     
     // MARK: - Action Methods
