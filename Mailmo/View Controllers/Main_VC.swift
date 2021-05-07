@@ -7,8 +7,14 @@
 
 import UIKit
 import Lottie
+import GoogleSignIn
+import Firebase
 
 class Main_VC: UIViewController {
+    
+    // MARK: - Variables
+    let firebaseAuth = Auth.auth()
+    let firebaseData = Database.database().reference()
     
     // MARK: - Outlet Variables
     @IBOutlet weak var welcomeIcon: UIImageView!
@@ -42,5 +48,29 @@ class Main_VC: UIViewController {
     }
     
     @IBAction func unwindFromNewToMain(_ unwindSegue: UIStoryboardSegue) {
+    }
+    
+    func transitionToSignIn() {
+        
+        // Update root view controller to SignInVC (when user signs out)
+        if let signInVC = self.storyboard?.instantiateViewController(withIdentifier: "SignInVC") as? SignIn_VC {
+            let navController = UINavigationController(rootViewController: signInVC)
+            navController.modalPresentationStyle = .fullScreen
+            self.navigationController?.present(navController, animated: true, completion: nil)
+        }
+    }
+
+    // MARK: - Action Methods
+    @IBAction func logOut(_ sender: Any) {
+        GIDSignIn.sharedInstance()?.signOut()
+        
+        // Sign user out
+        do {
+            try firebaseAuth.signOut()
+            transitionToSignIn()
+        } catch {
+            print("Error signing out: %@", error)
+        }
+        print("Signed out")
     }
 }

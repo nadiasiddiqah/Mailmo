@@ -10,29 +10,90 @@ import UIKit
 class History_VC: UIViewController {
 
     // MARK: - Variables
-    var sortedSentEmails = [CellInfo]()
-    var sortedScheduledEmails = [CellInfo]()
-    var selectedRow: CellInfo?
+    var sentEmails = [FirebaseData]()
+    var scheduledEmails = [FirebaseData]()
+    var selectedRow: FirebaseData?
+    var refreshTimer: Timer?
     
     // MARK: - Outlet Variables
     @IBOutlet weak var historyTableView: UITableView!
+    @IBOutlet weak var refreshLabel: UILabel!
     
     // MARK: - View Controller Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if sentEmails.isEmpty && scheduledEmails.isEmpty {
+        checkForHistory()
+        
+        // Manual refresh control
+        historyTableView.refreshControl = UIRefreshControl()
+        historyTableView.refreshControl?.addTarget(self, action: #selector(didPullToRefresh),
+                                                   for: .valueChanged)
+        
+        // Automatic refresh control
+        refreshTimer = Timer.scheduledTimer(timeInterval: 60,
+                                            target: self, selector: #selector(refreshEveryMin),
+                                            userInfo: nil, repeats: true)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        refreshTimer?.invalidate()
+    }
+    
+    @objc private func refreshEveryMin() {
+        // Re-fetch data
+        print("refreshing data every minute")
+        sortEmails()
+        DispatchQueue.main.async {
+            self.historyTableView.reloadData()
+        }
+    }
+    
+    @objc private func didPullToRefresh() {
+        // Re-fetch data
+        refreshTableView()
+        
+        DispatchQueue.main.async {
+            self.historyTableView.refreshControl?.endRefreshing()
+        }
+    }
+    
+    func checkForHistory() {
+        if allEmails.isEmpty {
             historyTableView.isHidden = true
+            refreshLabel.isHidden = true
             noMailmoHistory()
-            
-            
-//            let noMailmo = UILabel()
-//            noMailmo.text = "No Mailmo History"
-//            view.addSubview(noMailmo)
-//            noMailmo.centerInSuperview()
         } else {
+            sortEmails()
             showTableView()
         }
+    }
+    
+    func refreshTableView() {
+        print("refreshing data")
+        
+        sortEmails()
+        DispatchQueue.main.async {
+            self.historyTableView.refreshControl?.endRefreshing()
+            self.historyTableView.reloadData()
+        }
+    }
+    
+    func sortEmails() {
+        let timeNow = dateFormatter(date: Date())
+        var sent = [FirebaseData]()
+        var scheduled = [FirebaseData]()
+        
+        for email in allEmails {
+            if timeNow >= email.sendAtString {
+                sent.append(email)
+            } else {
+                scheduled.append(email)
+            }
+        }
+        
+        sentEmails = sent.sorted(by: { $0.sendAtString > $1.sendAtString })
+        scheduledEmails = scheduled.sorted(by: { $0.sendAtString > $1.sendAtString })
     }
     
     func noMailmoHistory() {
@@ -48,11 +109,8 @@ class History_VC: UIViewController {
     }
     
     // MARK: - Navigation Methods
-    @IBAction func backToMain(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
-    }
-    
     @IBAction func unwindFromNewToHistory(_ unwindSegue: UIStoryboardSegue) {
+        print("go back to main")
         navigationController?.popViewController(animated: true)
     }
     
@@ -69,6 +127,8 @@ class History_VC: UIViewController {
     func showTableView() {
         historyTableView.delegate = self
         historyTableView.dataSource = self
+        refreshLabel.isHidden = false
+        historyTableView.tableHeaderView = refreshLabel
     }
 }
 
@@ -106,14 +166,14 @@ extension History_VC: UITableViewDelegate {
         if tableView.numberOfSections == 1 {
             // One section has data
             if sentEmails.isEmpty {
-                selectedRow = sortedScheduledEmails[indexPath.row]
+                selectedRow = scheduledEmails[indexPath.row]
             } else {
-                selectedRow = sortedSentEmails[indexPath.row]
+                selectedRow = sentEmails[indexPath.row]
             }
         } else {
             // Both sections have data
             selectedRow = indexPath.section == 0 ?
-                sortedScheduledEmails[indexPath.row] : sortedSentEmails[indexPath.row]
+                scheduledEmails[indexPath.row] : sentEmails[indexPath.row]
         }
         
         performSegue(withIdentifier: "showHistoryDetail", sender: nil)
@@ -149,23 +209,18 @@ extension History_VC: UITableViewDataSource {
         cell.selectionStyle = .none
 
         // Sort by Recent to Oldest + Info for each cell
-        let cellInfo: CellInfo
+        let cellInfo: FirebaseData
         if tableView.numberOfSections == 1 {
             // One section has data
             if sentEmails.isEmpty {
-                sortedScheduledEmails = scheduledEmails.sorted(by: { $0.sendTime > $1.sendTime })
-                cellInfo = sortedScheduledEmails[indexPath.row]
+                cellInfo = scheduledEmails[indexPath.row]
             } else {
-                sortedSentEmails = sentEmails.sorted(by: { $0.sendTime > $1.sendTime })
-                cellInfo = sortedSentEmails[indexPath.row]
+                cellInfo = sentEmails[indexPath.row]
             }
         } else {
             // Both sections have data
-            sortedScheduledEmails = scheduledEmails.sorted(by: { $0.sendTime > $1.sendTime })
-            sortedSentEmails = sentEmails.sorted(by: { $0.sendTime > $1.sendTime })
-
             cellInfo = indexPath.section == 0 ?
-                sortedScheduledEmails[indexPath.row] : sortedSentEmails[indexPath.row]
+                scheduledEmails[indexPath.row] : sentEmails[indexPath.row]
         }
         
         // Configure each cell

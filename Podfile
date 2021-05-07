@@ -9,6 +9,12 @@ target 'Mailmo' do
   pod 'lottie-ios'
   pod 'Gifu'
   pod 'TinyConstraints'
+  pod 'Firebase/Analytics'
+  pod 'Firebase/Database'
+  pod 'Firebase/Core'
+  pod 'Firebase/Auth'
+  pod 'GoogleSignIn'
+  pod 'cocoapods-keys'
 
   target 'MailmoTests' do
     inherit! :search_paths
