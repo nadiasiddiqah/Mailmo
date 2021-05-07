@@ -11,8 +11,10 @@
 		09016C7F2614178C00B11BF0 /* Public Methods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09016C7E2614178C00B11BF0 /* Public Methods.swift */; };
 		0924F1002613CD1300C0E909 /* AudioVisualizerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0924F0FF2613CD1300C0E909 /* AudioVisualizerView.swift */; };
 		093D27B32631023000C4CBCB /* HistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093D27B22631023000C4CBCB /* HistoryCell.swift */; };
+		095ABFF12642326E00031A77 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 095ABFF02642326E00031A77 /* GoogleService-Info.plist */; };
 		097333DC260961370045F5AB /* voiceAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 097333DB260961370045F5AB /* voiceAnimation.json */; };
 		0975616726093BE600F01055 /* recordAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 0975616626093BE500F01055 /* recordAnimation.json */; };
+		09A6E2F7264221F800C67575 /* SignUp_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A6E2F6264221F600C67575 /* SignUp_VC.swift */; };
 		09BA6BD5260A5DEA003DBFD3 /* New_Edit_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BA6BD4260A5DEA003DBFD3 /* New_Edit_VC.swift */; };
 		09BA6BE4260A84D8003DBFD3 /* SendNow_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BA6BE3260A84D8003DBFD3 /* SendNow_VC.swift */; };
 		09BA6BF4260A87DB003DBFD3 /* sendNowAnimation.gif in Resources */ = {isa = PBXBuildFile; fileRef = 09BA6BF3260A87DB003DBFD3 /* sendNowAnimation.gif */; };
@@ -101,8 +103,11 @@
 		0924F0BC2613BB6300C0E909 /* AudioKit */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = AudioKit; path = "../../Downloads/AudioKit.xcframework/AudioKit.xcframework/ios-arm64_armv7/AudioKit.framework/AudioKit"; sourceTree = "<group>"; };
 		0924F0FF2613CD1300C0E909 /* AudioVisualizerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioVisualizerView.swift; sourceTree = "<group>"; };
 		093D27B22631023000C4CBCB /* HistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCell.swift; sourceTree = "<group>"; };
+		095ABFF02642326E00031A77 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		095AC0312644C6CA00031A77 /* SendGrid-Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "SendGrid-Config.xcconfig"; sourceTree = "<group>"; };
 		097333DB260961370045F5AB /* voiceAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = voiceAnimation.json; sourceTree = "<group>"; };
 		0975616626093BE500F01055 /* recordAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = recordAnimation.json; sourceTree = "<group>"; };
+		09A6E2F6264221F600C67575 /* SignUp_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp_VC.swift; sourceTree = "<group>"; };
 		09BA6BD4260A5DEA003DBFD3 /* New_Edit_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = New_Edit_VC.swift; sourceTree = "<group>"; };
 		09BA6BE3260A84D8003DBFD3 /* SendNow_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendNow_VC.swift; sourceTree = "<group>"; };
 		09BA6BF3260A87DB003DBFD3 /* sendNowAnimation.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = sendNowAnimation.gif; path = ../sendNowAnimation.gif; sourceTree = "<group>"; };
@@ -237,6 +242,7 @@
 				09E98D4B2605397900C4F4F7 /* AppDelegate.swift */,
 				09E98D4D2605397900C4F4F7 /* SceneDelegate.swift */,
 				09E98D5C2605397A00C4F4F7 /* Info.plist */,
+				095ABFF02642326E00031A77 /* GoogleService-Info.plist */,
 				09E98D542605397900C4F4F7 /* Mailmo.xcdatamodeld */,
 				09E98E5B26053A9F00C4F4F7 /* Assets */,
 				09E98E3D26053A6300C4F4F7 /* Storyboards */,
@@ -244,6 +250,7 @@
 				0924F0FF2613CD1300C0E909 /* AudioVisualizerView.swift */,
 				09016C7E2614178C00B11BF0 /* Public Methods.swift */,
 				093D27B22631023000C4CBCB /* HistoryCell.swift */,
+				095AC0312644C6CA00031A77 /* SendGrid-Config.xcconfig */,
 			);
 			path = Mailmo;
 			sourceTree = "<group>";
@@ -369,6 +376,7 @@
 			isa = PBXGroup;
 			children = (
 				09E98E4926053A6B00C4F4F7 /* SignIn_VC.swift */,
+				09A6E2F6264221F600C67575 /* SignUp_VC.swift */,
 				09E98E4826053A6B00C4F4F7 /* Main_VC.swift */,
 				09016C732614173000B11BF0 /* New_VC.swift */,
 				09BA6BD4260A5DEA003DBFD3 /* New_Edit_VC.swift */,
@@ -429,14 +437,13 @@
 				09E98D452605397900C4F4F7 /* Frameworks */,
 				09E98D462605397900C4F4F7 /* Resources */,
 				23596BEF3E6A2206DBDF618D /* [CP] Embed Pods Frameworks */,
+				544B4F88C7C5548CDC4C1F2E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = Mailmo;
-			packageProductDependencies = (
-			);
 			productName = Mailmo;
 			productReference = 09E98D482605397900C4F4F7 /* Mailmo.app */;
 			productType = "com.apple.product-type.application";
@@ -469,6 +476,7 @@
 				09E98D692605397A00C4F4F7 /* Frameworks */,
 				09E98D6A2605397A00C4F4F7 /* Resources */,
 				8E675E524B00AF2E0D00AE8E /* [CP] Embed Pods Frameworks */,
+				92664DE29E7783AD08268B87 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -511,8 +519,6 @@
 				Base,
 			);
 			mainGroup = 09E98D3F2605397900C4F4F7;
-			packageReferences = (
-			);
 			productRefGroup = 09E98D492605397900C4F4F7 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -570,6 +576,7 @@
 				09E98DCA260539E900C4F4F7 /* fa-solid-900.svg in Resources */,
 				09E98DDF260539E900C4F4F7 /* Ubuntu-R.ttf in Resources */,
 				09E98DD2260539E900C4F4F7 /* fontawesome-all.css in Resources */,
+				095ABFF12642326E00031A77 /* GoogleService-Info.plist in Resources */,
 				09E98D582605397A00C4F4F7 /* Assets.xcassets in Resources */,
 				09E98DCB260539E900C4F4F7 /* fa-solid-900.woff in Resources */,
 				09E98E4226053A6300C4F4F7 /* LaunchScreen.storyboard in Resources */,
@@ -611,6 +618,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Mailmo/Pods-Mailmo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		544B4F88C7C5548CDC4C1F2E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Mailmo/Pods-Mailmo-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Mailmo/Pods-Mailmo-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Mailmo/Pods-Mailmo-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		59B75C94FA20C29249B4CA11 /* [CP] Check Pods Manifest.lock */ = {
@@ -674,6 +698,23 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Mailmo-MailmoUITests/Pods-Mailmo-MailmoUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		92664DE29E7783AD08268B87 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Mailmo-MailmoUITests/Pods-Mailmo-MailmoUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Mailmo-MailmoUITests/Pods-Mailmo-MailmoUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Mailmo-MailmoUITests/Pods-Mailmo-MailmoUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		B36740D9DC254B0F9B48B70E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -716,6 +757,7 @@
 				09E98D4C2605397900C4F4F7 /* AppDelegate.swift in Sources */,
 				09BA6BE4260A84D8003DBFD3 /* SendNow_VC.swift in Sources */,
 				09BA6C27260C131F003DBFD3 /* Settings_VC.swift in Sources */,
+				09A6E2F7264221F800C67575 /* SignUp_VC.swift in Sources */,
 				09E98D562605397900C4F4F7 /* Mailmo.xcdatamodeld in Sources */,
 				093D27B32631023000C4CBCB /* HistoryCell.swift in Sources */,
 				09E98D4E2605397900C4F4F7 /* SceneDelegate.swift in Sources */,
@@ -775,6 +817,7 @@
 /* Begin XCBuildConfiguration section */
 		09E98D732605397A00C4F4F7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 095AC0312644C6CA00031A77 /* SendGrid-Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -836,6 +879,7 @@
 		};
 		09E98D742605397A00C4F4F7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 095AC0312644C6CA00031A77 /* SendGrid-Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;

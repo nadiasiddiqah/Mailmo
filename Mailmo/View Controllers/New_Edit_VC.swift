@@ -10,6 +10,7 @@ import Foundation
 #if canImport(FoundationNetworking)
 import FoundationNetworking
 #endif
+import Firebase
 
 class New_Edit_VC: UIViewController {
     
@@ -25,8 +26,11 @@ class New_Edit_VC: UIViewController {
     var from = EmailInfo(email: "nadiasiddiqah@gmail.com", name: "Mailmo")
     let today = Date()
     
+    let firebaseAuth = Auth.auth()
+    let firebaseData = Database.database().reference()
+    
     // Body passed from New_VC
-    var email = EmailContent(subject: "", body: "")
+    var email = SendGridData(subject: "", body: "", sendAt: nil)
     
     // Semaphore object (to ensure one thread accesses SendGrid at a time)
     var semaphore = DispatchSemaphore(value: 0)
@@ -56,7 +60,7 @@ class New_Edit_VC: UIViewController {
     @IBAction func sendNow(_ sender: Any) {
         sendEmail()
         if sendSuccess {
-            updateHistory()
+            postData()
             performSegue(withIdentifier: "showSendNow", sender: nil)
         }
     }
@@ -106,15 +110,19 @@ class New_Edit_VC: UIViewController {
         }
     }
     
-    func updateHistory() {
-        let sendTimeFormatter = DateFormatter()
-        sendTimeFormatter.dateFormat = "M/d/yy h:mma"
-        let sendTime = sendTimeFormatter.string(from: today)
+    func postData() {
+        let sendTime = dateFormatter(date: today)
         
-        sentEmails.append(CellInfo(statusColor: #colorLiteral(red: 0.8039215686, green: 0.9450980392, blue: 1, alpha: 1), statusIcon: UIImage(named: "sent_now")!,
-                                   detailIcon: UIImage(named: "mail_now")!,
-                                   subject: email.subject, body: email.body,
-                                   sendTime: sendTime))
+        allEmails.append(FirebaseData(subject: email.subject, body: email.body,
+                                      sendAtString: sendTime))
+        
+        // Post data to Firebase
+        if let uid = firebaseAuth.currentUser?.uid {
+            print("Successfully posted data to Firebase")
+            firebaseData.child("posts/\(uid)").child(calculateSendTime()).setValue(["subject": email.subject,
+                                                                                    "body": email.body,
+                                                                                    "sendAtString": sendTime])
+        }
     }
     
     func sendEmail() {
@@ -132,7 +140,7 @@ class New_Edit_VC: UIViewController {
         var urlRequest = URLRequest(url: URL(string: "https://api.sendgrid.com/v3/mail/send")!,
                                  timeoutInterval: Double.infinity)
         // Check if sendGrid API key is broken
-        guard let apiKey = ProcessInfo.processInfo.environment["sendGridAPI"] else {
+        guard let apiKey = Bundle.main.infoDictionary?["SendGridAPI_Key"] as? String else {
             sendSuccess = false
             handleInvalidAPI()
             return

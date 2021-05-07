@@ -10,8 +10,7 @@ import UIKit
 import Lottie
 
 // MARK: - Variables
-var sentEmails = [CellInfo]()
-var scheduledEmails = [CellInfo]()
+var allEmails = [FirebaseData]()
 
 // MARK: - Classes / Structs
 struct EmailInfo {
@@ -19,17 +18,36 @@ struct EmailInfo {
     var name: String?
 }
 
-struct EmailContent {
+struct SendGridData {
     var subject, body: String
+    var sendAt: Int?
 }
 
-struct CellInfo {
-    var statusColor: UIColor
-    var statusIcon, detailIcon: UIImage
-    var subject, body, sendTime: String
+struct FirebaseData {
+    var subject, body, sendAtString: String
 }
 
 // MARK: - Methods
+func calculateSendTime() -> String {
+    let date = Date()
+    let sendTime = Int(date.timeIntervalSince1970 * 60)
+    return String(sendTime)
+}
+
+func isPasswordValid(_ password : String) -> Bool {
+
+    let passwordTest = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[$@$#!%*?&])[A-Za-z\\d$@$#!%*?&]{8,}")
+    return passwordTest.evaluate(with: password)
+}
+
+func isEmailValid(_ email: String) -> Bool {
+    
+    let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+
+    let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+    return emailPred.evaluate(with: email)
+}
+
 func loadAnimation(fileName: String, loadingView: UIView) -> AnimationView {
     let animationView = AnimationView()
     animationView.animation = Animation.named(fileName)
@@ -69,6 +87,13 @@ func emailFormatter(to: String, toName: String,
     return email
 }
 
+func dateFormatter(date: Date) -> String {
+    let sendTimeFormatter = DateFormatter()
+    sendTimeFormatter.dateFormat = "M/d/yy h:mma"
+    let sendTime = sendTimeFormatter.string(from: date)
+    
+    return sendTime
+}
 
 // MARK: - UIView Extensions
 extension UIView {

@@ -11,10 +11,10 @@ class HistoryDetails_VC: UIViewController {
     
     // MARK: - Variables
     // Passed from HistoryVC
-    var rowDetail: CellInfo?
+    var rowDetail: FirebaseData?
     
     // MARK: - Outlets
-    @IBOutlet weak var sentTimeLabel: UILabel!
+    @IBOutlet weak var sendAtLabel: UILabel!
     @IBOutlet weak var statusIcon: UIImageView!
     @IBOutlet weak var subjectLabel: UILabel!
     @IBOutlet weak var bodyTextView: UITextView!
@@ -28,15 +28,19 @@ class HistoryDetails_VC: UIViewController {
     // MARK: - Helper Methods
     func setupView() {
         if let row = rowDetail {
-            if row.statusIcon == UIImage(named: "mail_now") {
-                sentTimeLabel.text = "Sent: \(row.sendTime)"
+            let timeNow = dateFormatter(date: Date())
+            
+            if timeNow >= row.sendAtString {
+                sendAtLabel.text = "Sent: \(row.sendAtString)"
+                statusIcon.image = UIImage(named: "sent_now")
             } else {
-                sentTimeLabel.text = "Scheduled: \(row.sendTime)"
+                sendAtLabel.text = "Scheduled: \(row.sendAtString)"
+                statusIcon.image = UIImage(named: "sent_later")
             }
-            statusIcon.image = row.detailIcon
+            
             subjectLabel.text = row.subject
             bodyTextView.text = row.body
         }
     }
-
 }
+
