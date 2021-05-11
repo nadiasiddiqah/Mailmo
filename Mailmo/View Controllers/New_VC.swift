@@ -182,7 +182,7 @@ class New_VC: UIViewController, SFSpeechRecognizerDelegate {
         
         // Initialize textView, savedText, timeLeft
         speechTextView.fadeTransition(0.6)
-        speechTextView.text = "↓Tap to start recording..."
+        speechTextView.text = "↓Tap the button below to start recording and transcribing your email..."
         savedText = ""
         timeLeft = 10
         

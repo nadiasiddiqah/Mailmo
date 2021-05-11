@@ -10,7 +10,7 @@ import UIKit
 import Lottie
 
 // MARK: - Variables
-var allEmails = [FirebaseData]()
+//var allEmails = [FirebaseData]()
 
 // MARK: - Classes / Structs
 struct EmailInfo {
@@ -87,12 +87,26 @@ func emailFormatter(to: String, toName: String,
     return email
 }
 
-func dateFormatter(date: Date) -> String {
+func convertDateToString(_ date: Date) -> String {
+    var sendTimeString = String()
     let sendTimeFormatter = DateFormatter()
     sendTimeFormatter.dateFormat = "M/d/yy h:mma"
-    let sendTime = sendTimeFormatter.string(from: date)
     
-    return sendTime
+    sendTimeString = sendTimeFormatter.string(from: date)
+    
+    return sendTimeString
+}
+
+func convertStringToUTC(_ string: String) -> Int {
+    var sendTimeInt = Int()
+    let sendTimeFormatter = DateFormatter()
+    sendTimeFormatter.dateFormat = "M/d/yy h:mma"
+    
+    if let sendTimeDate = sendTimeFormatter.date(from: string) {
+        sendTimeInt = Int(sendTimeDate.timeIntervalSince1970 / 60) * 60
+    }
+    
+    return sendTimeInt
 }
 
 // MARK: - UIView Extensions
