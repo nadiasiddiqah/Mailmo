@@ -53,11 +53,9 @@ class Main_VC: UIViewController {
     func transitionToSignIn() {
         
         // Update root view controller to SignInVC (when user signs out)
-        if let signInVC = self.storyboard?.instantiateViewController(withIdentifier: "SignInVC") as? SignIn_VC {
-            let navController = UINavigationController(rootViewController: signInVC)
-            navController.modalPresentationStyle = .fullScreen
-            self.navigationController?.present(navController, animated: true, completion: nil)
-        }
+        let signInVC = self.storyboard?.instantiateViewController(withIdentifier: "SignInVC") as? SignIn_VC
+        view.window?.rootViewController = signInVC
+        view.window?.makeKeyAndVisible()
     }
 
     // MARK: - Action Methods
