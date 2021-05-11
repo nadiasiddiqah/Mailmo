@@ -111,10 +111,7 @@ class New_Edit_VC: UIViewController {
     }
     
     func postData() {
-        let sendTime = dateFormatter(date: today)
-        
-        allEmails.append(FirebaseData(subject: email.subject, body: email.body,
-                                      sendAtString: sendTime))
+        let sendTime = convertDateToString(today)
         
         // Post data to Firebase
         if let uid = firebaseAuth.currentUser?.uid {

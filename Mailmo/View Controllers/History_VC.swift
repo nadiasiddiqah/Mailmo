@@ -6,14 +6,21 @@
 //
 
 import UIKit
+import Firebase
 
 class History_VC: UIViewController {
 
     // MARK: - Variables
+    var allEmails = [FirebaseData]()
     var sentEmails = [FirebaseData]()
     var scheduledEmails = [FirebaseData]()
     var selectedRow: FirebaseData?
     var refreshTimer: Timer?
+    
+    let firebaseAuth = Auth.auth()
+    let firebaseData = Database.database().reference()
+    var databaseHandler: DatabaseHandle?
+    var userID = String()
     
     // MARK: - Outlet Variables
     @IBOutlet weak var historyTableView: UITableView!
@@ -23,89 +30,7 @@ class History_VC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        checkForHistory()
-        
-        // Manual refresh control
-        historyTableView.refreshControl = UIRefreshControl()
-        historyTableView.refreshControl?.addTarget(self, action: #selector(didPullToRefresh),
-                                                   for: .valueChanged)
-        
-        // Automatic refresh control
-        refreshTimer = Timer.scheduledTimer(timeInterval: 60,
-                                            target: self, selector: #selector(refreshEveryMin),
-                                            userInfo: nil, repeats: true)
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        refreshTimer?.invalidate()
-    }
-    
-    @objc private func refreshEveryMin() {
-        // Re-fetch data
-        print("refreshing data every minute")
-        sortEmails()
-        DispatchQueue.main.async {
-            self.historyTableView.reloadData()
-        }
-    }
-    
-    @objc private func didPullToRefresh() {
-        // Re-fetch data
-        refreshTableView()
-        
-        DispatchQueue.main.async {
-            self.historyTableView.refreshControl?.endRefreshing()
-        }
-    }
-    
-    func checkForHistory() {
-        if allEmails.isEmpty {
-            historyTableView.isHidden = true
-            refreshLabel.isHidden = true
-            noMailmoHistory()
-        } else {
-            sortEmails()
-            showTableView()
-        }
-    }
-    
-    func refreshTableView() {
-        print("refreshing data")
-        
-        sortEmails()
-        DispatchQueue.main.async {
-            self.historyTableView.refreshControl?.endRefreshing()
-            self.historyTableView.reloadData()
-        }
-    }
-    
-    func sortEmails() {
-        let timeNow = dateFormatter(date: Date())
-        var sent = [FirebaseData]()
-        var scheduled = [FirebaseData]()
-        
-        for email in allEmails {
-            if timeNow >= email.sendAtString {
-                sent.append(email)
-            } else {
-                scheduled.append(email)
-            }
-        }
-        
-        sentEmails = sent.sorted(by: { $0.sendAtString > $1.sendAtString })
-        scheduledEmails = scheduled.sorted(by: { $0.sendAtString > $1.sendAtString })
-    }
-    
-    func noMailmoHistory() {
-        let alert = UIAlertController(title: "No Mailmo History",
-                                      message: nil, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Record Mailmo", style: .default, handler: { (_) in
-            self.performSegue(withIdentifier: "showNew", sender: nil)
-        }))
-        alert.addAction(UIAlertAction(title: "Back to Main", style: .cancel, handler: { (_) in
-            self.performSegue(withIdentifier: "unwindFromHistoryToMain", sender: nil)
-        }))
-        present(alert, animated: true, completion: nil)
+        checkIfDataExists()
     }
     
     // MARK: - Navigation Methods
@@ -124,12 +49,114 @@ class History_VC: UIViewController {
         }
     }
     
+    // MARK: - Helper Methods
+    
+    // Executes when a child is added under Posts
+    func checkIfDataExists() {
+        if let uid = firebaseAuth.currentUser?.uid {
+            userID = uid
+            databaseHandler = firebaseData.child("posts/\(uid)").observe(.value, with: { (snapshot) in
+                guard snapshot.exists() else {
+                    DispatchQueue.main.async {
+                        self.noMailmoHistory()
+                    }
+                    return
+                }
+                self.fetchData()
+            })
+        }
+    }
+    
+    func fetchData() {
+        databaseHandler = firebaseData.child("posts/\(userID)").observe(.childAdded, with: { (snapshot) in
+            // If snapshot exists, append childSnapshot to allEmails
+            if let subject = snapshot.childSnapshot(forPath: "subject").value as? String,
+               let body = snapshot.childSnapshot(forPath: "body").value as? String,
+               let sendAtString = snapshot.childSnapshot(forPath: "sendAtString").value as? String {
+                self.allEmails.append(FirebaseData(subject: subject, body: body, sendAtString: sendAtString))
+            }
+
+            // Sort emails, show table view, and start refeshing
+            self.sortEmails()
+            self.showTableView()
+            self.startRefreshing()
+        })
+    }
+    
+    func noMailmoHistory() {
+        // Hide table view and refresh label
+        self.historyTableView.isHidden = true
+        self.refreshLabel.isHidden = true
+        
+        // Show alert
+        let alert = UIAlertController(title: "No Mailmo History",
+                                      message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Record Mailmo", style: .default, handler: { (_) in
+            self.performSegue(withIdentifier: "showNew", sender: nil)
+        }))
+        alert.addAction(UIAlertAction(title: "Back to Main", style: .cancel, handler: { (_) in
+            self.performSegue(withIdentifier: "unwindFromHistoryToMain", sender: nil)
+        }))
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func sortEmails() {
+        // Convert timeNow to UTC
+        let timeNow = Int(Date().timeIntervalSince1970 / 60) * 60
+        
+        var sent = [FirebaseData]()
+        var scheduled = [FirebaseData]()
+        
+        for email in allEmails {
+            // Convert each email's sendAtString to UTC
+            let sendAtInt = convertStringToUTC(email.sendAtString)
+            
+            // Compare each email's UTC vs timeNow's UTC
+            if timeNow >= sendAtInt {
+                sent.append(email)
+            } else {
+                scheduled.append(email)
+            }
+        }
+        
+        sentEmails = sent.sorted(by: { convertStringToUTC($0.sendAtString) > convertStringToUTC($1.sendAtString) })
+        scheduledEmails = scheduled.sorted(by: { convertStringToUTC($0.sendAtString) > convertStringToUTC($1.sendAtString) })
+    }
+    
     func showTableView() {
         historyTableView.delegate = self
         historyTableView.dataSource = self
         refreshLabel.isHidden = false
         historyTableView.tableHeaderView = refreshLabel
     }
+    
+    func startRefreshing() {
+        historyTableView.reloadData()
+        historyTableView.refreshControl = UIRefreshControl()
+        historyTableView.refreshControl?.addTarget(self, action: #selector(didPullToRefresh),
+                                                   for: .valueChanged)
+    }
+    
+    func refreshTableView() {
+        print("refreshing data")
+        
+        sortEmails()
+        DispatchQueue.main.async {
+            self.historyTableView.refreshControl?.endRefreshing()
+            self.historyTableView.reloadData()
+        }
+    }
+    
+    // MARK: - Obj-C Methods
+    @objc private func didPullToRefresh() {
+        // Re-fetch data
+        refreshTableView()
+        
+        DispatchQueue.main.async {
+            self.historyTableView.refreshControl?.endRefreshing()
+        }
+    }
+    
 }
 
 // MARK: - Table View Delegate Methods

@@ -17,6 +17,9 @@ class SignIn_VC: UIViewController {
     let firebaseData = Database.database().reference()
     var authHandler: AuthStateDidChangeListenerHandle?
     
+    var email = String()
+    var pass = String()
+    
     // MARK: - Outlet Variables
     @IBOutlet weak var mailmoIcon: UIImageView!
     @IBOutlet weak var emailField: UITextField!
@@ -55,11 +58,9 @@ class SignIn_VC: UIViewController {
     func transitionToMain() {
         
         // Set new rootVC as MainVC (when user logs in)
-        if let mainVC = self.storyboard?.instantiateViewController(identifier: "MainVC") as? Main_VC {
-            let navController = UINavigationController(rootViewController: mainVC)
-            navController.modalPresentationStyle = .fullScreen
-            self.navigationController?.present(navController, animated: true, completion: nil)
-        }
+        let mainVC = storyboard?.instantiateViewController(identifier: "MainVC") as? Main_VC
+        view.window?.rootViewController = mainVC
+        view.window?.makeKeyAndVisible()
     }
     
     // MARK: - Action Methods
@@ -75,10 +76,6 @@ class SignIn_VC: UIViewController {
             // No errors in fields
             errorHandler("", isHidden: true)
     
-            // Create cleaned versions of the data
-            let email = emailField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-            let pass = passwordField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-            
             // Log in User
             firebaseAuth.signIn(withEmail: email, password: pass) { (result, error) in
                 if let error = error {
@@ -152,20 +149,25 @@ class SignIn_VC: UIViewController {
     
     // MARK: - User/Field Validation Methods
     func validateFields() -> String? {
+        // Create cleaned versions of the data
+        email = emailField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        pass = passwordField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         
-        // Cehck that all fields are filled in
-        if emailField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "",
-           passwordField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
-            return "Please fill in empty field(s)."
+        // Check that all fields are filled in
+        if email == "", pass == "" {
+            return "Error: Please fill in empty field(s)."
         }
         
-        // TODO: Check email field
+        // Check if email is valid
+        if !isEmailValid(email) {
+            // Email is not valid
+            return "Error: Invalid email address."
+        }
         
-        // Check if password is scecure
-        let cleanedPassword = passwordField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-        if isPasswordValid(cleanedPassword) {
+        // Check if password is secure
+        if !isPasswordValid(pass) {
             // Password isn't secure enough
-            return "Password requires 8+ characters, a special character and a number."
+            return "Error: Password requires 8+ characters, a special character and a number."
         }
         
         return nil
