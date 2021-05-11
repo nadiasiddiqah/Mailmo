@@ -16,7 +16,7 @@ extension Int {
 class AudioVisualizerView: UIView {
     
     // Bar width
-    var barWidth: CGFloat = 12.0
+    var barWidth: CGFloat = 6.0
     // Indicate that waveform should draw active/inactive state
     var active = false {
         didSet {
@@ -31,7 +31,7 @@ class AudioVisualizerView: UIView {
     // Color for bars
     var color = UIColor.gray.cgColor
     // Given waveforms
-    var waveforms: [Int] = Array(repeating: 0, count: 50)
+    var waveforms: [Int] = Array(repeating: 0, count: 200)
     
     // MARK: - Init
     override init (frame : CGRect) {
@@ -52,7 +52,7 @@ class AudioVisualizerView: UIView {
         context.clear(rect)
         context.setFillColor(red: 0, green: 0, blue: 0, alpha: 0)
         context.fill(rect)
-        context.setLineWidth(5)
+        context.setLineWidth(3)
         context.setStrokeColor(self.color)
         let w = rect.size.width
         let h = rect.size.height
@@ -63,7 +63,7 @@ class AudioVisualizerView: UIView {
         let x = m - r
         var bar: CGFloat = 0
         for i in s ..< self.waveforms.count {
-            var v = h * CGFloat(self.waveforms[i]) / 50.0
+            var v = h * CGFloat(self.waveforms[i]) / 30.0
             if v > x {
                 v = x
             }
