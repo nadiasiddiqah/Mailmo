@@ -568,7 +568,7 @@
                                         </constraints>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OjY-oP-9pB" customClass="AudioVisualizerView" customModule="Mailmo" customModuleProvider="target">
-                                        <rect key="frame" x="15.666666666666657" y="369.66666666666663" width="396.66666666666674" height="121.33333333333331"/>
+                                        <rect key="frame" x="15.666666666666657" y="369.66666666666663" width="396.66666666666674" height="166.33333333333337"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" name="AccentColor"/>
                                     </view>
@@ -597,7 +597,6 @@
                                     <constraint firstItem="yom-k7-mCu" firstAttribute="centerY" secondItem="A85-0y-PlD" secondAttribute="centerY" id="Ihe-DK-lSy"/>
                                     <constraint firstItem="HUa-4U-WkZ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="eHX-Ls-Kmz" secondAttribute="leading" constant="20" symbolic="YES" id="Pjc-5j-AXg"/>
                                     <constraint firstItem="A85-0y-PlD" firstAttribute="height" secondItem="eHX-Ls-Kmz" secondAttribute="height" multiplier="0.650726" id="SK7-b0-aMk"/>
-                                    <constraint firstAttribute="bottom" secondItem="OjY-oP-9pB" secondAttribute="bottom" id="SQ8-it-Bvw"/>
                                     <constraint firstItem="A85-0y-PlD" firstAttribute="width" secondItem="eHX-Ls-Kmz" secondAttribute="width" multiplier="0.84058" id="ay5-FG-Wze"/>
                                     <constraint firstItem="A85-0y-PlD" firstAttribute="trailing" secondItem="HUa-4U-WkZ" secondAttribute="trailing" constant="7" id="bw5-vE-uQG"/>
                                     <constraint firstItem="yom-k7-mCu" firstAttribute="centerX" secondItem="A85-0y-PlD" secondAttribute="centerX" id="fzb-T6-hyM"/>
@@ -686,6 +685,7 @@
                             <constraint firstItem="eHX-Ls-Kmz" firstAttribute="height" secondItem="bXP-Gb-wFV" secondAttribute="height" multiplier="0.530344" id="ByS-FH-V0d"/>
                             <constraint firstItem="uJt-TB-L4D" firstAttribute="trailing" secondItem="bXP-Gb-wFV" secondAttribute="trailing" id="HWZ-Vi-o8p"/>
                             <constraint firstItem="eHX-Ls-Kmz" firstAttribute="leading" secondItem="bXP-Gb-wFV" secondAttribute="leading" id="OGg-ie-Y1S"/>
+                            <constraint firstItem="OjY-oP-9pB" firstAttribute="height" secondItem="rT4-yA-UJe" secondAttribute="height" multiplier="0.75" id="Omv-gh-5M1"/>
                             <constraint firstItem="Q5Z-U0-9nl" firstAttribute="top" secondItem="bXP-Gb-wFV" secondAttribute="top" id="PEO-Sh-dBa"/>
                             <constraint firstItem="eHX-Ls-Kmz" firstAttribute="top" secondItem="Q5Z-U0-9nl" secondAttribute="bottom" id="ebd-Pj-yqE"/>
                             <constraint firstItem="uJt-TB-L4D" firstAttribute="leading" secondItem="bXP-Gb-wFV" secondAttribute="leading" id="fx0-Su-yWe"/>
@@ -1979,6 +1979,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="0QW-Qb-Erz"/>
         <segue reference="nhT-vB-DZb"/>
         <segue reference="Oyx-mH-3Sh"/>
     </inferredMetricsTieBreakers>

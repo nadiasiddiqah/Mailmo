@@ -71,7 +71,7 @@ class New_VC: UIViewController, SFSpeechRecognizerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setupNewView()
+        setupView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -176,17 +176,18 @@ class New_VC: UIViewController, SFSpeechRecognizerDelegate {
     
     
     // MARK: - General Methods
-    func setupNewView() {
+    func setupView() {
         // Check for permissions
         requestPermission()
         
         // Initialize textView, savedText, timeLeft
         speechTextView.fadeTransition(0.6)
-        speechTextView.text = "↓Tap the button below to start recording and transcribing your email..."
+        speechTextView.text = "↓Tap button below to start recording your email"
         savedText = ""
         timeLeft = 10
         
         // Disable record animation
+        audioView.isHidden = true
         recordAnimation.isHidden = false
         recordAnimation.stop()
         
@@ -205,7 +206,7 @@ class New_VC: UIViewController, SFSpeechRecognizerDelegate {
         checkOrStopSpeechRecognizer()
         
         // Restart new view + timer
-        setupNewView()
+        setupView()
         stopTimer(message: "You have \(timeLeft)s left!", fadeTransition: true)
     }
     
@@ -440,6 +441,7 @@ class New_VC: UIViewController, SFSpeechRecognizerDelegate {
         
         recognitionTask = speechRecognizer.recognitionTask(with: recognitionRequest, resultHandler: { [self] (result, error) in
             
+            audioView.isHidden = false
             dotsAnimation.isHidden = true
             pauseButton.isEnabled = true
             
