@@ -17,9 +17,11 @@ class HistoryCell: UITableViewCell {
 
     // MARK: - Helper Methods
     func configureHistoryCell(info: FirebaseData) {
-        let timeNow = dateFormatter(date: Date())
+        let timeNow = Int(Date().timeIntervalSince1970 / 60) * 60
+//        let timeNow = convertDateToString(date: Date())
+        let sendAtInt = convertStringToUTC(info.sendAtString)
         
-        if timeNow >= info.sendAtString {
+        if timeNow >= sendAtInt {
             // If timeNow >= sendAtString -> email is sent
             cellBackgroundView.backgroundColor = #colorLiteral(red: 0.8039215686, green: 0.9450980392, blue: 1, alpha: 1)
             statusImage.image = UIImage(named: "sent_now")!

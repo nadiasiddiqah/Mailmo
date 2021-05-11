@@ -42,11 +42,9 @@ class SignUp_VC: UIViewController {
     func transitionToMain() {
         
         // Set new rootVC as MainVC (when user logs in)
-        if let mainVC = self.storyboard?.instantiateViewController(identifier: "MainVC") as? Main_VC {
-            let navController = UINavigationController(rootViewController: mainVC)
-            navController.modalPresentationStyle = .fullScreen
-            self.navigationController?.present(navController, animated: true, completion: nil)
-        }
+        let mainVC = storyboard?.instantiateViewController(identifier: "MainVC") as? Main_VC
+        view.window?.rootViewController = mainVC
+        view.window?.makeKeyAndVisible()
     }
     
     // MARK: - Action Methods

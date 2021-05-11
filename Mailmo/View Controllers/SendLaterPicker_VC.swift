@@ -77,10 +77,7 @@ class SendLaterPicker_VC: UIViewController {
     }
     
     func postData() {
-        let sendTime = dateFormatter(date: datePicker.date)
-        
-        allEmails.append(FirebaseData(subject: email.subject, body: email.body,
-                                      sendAtString: sendTime))
+        let sendTime = convertDateToString(datePicker.date)
         
         // Post data to Firebase
         if let uid = firebaseAuth.currentUser?.uid {
