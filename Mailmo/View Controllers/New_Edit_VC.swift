@@ -60,8 +60,13 @@ class New_Edit_VC: UIViewController {
     @IBAction func sendNow(_ sender: Any) {
         sendEmail()
         if sendSuccess {
+            hudView(show: true, text: "Sending now!")
             postData()
-            performSegue(withIdentifier: "showSendNow", sender: nil)
+            dismissHud(hud, text: "Sending now!", detailText: "", delay: 1)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.performSegue(withIdentifier: "showSendNow", sender: nil)
+            }
         }
     }
     
@@ -86,6 +91,19 @@ class New_Edit_VC: UIViewController {
     }
     
     // MARK: - Helper Methods
+    func hudView(show: Bool, text: String) {
+        if show {
+            hud.textLabel.text = text
+            hud.detailTextLabel.text = nil
+            hud.show(in: view, animated: true)
+        } else {
+            hud.textLabel.text = text
+            hud.detailTextLabel.text = nil
+            hud.dismiss(animated: true)
+            dismiss(animated: true, completion: nil)
+        }
+    }
+    
     func gesturesToHideKeyboard() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         view.addGestureRecognizer(tap)
@@ -165,7 +183,7 @@ class New_Edit_VC: UIViewController {
             print(String(data: data, encoding: .utf8)!)
             self.semaphore.signal()
         }
-        //  Resume task (post emailData to SendGrid) + start semaphore
+        // Resume task (post emailData to SendGrid) + start semaphore
         dataTask.resume()
         semaphore.wait()
     }
@@ -214,7 +232,6 @@ extension New_Edit_VC: UITextViewDelegate {
             let textWithBreaks = enteredText.replacingOccurrences(of: "\n", with: "<br>")
             email.body = textWithBreaks
         }
-//        print(mailmoBody)
         view.endEditing(true)
     }
 }
