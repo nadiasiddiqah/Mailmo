@@ -14,7 +14,9 @@ target 'Mailmo' do
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
   pod 'GoogleSignIn'
-  pod 'cocoapods-keys'
+  pod 'IQKeyboardManagerSwift'
+  pod 'JGProgressHUD'
+  pod 'SwiftMessages'
 
   target 'MailmoTests' do
     inherit! :search_paths

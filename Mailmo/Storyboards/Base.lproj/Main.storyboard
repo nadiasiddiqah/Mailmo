@@ -344,7 +344,7 @@
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" image="square.and.arrow.up" catalog="system"/>
                                         <connections>
-                                            <action selector="logOut:" destination="3na-6K-Ofu" eventType="touchUpInside" id="NU8-sd-Jvd"/>
+                                            <action selector="signOut:" destination="3na-6K-Ofu" eventType="touchUpInside" id="NU8-sd-Jvd"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -364,16 +364,16 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WK2-sp-DLc" userLabel="Bottom View">
-                                <rect key="frame" x="0.0" y="411.66666666666669" width="428" height="513.33333333333326"/>
+                                <rect key="frame" x="0.0" y="411.66666666666669" width="428" height="514.33333333333326"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="Xa6-4w-Aly">
-                                        <rect key="frame" x="15" y="57.666666666666657" width="398" height="397.66666666666674"/>
+                                        <rect key="frame" x="14.666666666666657" y="57.999999999999972" width="398.66666666666674" height="398.33333333333326"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="9ug-aj-EC6">
-                                                <rect key="frame" x="0.0" y="0.0" width="398" height="184"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="398.66666666666669" height="184.33333333333334"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vXy-BP-qVX">
-                                                        <rect key="frame" x="0.0" y="0.0" width="184" height="184"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="184.33333333333334" height="184.33333333333334"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="vXy-BP-qVX" secondAttribute="height" multiplier="1:1" id="vEX-D5-QdG"/>
                                                         </constraints>
@@ -383,7 +383,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LU7-aq-KSS">
-                                                        <rect key="frame" x="214" y="0.0" width="184" height="184"/>
+                                                        <rect key="frame" x="214.33333333333331" y="0.0" width="184.33333333333331" height="184.33333333333334"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="LU7-aq-KSS" secondAttribute="height" multiplier="1:1" id="7Ff-AD-YQY"/>
                                                         </constraints>
@@ -399,7 +399,7 @@
                                                 <variation key="heightClass=regular-widthClass=regular" spacing="80"/>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="epS-x9-fK2">
-                                                <rect key="frame" x="107" y="214.00000000000006" width="184" height="183.66666666666669"/>
+                                                <rect key="frame" x="107.33333333333331" y="214.33333333333331" width="184" height="184"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="epS-x9-fK2" secondAttribute="height" multiplier="1:1" id="DaO-0b-MVX"/>
                                                 </constraints>
@@ -428,13 +428,13 @@
                         <viewLayoutGuide key="safeArea" id="EVT-4W-Gog"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="WK2-sp-DLc" secondAttribute="bottom" constant="1" id="8Bl-Kv-grk"/>
+                            <constraint firstItem="De8-mX-Mzg" firstAttribute="height" secondItem="MT1-kA-3O2" secondAttribute="height" multiplier="0.444564" id="1vE-KB-KPW"/>
+                            <constraint firstAttribute="bottom" secondItem="WK2-sp-DLc" secondAttribute="bottom" id="8Bl-Kv-grk"/>
                             <constraint firstItem="WK2-sp-DLc" firstAttribute="top" secondItem="De8-mX-Mzg" secondAttribute="bottom" id="B0k-qe-i8Q"/>
                             <constraint firstItem="De8-mX-Mzg" firstAttribute="top" secondItem="MT1-kA-3O2" secondAttribute="top" id="JgK-p5-tgS"/>
-                            <constraint firstItem="De8-mX-Mzg" firstAttribute="height" secondItem="WK2-sp-DLc" secondAttribute="height" multiplier="0.801471" id="LEQ-A7-Sms"/>
-                            <constraint firstItem="WK2-sp-DLc" firstAttribute="top" secondItem="De8-mX-Mzg" secondAttribute="bottom" id="NMv-I0-5LN"/>
                             <constraint firstAttribute="trailing" secondItem="De8-mX-Mzg" secondAttribute="trailing" id="QIy-B7-4Ie"/>
                             <constraint firstItem="De8-mX-Mzg" firstAttribute="leading" secondItem="MT1-kA-3O2" secondAttribute="leading" id="Qrx-Ir-6pS"/>
+                            <constraint firstItem="WK2-sp-DLc" firstAttribute="height" secondItem="MT1-kA-3O2" secondAttribute="height" multiplier="0.555436" id="e6z-HR-0ji"/>
                             <constraint firstAttribute="trailing" secondItem="WK2-sp-DLc" secondAttribute="trailing" id="w7v-SS-MSt"/>
                             <constraint firstItem="WK2-sp-DLc" firstAttribute="leading" secondItem="MT1-kA-3O2" secondAttribute="leading" id="yTK-hh-qlp"/>
                         </constraints>
@@ -447,7 +447,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vMV-YB-983" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="342.0560747663551" y="107.55939524838014"/>
+            <point key="canvasLocation" x="340.65420560747663" y="107.55939524838014"/>
         </scene>
         <!--NewVC-->
         <scene sceneID="kmy-Q5-qKG">
@@ -792,7 +792,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select date and time:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="pNf-D7-1LD">
-                                        <rect key="frame" x="117.66666666666667" y="17.666666666666629" width="192.66666666666663" height="27.666666666666671"/>
+                                        <rect key="frame" x="117.66666666666669" y="17.666666666666629" width="192.66666666666663" height="27.666666666666671"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -905,7 +905,7 @@
                                         <rect key="frame" x="34.333333333333343" y="41.666666666666657" width="359.33333333333326" height="74"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dAJ-qX-S8v" userLabel="Logo">
-                                                <rect key="frame" x="103.00000000000001" y="11.666666666666668" width="153.33333333333337" height="50.666666666666657"/>
+                                                <rect key="frame" x="103" y="11.666666666666668" width="153.33333333333337" height="50.666666666666657"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mailmo_logo" translatesAutoresizingMaskIntoConstraints="NO" id="KWb-7p-nnP">
                                                         <rect key="frame" x="0.0" y="0.0" width="50.666666666666664" height="50.666666666666664"/>
@@ -914,7 +914,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="History" textAlignment="natural" lineBreakMode="tailTruncation" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="0Vk-Wv-sdj">
-                                                        <rect key="frame" x="50.666666666666664" y="0.0" width="102.66666666666669" height="50.666666666666664"/>
+                                                        <rect key="frame" x="50.666666666666657" y="0.0" width="102.66666666666669" height="50.666666666666664"/>
                                                         <fontDescription key="fontDescription" name="Ubuntu" family="Ubuntu" pointSize="35"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -987,7 +987,7 @@
                                                     <rect key="frame" x="5" y="5" width="378" height="97"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="knu-08-JsA" userLabel="Detail Stack">
-                                                            <rect key="frame" x="26.666666666666657" y="27.666666666666668" width="324.66666666666674" height="41.666666666666657"/>
+                                                            <rect key="frame" x="26.666666666666657" y="27.666666666666671" width="324.66666666666674" height="41.666666666666657"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sent_now" translatesAutoresizingMaskIntoConstraints="NO" id="GLD-ee-7Tv" userLabel="sentMail_icon">
                                                                     <rect key="frame" x="0.0" y="0.0" width="42" height="41.666666666666664"/>
@@ -1105,7 +1105,7 @@
                                         <rect key="frame" x="34.333333333333343" y="41.666666666666657" width="359.33333333333326" height="74"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VOA-mW-6LN" userLabel="Logo">
-                                                <rect key="frame" x="103.00000000000001" y="11.666666666666668" width="153.33333333333337" height="50.666666666666657"/>
+                                                <rect key="frame" x="103" y="11.666666666666668" width="153.33333333333337" height="50.666666666666657"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mailmo_logo" translatesAutoresizingMaskIntoConstraints="NO" id="niE-Fm-Dhw">
                                                         <rect key="frame" x="0.0" y="0.0" width="50.666666666666664" height="50.666666666666664"/>
@@ -1114,7 +1114,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="History" textAlignment="natural" lineBreakMode="tailTruncation" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ENH-0g-E5o">
-                                                        <rect key="frame" x="50.666666666666664" y="0.0" width="102.66666666666669" height="50.666666666666664"/>
+                                                        <rect key="frame" x="50.666666666666657" y="0.0" width="102.66666666666669" height="50.666666666666664"/>
                                                         <fontDescription key="fontDescription" name="Ubuntu" family="Ubuntu" pointSize="35"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -1306,7 +1306,7 @@
                                         <rect key="frame" x="34.333333333333343" y="41.666666666666657" width="359.33333333333326" height="74"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4p9-dU-Tx8" userLabel="Logo">
-                                                <rect key="frame" x="103.00000000000001" y="11.666666666666668" width="153.33333333333337" height="50.666666666666657"/>
+                                                <rect key="frame" x="103" y="11.666666666666668" width="153.33333333333337" height="50.666666666666657"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mailmo_logo" translatesAutoresizingMaskIntoConstraints="NO" id="ijb-Zy-NwH">
                                                         <rect key="frame" x="0.0" y="0.0" width="50.666666666666664" height="50.666666666666664"/>
@@ -1315,7 +1315,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="natural" lineBreakMode="tailTruncation" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="fMF-Sl-CS5">
-                                                        <rect key="frame" x="50.666666666666664" y="0.0" width="102.66666666666669" height="50.666666666666664"/>
+                                                        <rect key="frame" x="50.666666666666657" y="0.0" width="102.66666666666669" height="50.666666666666664"/>
                                                         <fontDescription key="fontDescription" name="Ubuntu" family="Ubuntu" pointSize="35"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -1340,7 +1340,7 @@
                                                 </constraints>
                                                 <state key="normal" backgroundImage="back_arrow"/>
                                                 <connections>
-                                                    <action selector="backToMain:" destination="YYs-5a-7vz" eventType="touchUpInside" id="HpU-Wh-zzX"/>
+                                                    <segue destination="zqK-eU-oPc" kind="unwind" identifier="unwindFromSettingsToMain" unwindAction="unwindFromSettingsToMain:" id="Gum-Qw-axE"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -1385,6 +1385,9 @@
                                                 <variation key="heightClass=regular-widthClass=regular">
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="35"/>
                                                 </variation>
+                                                <connections>
+                                                    <action selector="pressedLogOut:" destination="YYs-5a-7vz" eventType="touchUpInside" id="hzO-gd-IWJ"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hst-DH-YDy">
                                                 <rect key="frame" x="0.0" y="67" width="360" height="57"/>
@@ -1446,8 +1449,9 @@
                     <nil key="simulatedTopBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lOO-vm-puv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="zqK-eU-oPc" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="341" y="825"/>
+            <point key="canvasLocation" x="340.65420560747663" y="824.8380129589633"/>
         </scene>
         <!--New EditVC-->
         <scene sceneID="tkf-54-bnH">
@@ -1880,7 +1884,7 @@
                                                         </constraints>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="fFR-En-0if">
-                                                        <rect key="frame" x="70.333333333333329" y="110.33333333333331" width="152.66666666666669" height="27.666666666666657"/>
+                                                        <rect key="frame" x="70.333333333333314" y="110.33333333333331" width="152.66666666666669" height="27.666666666666657"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Have an account?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="el3-sk-iCh">
                                                                 <rect key="frame" x="0.0" y="0.0" width="107.66666666666667" height="27.666666666666668"/>
@@ -1906,7 +1910,7 @@
                                                                     </attributedString>
                                                                 </state>
                                                                 <connections>
-                                                                    <action selector="backToLogin:" destination="GAQ-y9-eLh" eventType="touchUpInside" id="f2Q-2Z-RNM"/>
+                                                                    <action selector="backToLogin:" destination="GAQ-y9-eLh" eventType="touchUpInside" id="ICM-bd-7KL"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -1979,9 +1983,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="0QW-Qb-Erz"/>
-        <segue reference="nhT-vB-DZb"/>
-        <segue reference="Oyx-mH-3Sh"/>
+        <segue reference="ZXc-tv-FpL"/>
+        <segue reference="arz-rD-a1W"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="apple_button" width="132" height="40"/>

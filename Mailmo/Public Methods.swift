@@ -8,9 +8,14 @@
 import Foundation
 import UIKit
 import Lottie
+import JGProgressHUD
 
 // MARK: - Variables
-//var allEmails = [FirebaseData]()
+var hud: JGProgressHUD = {
+    let hud = JGProgressHUD(style: .extraLight)
+    hud.interactionType = .blockAllTouches
+    return hud
+}()
 
 // MARK: - Classes / Structs
 struct EmailInfo {
@@ -109,6 +114,12 @@ func convertStringToUTC(_ string: String) -> Int {
     return sendTimeInt
 }
 
+func dismissHud(_ hud: JGProgressHUD, text: String, detailText: String, delay: TimeInterval) {
+    hud.textLabel.text = text
+    hud.detailTextLabel.text = detailText
+    hud.dismiss(afterDelay: delay, animated: true)
+}
+
 // MARK: - UIView Extensions
 extension UIView {
     func fadeTransition(_ duration: CFTimeInterval) {
@@ -120,3 +131,31 @@ extension UIView {
         layer.add(animation, forKey: CATransitionType.fade.rawValue)
     }
 }
+
+// MARK: - UIAlertController Extensions
+extension UIAlertController {
+    func pruneNegativeWidthConstraints() {
+        for subView in self.view.subviews {
+            for constraint in subView.constraints where constraint.debugDescription.contains("width == - 16") {
+                subView.removeConstraint(constraint)
+            }
+        }
+    }
+}
+
+//extension  SFSafariViewController {
+//    override open var modalPresentationStyle: UIModalPresentationStyle {
+//        get { return .fullScreen}
+//        set { super.modalPresentationStyle = newValue }
+//    }
+//}
+
+//extension String {
+//    func capitalizingFirstLetter() -> String {
+//        return prefix(1).capitalized + dropFirst()
+//    }
+//
+//    mutating func capitalizeFirstLetter() {
+//        self = self.capitalizingFirstLetter()
+//    }
+//}
