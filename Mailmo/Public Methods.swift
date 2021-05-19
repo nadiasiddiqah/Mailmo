@@ -8,9 +8,15 @@
 import Foundation
 import UIKit
 import Lottie
+import JGProgressHUD
+import SwiftMessages
 
 // MARK: - Variables
-//var allEmails = [FirebaseData]()
+var hud: JGProgressHUD = {
+    let hud = JGProgressHUD(style: .extraLight)
+    hud.interactionType = .blockAllTouches
+    return hud
+}()
 
 // MARK: - Classes / Structs
 struct EmailInfo {
@@ -87,6 +93,21 @@ func emailFormatter(to: String, toName: String,
     return email
 }
 
+func popupFormatter(body: String, iconText: String) {
+    let msg = MessageView.viewFromNib(layout: .cardView)
+    msg.configureTheme(.success)
+    msg.configureDropShadow()
+    
+    msg.button?.isHidden = true
+    msg.configureContent(title: "", body: body, iconText: iconText)
+    
+    var msgConfig = SwiftMessages.defaultConfig
+    msgConfig.duration = .seconds(seconds: 1)
+    msgConfig.presentationContext = .window(windowLevel: UIWindow.Level.normal)
+    
+    SwiftMessages.show(config: msgConfig, view: msg)
+}
+
 func convertDateToString(_ date: Date) -> String {
     var sendTimeString = String()
     let sendTimeFormatter = DateFormatter()
@@ -109,6 +130,12 @@ func convertStringToUTC(_ string: String) -> Int {
     return sendTimeInt
 }
 
+func dismissHud(_ hud: JGProgressHUD, text: String, detailText: String, delay: TimeInterval) {
+    hud.textLabel.text = text
+    hud.detailTextLabel.text = detailText
+    hud.dismiss(afterDelay: delay, animated: true)
+}
+
 // MARK: - UIView Extensions
 extension UIView {
     func fadeTransition(_ duration: CFTimeInterval) {
@@ -118,5 +145,16 @@ extension UIView {
         animation.type = CATransitionType.fade
         animation.duration = duration
         layer.add(animation, forKey: CATransitionType.fade.rawValue)
+    }
+}
+
+// MARK: - UIAlertController Extensions
+extension UIAlertController {
+    func pruneNegativeWidthConstraints() {
+        for subView in self.view.subviews {
+            for constraint in subView.constraints where constraint.debugDescription.contains("width == - 16") {
+                subView.removeConstraint(constraint)
+            }
+        }
     }
 }

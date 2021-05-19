@@ -34,6 +34,17 @@ class SendNow_VC: UIViewController {
         navigationController?.isNavigationBarHidden = true
     }
     
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "backToMain_Now" {
+            let controller = segue.destination as! Main_VC
+            controller.showStatusPopup = true
+            controller.statusText = "Mailmo successfully sent!"
+            controller.iconText = ["✅", "🙌🏽", "👍🏾", "✉️"].randomElement()!
+        }
+    }
+    
+    // MARK: - Methods
     func playAnimation() {
         view.addSubview(sendNowAnimation)
         sendNowAnimation.centerInSuperview()

@@ -39,12 +39,17 @@ class SendLaterPicker_VC: UIViewController {
     
     // MARK: - Navigation
     @IBAction func nextButton(_ sender: Any) {
+        hudView(show: true, text: "Scheduling to send later...")
         calculateSendAt()
         sendEmail()
         
         if sendSuccess {
             postData()
-            performSegue(withIdentifier: "showSendLater", sender: nil)
+            dismissHud(hud, text: "Scheduling to send later...", detailText: "", delay: 0.8)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                self.performSegue(withIdentifier: "showSendLater", sender: nil)
+            }
         }
     }
     
@@ -59,6 +64,14 @@ class SendLaterPicker_VC: UIViewController {
     }
     
     // MARK: - Helper Methods
+    func hudView(show: Bool, text: String) {
+        if show {
+            hud.textLabel.text = text
+            hud.detailTextLabel.text = nil
+            hud.show(in: view, animated: true)
+        }
+    }
+    
     func setupDatePicker(startDate: Date) {
         minDate = Calendar.autoupdatingCurrent.date(byAdding: .minute, value: 1, to: startDate)!
         maxDate = Calendar.autoupdatingCurrent.date(byAdding: .day, value: 3, to: startDate)!

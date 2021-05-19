@@ -104,6 +104,8 @@ PODS:
     - AppAuth/Core (~> 1.4)
     - GTMSessionFetcher/Core (~> 1.5)
   - GTMSessionFetcher/Core (1.5.0)
+  - IQKeyboardManagerSwift (6.5.6)
+  - JGProgressHUD (2.2)
   - leveldb-library (1.22.1)
   - lottie-ios (3.1.9)
   - nanopb (2.30908.0):
@@ -112,6 +114,9 @@ PODS:
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
   - PromisesObjC (1.2.12)
+  - SwiftMessages (9.0.2):
+    - SwiftMessages/App (= 9.0.2)
+  - SwiftMessages/App (9.0.2)
   - TinyConstraints (4.0.1)
 
 DEPENDENCIES:
@@ -121,7 +126,10 @@ DEPENDENCIES:
   - Firebase/Database
   - Gifu
   - GoogleSignIn
+  - IQKeyboardManagerSwift
+  - JGProgressHUD
   - lottie-ios
+  - SwiftMessages
   - TinyConstraints
 
 SPEC REPOS:
@@ -141,10 +149,13 @@ SPEC REPOS:
     - GoogleUtilities
     - GTMAppAuth
     - GTMSessionFetcher
+    - IQKeyboardManagerSwift
+    - JGProgressHUD
     - leveldb-library
     - lottie-ios
     - nanopb
     - PromisesObjC
+    - SwiftMessages
     - TinyConstraints
 
 SPEC CHECKSUMS:
@@ -163,12 +174,15 @@ SPEC CHECKSUMS:
   GoogleUtilities: e1d9ed4e544fc32a93e00e721400cbc3f377200d
   GTMAppAuth: 5b53231ef6920f149ab84b2969cb0ab572da3077
   GTMSessionFetcher: b3503b20a988c4e20cc189aa798fd18220133f52
+  IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
+  JGProgressHUD: d83d7a981b85d11205e19ff8ad5bb9c40571c847
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
   lottie-ios: 3a3758ef5a008e762faec9c9d50a39842f26d124
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
+  SwiftMessages: 77b847d1405f99046ffbd0d856bc7d73e6892686
   TinyConstraints: 8dd91295e56797648c7bc335dd20e1d91ec4c192
 
-PODFILE CHECKSUM: 34467e0a638bbf5085f7f428cff0a95277344386
+PODFILE CHECKSUM: d052eaeec7144fb672188954c6772757223c055d
 
 COCOAPODS: 1.10.0
