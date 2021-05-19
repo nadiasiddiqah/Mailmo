@@ -58,13 +58,13 @@ class New_Edit_VC: UIViewController {
     
     // MARK: - Send Methods
     @IBAction func sendNow(_ sender: Any) {
+        hudView(show: true, text: "Preparing to send...")
         sendEmail()
         if sendSuccess {
-            hudView(show: true, text: "Sending now!")
             postData()
-            dismissHud(hud, text: "Sending now!", detailText: "", delay: 1)
+            dismissHud(hud, text: "Preparing to send...", detailText: "", delay: 0.8)
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
                 self.performSegue(withIdentifier: "showSendNow", sender: nil)
             }
         }
@@ -96,11 +96,6 @@ class New_Edit_VC: UIViewController {
             hud.textLabel.text = text
             hud.detailTextLabel.text = nil
             hud.show(in: view, animated: true)
-        } else {
-            hud.textLabel.text = text
-            hud.detailTextLabel.text = nil
-            hud.dismiss(animated: true)
-            dismiss(animated: true, completion: nil)
         }
     }
     
