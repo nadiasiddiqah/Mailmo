@@ -17,7 +17,14 @@ class Main_VC: UIViewController {
     // MARK: - Variables
     let firebaseAuth = Auth.auth()
     let firebaseData = Database.database().reference()
-    var msgBody = String()
+    
+    var userExists = Bool()
+    var showWelcomePopup = Bool()
+    var welcomeText = String()
+    
+    var showStatusPopup = Bool()
+    var iconText = String()
+    var statusText = String()
     
     // MARK: - Outlet Variables
     @IBOutlet weak var welcomeIcon: UIImageView!
@@ -107,22 +114,55 @@ class Main_VC: UIViewController {
     
     func setupView() {
         welcomeAnimation.play(fromProgress: 0, toProgress: 1, loopMode: .loop, completion: nil)
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            let msg = MessageView.viewFromNib(layout: .cardView)
-            msg.configureTheme(.success)
-            msg.configureDropShadow()
-            let iconText = ["😎", "👋🏽", "🤙🏽", "🤗"].randomElement()!
-            msg.button?.isHidden = true
-            msg.configureContent(title: "", body: self.msgBody, iconText: iconText)
-            
-            var msgConfig = SwiftMessages.defaultConfig
-            msgConfig.duration = .seconds(seconds: 1)
-            msgConfig.presentationContext = .window(windowLevel: UIWindow.Level.normal)
-            
-            SwiftMessages.show(config: msgConfig, view: msg)
+        
+        retrieveUserInfo()
+        
+        if showStatusPopup {
+            showStatusPopup = false
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                self.statusPopup()
+            }
         }
         
+        
+        if showWelcomePopup {
+            showWelcomePopup = false
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                self.welcomePopup()
+            }
+        }
+    }
+    
+    func retrieveUserInfo() {
+        if let uid = self.firebaseAuth.currentUser?.uid {
+            // Retrieve user's name for msgBody
+            self.firebaseData.child("users/\(uid)/name").observeSingleEvent(of: .value) { (snapshot) in
+                if let name = snapshot.value as? String {
+                    if self.userExists {
+                        if name == "No name set" {
+                            self.welcomeText = "Welcome back!"
+                        } else {
+                            self.welcomeText = "Welcome back, \(name)!"
+                        }
+                    } else {
+                        if name == "No name set" {
+                            self.welcomeText = "Welcome to Mailmo!"
+                        } else {
+                            self.welcomeText = "Welcome to Mailmo, \(name)!"
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    func statusPopup() {
+        popupFormatter(body: statusText, iconText: iconText)
+    }
+    
+    func welcomePopup() {
+        let iconText = ["😎", "👋🏽", "🤙🏽", "🤗"].randomElement()!
+        popupFormatter(body: welcomeText, iconText: iconText)
     }
     
     func hudView(show: Bool) {

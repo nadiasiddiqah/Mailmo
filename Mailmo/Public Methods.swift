@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import Lottie
 import JGProgressHUD
+import SwiftMessages
 
 // MARK: - Variables
 var hud: JGProgressHUD = {
@@ -92,6 +93,21 @@ func emailFormatter(to: String, toName: String,
     return email
 }
 
+func popupFormatter(body: String, iconText: String) {
+    let msg = MessageView.viewFromNib(layout: .cardView)
+    msg.configureTheme(.success)
+    msg.configureDropShadow()
+    
+    msg.button?.isHidden = true
+    msg.configureContent(title: "", body: body, iconText: iconText)
+    
+    var msgConfig = SwiftMessages.defaultConfig
+    msgConfig.duration = .seconds(seconds: 1)
+    msgConfig.presentationContext = .window(windowLevel: UIWindow.Level.normal)
+    
+    SwiftMessages.show(config: msgConfig, view: msg)
+}
+
 func convertDateToString(_ date: Date) -> String {
     var sendTimeString = String()
     let sendTimeFormatter = DateFormatter()
@@ -142,20 +158,3 @@ extension UIAlertController {
         }
     }
 }
-
-//extension  SFSafariViewController {
-//    override open var modalPresentationStyle: UIModalPresentationStyle {
-//        get { return .fullScreen}
-//        set { super.modalPresentationStyle = newValue }
-//    }
-//}
-
-//extension String {
-//    func capitalizingFirstLetter() -> String {
-//        return prefix(1).capitalized + dropFirst()
-//    }
-//
-//    mutating func capitalizeFirstLetter() {
-//        self = self.capitalizingFirstLetter()
-//    }
-//}

@@ -22,7 +22,6 @@ class SignIn_VC: UIViewController {
     
     var email = String()
     var pass = String()
-    var msgBody = String()
     var userExists = false
     
     // MARK: - Outlet Variables
@@ -46,15 +45,12 @@ class SignIn_VC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupView()
+        // Listens for changes in auth status
+        authStateListener()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        // Listens for changes in auth status
-        authStateListener()
-        
         navigationController?.isNavigationBarHidden = true
     }
     
@@ -65,17 +61,15 @@ class SignIn_VC: UIViewController {
     
     // MARK: - Navigation
     func transitionToMain() {
+        
         // Dismiss HUD
-        if userExists {
-            hudView(show: false, text: "Logging in...")
-        } else {
-            hudView(show: false, text: "Creating new account...")
-        }
-        userExists = false
+        hud.dismiss(animated: true)
+        dismiss(animated: true, completion: nil)
         
         // Set new rootVC as MainVC (when user logs in)
         let mainVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "MainVC") as! Main_VC
-        mainVC.msgBody = msgBody
+        mainVC.userExists = userExists
+        mainVC.showWelcomePopup = true
         self.view.window?.rootViewController = mainVC
         self.view.window?.makeKeyAndVisible()
     }
@@ -98,30 +92,21 @@ class SignIn_VC: UIViewController {
     
             // Log in User
             firebaseAuth.signIn(withEmail: email, password: pass) { (result, error) in
-                if let error = error {
-                    // Firebase sign in error
-                    print("Failed to create user", error)
-                    self.errorHandler("\(error.localizedDescription)", isHidden: false)
-                } else {
                 
+                if error != nil {
+                    // Firebase sign in error
+                    dismissHud(hud, text: "Error", detailText: "Failed to create new user", delay: 0.5)
+                } else {
                     // Sign in successful
                     self.errorHandler("", isHidden: true)
+                    self.userExists = true
                     
-                    if let uid = self.firebaseAuth.currentUser?.uid {
-                        self.firebaseData.child("users/\(uid)/name").observeSingleEvent(of: .value) { (snapshot) in
-                            if let name = snapshot.value as? String {
-                                self.msgBody = "Welcome to Mailmo, \(name.capitalized)!"
-                            }
-                            // Transition to main screen
-                            DispatchQueue.main.async {
-                                self.transitionToMain()
-                            }
-                        } withCancel: { (error) in
-                            print(error)
-                        }
+                    // Transition to main
+                    DispatchQueue.main.async {
+                        self.transitionToMain()
                     }
-                    
                 }
+                
             }
             
         }
@@ -136,16 +121,13 @@ class SignIn_VC: UIViewController {
         hudView(show: true, text: "Authenticating with Google...")
         
         // Uses view controller to show Google sign-in URL
-//        if ((GIDSignIn.sharedInstance()?.hasPreviousSignIn()) != nil) {
-//            GIDSignIn.sharedInstance()?.restorePreviousSignIn()
-//        } else {
-            GIDSignIn.sharedInstance()?.signIn()
-//        }
+        GIDSignIn.sharedInstance()?.signIn()
     }
     
     
     // MARK: - View Methods
     func setupView() {
+
         // Set-up google sign in
         GIDSignIn.sharedInstance()?.delegate = self
         GIDSignIn.sharedInstance()?.presentingViewController = self
@@ -160,43 +142,18 @@ class SignIn_VC: UIViewController {
     }
     
     func authStateListener() {
-        print("before authhANDLER")
         authHandler = firebaseAuth.addStateDidChangeListener({ (auth, user) in
-            print("AFTER audthnadler")
-            if self.firebaseAuth.currentUser != nil {
-                
-                if let uid = self.firebaseAuth.currentUser?.uid {
-                    // Check if user exists
-                    self.firebaseData.child("users/\(uid)").observeSingleEvent(of: .value) { (snapshot) in
-                        if snapshot.exists() {
-                            // If user exists
-                            self.userExists = true
-                        } else {
-                            // If user doesn't exist, create new user
-                            self.userExists = false
-                        }
-                        
-                        // Retrieve user's name for msgBody
-                        self.firebaseData.child("users/\(uid)/name").observe(.value) { (snapshot) in
-                            if let name = snapshot.value as? String {
-                                if self.userExists {
-                                    self.msgBody = "Welcome back, \(name)!"
-                                } else {
-                                    self.msgBody = "Wecome to Mailmo, \(name.capitalized)!"
-                                }
-                            }
-                            // Transition to main screen
-                            DispatchQueue.main.async {
-                                self.transitionToMain()
-                            }
-                        } withCancel: { (error) in
-                            print(error)
-                        }
-
-                    }
-                }
-            }
             
+            if self.firebaseAuth.currentUser != nil {
+                // Transition to main screen
+                self.userExists = true
+                self.transitionToMain()
+            } else {
+                // Stay in sign-in screen
+                self.userExists = false
+                self.setupView()
+            }
+
         })
     }
     
@@ -290,11 +247,6 @@ extension SignIn_VC: GIDSignInDelegate {
         // Retrieve google user's email + name
         let email = user.profile.email ?? "No email set"
         let name = user.profile.givenName ?? "No name set"
-        if name != "No name set" {
-            msgBody = "Welcome back, \(name)!"
-        } else {
-            msgBody = "Welcome back!"
-        }
         print("Successfully authenticated with Google")
         
         // Firebase sign in with googleCredential
@@ -302,7 +254,7 @@ extension SignIn_VC: GIDSignInDelegate {
             
             // Check for firebase sign in error
             if error != nil {
-                dismissHud(hud, text: "Error", detailText: "Failed to create a Firebase user with Google", delay: 1)
+                dismissHud(hud, text: "Error", detailText: "Failed to create a Firebase user with Google", delay: 0.5)
                 return
             }
             print("Successfully authenticated with Firebase")
@@ -313,11 +265,9 @@ extension SignIn_VC: GIDSignInDelegate {
                     if snapshot.exists() {
                         // If user exists
                         self.userExists = true
-                        self.msgBody = "Welcome back, \(name)!"
                     } else {
                         // If user doesn't exist, create new user
                         self.userExists = false
-                        self.msgBody = "Welcome to Mailmo, \(name)!"
                         self.firebaseData.child("users/\(uid)").setValue(["name": name,
                                                                           "email": email])
                     }

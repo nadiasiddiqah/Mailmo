@@ -20,7 +20,6 @@ class SignUp_VC: UIViewController {
     var pass = String()
     var confirmPass = String()
     
-    var msgBody = String()
     var userExists = false
     
     // MARK: - Outlets
@@ -44,16 +43,13 @@ class SignUp_VC: UIViewController {
     
     func transitionToMain() {
         // Dismiss HUD
-        if userExists {
-            hudView(show: false, text: "Logging in...")
-        } else {
-            hudView(show: false, text: "Creating new account...")
-        }
-        userExists = false
+        hud.dismiss(animated: true)
+        dismiss(animated: true, completion: nil)
         
         // Set new rootVC as MainVC (when user logs in)
         let mainVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "MainVC") as! Main_VC
-        mainVC.msgBody = msgBody
+        mainVC.userExists = userExists
+        mainVC.showWelcomePopup = true
         view.window?.rootViewController = mainVC
         view.window?.makeKeyAndVisible()
     }
@@ -80,27 +76,26 @@ class SignUp_VC: UIViewController {
             
             // Create new user
             firebaseAuth.createUser(withEmail: email, password: pass) { (result, error) in
-                if let error = error {
+                if error != nil {
                     // Failed to create user
-                    print("Failed to create new user", error)
-                    self.errorHandler("\(error.localizedDescription)", isHidden: false)
+                    dismissHud(hud, text: "Error", detailText: "Failed to create new user", delay: 0.5)
                     return
                 }
                 
                 // Created user successfully
-                guard let uid = result?.user.uid else { return }
-                
-                self.errorHandler("", isHidden: true)
-                print("Successfully created new user")
-                
-                self.firebaseData.child("users/\(uid)").setValue(["name": self.name.capitalized,
-                                                                  "email": self.email])
-                self.msgBody = "Welcome to Mailmo, \(self.name)!"
-                
-                // Transition to main screen
-                DispatchQueue.main.async {
-                    self.transitionToMain()
+                if let uid = result?.user.uid {
+                    print("Successfully created new user")
+                    self.userExists = false
+                    self.errorHandler("", isHidden: true)
+                    
+                    self.firebaseData.child("users/\(uid)").setValue(["name": self.name.capitalized,
+                                                                      "email": self.email])
+                    // Transition to main screen
+                    DispatchQueue.main.async {
+                        self.transitionToMain()
+                    }
                 }
+        
             }
         }
         
@@ -126,6 +121,9 @@ class SignUp_VC: UIViewController {
         
         // Hide error label
         errorHandler("", isHidden: true)
+        
+        // Default state
+        userExists = false
         
         // Swipe/tap on screen to hide keyboard
         gesturesToHideKeyboard()
@@ -232,11 +230,6 @@ extension SignUp_VC: GIDSignInDelegate {
         // Retrive google user's email + name
         let email = user.profile.email ?? "No email set"
         name = user.profile.givenName ?? "No name set"
-        if name != "No name set" {
-            msgBody = "Welcome back, \(name)!"
-        } else {
-            msgBody = "Welcome back!"
-        }
         print("Successfully authenticated with Google")
         
         // Firebase sign in with googleCredential
@@ -254,15 +247,12 @@ extension SignUp_VC: GIDSignInDelegate {
                     if snapshot.exists() {
                         // If user exists
                         self.userExists = true
-                        self.msgBody = "Welcome back, \(self.name)!"
                     } else {
                         // If user doesn't exist, create new user
                         self.userExists = false
-                        self.msgBody = "Welcome to Mailmo, \(self.name)!"
                         self.firebaseData.child("users/\(uid)").setValue(["name": self.name,
                                                                           "email": email])
                     }
-
                     // Transition to main screen
                     DispatchQueue.main.async {
                         self.transitionToMain()

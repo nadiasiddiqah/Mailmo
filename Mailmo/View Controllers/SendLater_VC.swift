@@ -36,6 +36,16 @@ class SendLater_VC: UIViewController {
         sendLaterAnimation.pause()
     }
     
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "backToMain_Later" {
+            let controller = segue.destination as! Main_VC
+            controller.showStatusPopup = true
+            controller.statusText = "Mailmo scheduled to send later!"
+            controller.iconText = ["🕑", "⏰", "🗓"].randomElement()!
+        }
+    }
+    
     // MARK: - Methods
     func playAnimation() {
         sendLaterAnimation.play(fromProgress: 0, toProgress: 0.999, loopMode: .playOnce) { _ in

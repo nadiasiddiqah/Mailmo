@@ -27,13 +27,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Configure Firebase for Real-time Database backend
         FirebaseApp.configure()
         
-        // Assign root view controller
-        window = UIWindow()
-        window?.makeKeyAndVisible()
-        let navController = UINavigationController(rootViewController: Main_VC())
-        navController.isNavigationBarHidden = true
-        window?.rootViewController = navController
-        
         // Configure Google sign in
         GIDSignIn.sharedInstance()?.clientID = FirebaseApp.app()?.options.clientID
         
