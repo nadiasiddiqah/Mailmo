@@ -10,17 +10,19 @@
 		09016C742614173000B11BF0 /* New_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09016C732614173000B11BF0 /* New_VC.swift */; };
 		09016C7F2614178C00B11BF0 /* Public Methods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09016C7E2614178C00B11BF0 /* Public Methods.swift */; };
 		0924F1002613CD1300C0E909 /* AudioVisualizerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0924F0FF2613CD1300C0E909 /* AudioVisualizerView.swift */; };
+		0935134326560407000E3EF2 /* mailmoIconAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 0935134226560407000E3EF2 /* mailmoIconAnimation.json */; };
+		093513482656040F000E3EF2 /* sendLaterAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 093513472656040F000E3EF2 /* sendLaterAnimation.json */; };
+		0935134D26560418000E3EF2 /* sendNowAnimation.gif in Resources */ = {isa = PBXBuildFile; fileRef = 0935134C26560418000E3EF2 /* sendNowAnimation.gif */; };
+		0935135226560422000E3EF2 /* welcomeAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 0935135126560422000E3EF2 /* welcomeAnimation.json */; };
 		093D27B32631023000C4CBCB /* HistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093D27B22631023000C4CBCB /* HistoryCell.swift */; };
 		095ABFF12642326E00031A77 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 095ABFF02642326E00031A77 /* GoogleService-Info.plist */; };
-		097333DC260961370045F5AB /* voiceAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 097333DB260961370045F5AB /* voiceAnimation.json */; };
-		0975616726093BE600F01055 /* recordAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 0975616626093BE500F01055 /* recordAnimation.json */; };
 		09A6E2F7264221F800C67575 /* SignUp_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A6E2F6264221F600C67575 /* SignUp_VC.swift */; };
+		09A879D026560455002300E2 /* dotsAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 09A879CF26560455002300E2 /* dotsAnimation.json */; };
+		09A879D52656045F002300E2 /* recordAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 09A879D42656045F002300E2 /* recordAnimation.json */; };
 		09BA6BD5260A5DEA003DBFD3 /* New_Edit_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BA6BD4260A5DEA003DBFD3 /* New_Edit_VC.swift */; };
 		09BA6BE4260A84D8003DBFD3 /* SendNow_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BA6BE3260A84D8003DBFD3 /* SendNow_VC.swift */; };
-		09BA6BF4260A87DB003DBFD3 /* sendNowAnimation.gif in Resources */ = {isa = PBXBuildFile; fileRef = 09BA6BF3260A87DB003DBFD3 /* sendNowAnimation.gif */; };
 		09BA6C08260AB73E003DBFD3 /* SendLaterPicker_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BA6C07260AB73D003DBFD3 /* SendLaterPicker_VC.swift */; };
 		09BA6C0D260AB74F003DBFD3 /* SendLater_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BA6C0C260AB74F003DBFD3 /* SendLater_VC.swift */; };
-		09BA6C1A260AB873003DBFD3 /* sendLaterAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 09BA6C19260AB873003DBFD3 /* sendLaterAnimation.json */; };
 		09BA6C1F260AE7D9003DBFD3 /* History_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BA6C1E260AE7D9003DBFD3 /* History_VC.swift */; };
 		09BA6C27260C131F003DBFD3 /* Settings_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BA6C26260C131F003DBFD3 /* Settings_VC.swift */; };
 		09BA6C2C260C133B003DBFD3 /* HistoryDetails_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BA6C2B260C133B003DBFD3 /* HistoryDetails_VC.swift */; };
@@ -30,8 +32,6 @@
 		09E98D582605397A00C4F4F7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09E98D572605397A00C4F4F7 /* Assets.xcassets */; };
 		09E98D662605397A00C4F4F7 /* MailmoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E98D652605397A00C4F4F7 /* MailmoTests.swift */; };
 		09E98D712605397A00C4F4F7 /* MailmoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E98D702605397A00C4F4F7 /* MailmoUITests.swift */; };
-		09E98D94260539E000C4F4F7 /* welcomeAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 09E98D92260539E000C4F4F7 /* welcomeAnimation.json */; };
-		09E98D95260539E000C4F4F7 /* mailmoIconAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 09E98D93260539E000C4F4F7 /* mailmoIconAnimation.json */; };
 		09E98DC3260539E900C4F4F7 /* fa-solid-900.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09E98D9C260539E900C4F4F7 /* fa-solid-900.ttf */; };
 		09E98DC4260539E900C4F4F7 /* fa-regular-400.svg in Resources */ = {isa = PBXBuildFile; fileRef = 09E98D9D260539E900C4F4F7 /* fa-regular-400.svg */; };
 		09E98DC5260539E900C4F4F7 /* fa-regular-400.woff2 in Resources */ = {isa = PBXBuildFile; fileRef = 09E98D9E260539E900C4F4F7 /* fa-regular-400.woff2 */; };
@@ -73,7 +73,7 @@
 		09E98E4326053A6300C4F4F7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09E98E4026053A6300C4F4F7 /* Main.storyboard */; };
 		09E98E4A26053A6B00C4F4F7 /* Main_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E98E4826053A6B00C4F4F7 /* Main_VC.swift */; };
 		09E98E4B26053A6B00C4F4F7 /* SignIn_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E98E4926053A6B00C4F4F7 /* SignIn_VC.swift */; };
-		09EBB542260582690090E8E9 /* dotsAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 09EBB541260582690090E8E9 /* dotsAnimation.json */; };
+		09F28D07265603D300EAC5FF /* voiceAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 09F28D06265603D300EAC5FF /* voiceAnimation.json */; };
 		3CBB65EABAAD35963A1AC3D6 /* Pods_Mailmo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D0FF59A3BADA9E5F2060F55 /* Pods_Mailmo.framework */; };
 		474A6C2B269743740854BEF3 /* Pods_MailmoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12359E55CFD6BA1DF18D0FEF /* Pods_MailmoTests.framework */; };
 		E9AB2EEE0A76219C45A40A8E /* Pods_Mailmo_MailmoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6903071BCBC8E5D4F5717192 /* Pods_Mailmo_MailmoUITests.framework */; };
@@ -102,18 +102,20 @@
 		0924F0B02613BAD200C0E909 /* AudioKit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AudioKit.xcframework; path = ../../Downloads/AudioKit.xcframework; sourceTree = "<group>"; };
 		0924F0BC2613BB6300C0E909 /* AudioKit */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = AudioKit; path = "../../Downloads/AudioKit.xcframework/AudioKit.xcframework/ios-arm64_armv7/AudioKit.framework/AudioKit"; sourceTree = "<group>"; };
 		0924F0FF2613CD1300C0E909 /* AudioVisualizerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioVisualizerView.swift; sourceTree = "<group>"; };
+		0935134226560407000E3EF2 /* mailmoIconAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = mailmoIconAnimation.json; sourceTree = "<group>"; };
+		093513472656040F000E3EF2 /* sendLaterAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sendLaterAnimation.json; sourceTree = "<group>"; };
+		0935134C26560418000E3EF2 /* sendNowAnimation.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = sendNowAnimation.gif; sourceTree = "<group>"; };
+		0935135126560422000E3EF2 /* welcomeAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = welcomeAnimation.json; sourceTree = "<group>"; };
 		093D27B22631023000C4CBCB /* HistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCell.swift; sourceTree = "<group>"; };
 		095ABFF02642326E00031A77 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		095AC07F2645B45800031A77 /* SendGrid_Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = SendGrid_Config.xcconfig; sourceTree = "<group>"; };
-		097333DB260961370045F5AB /* voiceAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = voiceAnimation.json; sourceTree = "<group>"; };
-		0975616626093BE500F01055 /* recordAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = recordAnimation.json; sourceTree = "<group>"; };
 		09A6E2F6264221F600C67575 /* SignUp_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp_VC.swift; sourceTree = "<group>"; };
+		09A879CF26560455002300E2 /* dotsAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dotsAnimation.json; sourceTree = "<group>"; };
+		09A879D42656045F002300E2 /* recordAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = recordAnimation.json; sourceTree = "<group>"; };
 		09BA6BD4260A5DEA003DBFD3 /* New_Edit_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = New_Edit_VC.swift; sourceTree = "<group>"; };
 		09BA6BE3260A84D8003DBFD3 /* SendNow_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendNow_VC.swift; sourceTree = "<group>"; };
-		09BA6BF3260A87DB003DBFD3 /* sendNowAnimation.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = sendNowAnimation.gif; path = ../sendNowAnimation.gif; sourceTree = "<group>"; };
 		09BA6C07260AB73D003DBFD3 /* SendLaterPicker_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendLaterPicker_VC.swift; sourceTree = "<group>"; };
 		09BA6C0C260AB74F003DBFD3 /* SendLater_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendLater_VC.swift; sourceTree = "<group>"; };
-		09BA6C19260AB873003DBFD3 /* sendLaterAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sendLaterAnimation.json; sourceTree = "<group>"; };
 		09BA6C1E260AE7D9003DBFD3 /* History_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History_VC.swift; sourceTree = "<group>"; };
 		09BA6C26260C131F003DBFD3 /* Settings_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings_VC.swift; sourceTree = "<group>"; };
 		09BA6C2B260C133B003DBFD3 /* HistoryDetails_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDetails_VC.swift; sourceTree = "<group>"; };
@@ -130,8 +132,6 @@
 		09E98D6C2605397A00C4F4F7 /* MailmoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MailmoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		09E98D702605397A00C4F4F7 /* MailmoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailmoUITests.swift; sourceTree = "<group>"; };
 		09E98D722605397A00C4F4F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		09E98D92260539E000C4F4F7 /* welcomeAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = welcomeAnimation.json; sourceTree = "<group>"; };
-		09E98D93260539E000C4F4F7 /* mailmoIconAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = mailmoIconAnimation.json; sourceTree = "<group>"; };
 		09E98D9C260539E900C4F4F7 /* fa-solid-900.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fa-solid-900.ttf"; sourceTree = "<group>"; };
 		09E98D9D260539E900C4F4F7 /* fa-regular-400.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "fa-regular-400.svg"; sourceTree = "<group>"; };
 		09E98D9E260539E900C4F4F7 /* fa-regular-400.woff2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fa-regular-400.woff2"; sourceTree = "<group>"; };
@@ -173,7 +173,7 @@
 		09E98E4126053A6300C4F4F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		09E98E4826053A6B00C4F4F7 /* Main_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Main_VC.swift; sourceTree = "<group>"; };
 		09E98E4926053A6B00C4F4F7 /* SignIn_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignIn_VC.swift; sourceTree = "<group>"; };
-		09EBB541260582690090E8E9 /* dotsAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dotsAnimation.json; sourceTree = "<group>"; };
+		09F28D06265603D300EAC5FF /* voiceAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = voiceAnimation.json; sourceTree = "<group>"; };
 		12359E55CFD6BA1DF18D0FEF /* Pods_MailmoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MailmoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		24D29AEB57FAA99D3E4A6369 /* Pods-MailmoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MailmoTests.debug.xcconfig"; path = "Target Support Files/Pods-MailmoTests/Pods-MailmoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		4D0FF59A3BADA9E5F2060F55 /* Pods_Mailmo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mailmo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -276,13 +276,13 @@
 		09E98D91260539E000C4F4F7 /* Animations */ = {
 			isa = PBXGroup;
 			children = (
-				09E98D92260539E000C4F4F7 /* welcomeAnimation.json */,
-				09E98D93260539E000C4F4F7 /* mailmoIconAnimation.json */,
-				09BA6BF3260A87DB003DBFD3 /* sendNowAnimation.gif */,
-				097333DB260961370045F5AB /* voiceAnimation.json */,
-				09EBB541260582690090E8E9 /* dotsAnimation.json */,
-				0975616626093BE500F01055 /* recordAnimation.json */,
-				09BA6C19260AB873003DBFD3 /* sendLaterAnimation.json */,
+				09F28D06265603D300EAC5FF /* voiceAnimation.json */,
+				0935134226560407000E3EF2 /* mailmoIconAnimation.json */,
+				093513472656040F000E3EF2 /* sendLaterAnimation.json */,
+				0935134C26560418000E3EF2 /* sendNowAnimation.gif */,
+				09A879D42656045F002300E2 /* recordAnimation.json */,
+				09A879CF26560455002300E2 /* dotsAnimation.json */,
+				0935135126560422000E3EF2 /* welcomeAnimation.json */,
 			);
 			path = Animations;
 			sourceTree = "<group>";
@@ -541,42 +541,42 @@
 				09E98DD9260539E900C4F4F7 /* UbuntuMono-BI.ttf in Resources */,
 				09E98E4326053A6300C4F4F7 /* Main.storyboard in Resources */,
 				09E98DE6260539E900C4F4F7 /* Ubuntu-RI.ttf in Resources */,
-				09E98D95260539E000C4F4F7 /* mailmoIconAnimation.json in Resources */,
 				09E98DE1260539E900C4F4F7 /* Ubuntu-B.ttf in Resources */,
-				09BA6BF4260A87DB003DBFD3 /* sendNowAnimation.gif in Resources */,
 				09E98DCF260539E900C4F4F7 /* fa-brands-400.woff in Resources */,
 				09E98DE4260539E900C4F4F7 /* UbuntuMono-RI.ttf in Resources */,
 				09E98DC7260539E900C4F4F7 /* fa-brands-400.svg in Resources */,
-				097333DC260961370045F5AB /* voiceAnimation.json in Resources */,
-				09E98D94260539E000C4F4F7 /* welcomeAnimation.json in Resources */,
-				09EBB542260582690090E8E9 /* dotsAnimation.json in Resources */,
 				09E98DD8260539E900C4F4F7 /* Ubuntu-L.ttf in Resources */,
+				09A879D52656045F002300E2 /* recordAnimation.json in Resources */,
 				09E98DC4260539E900C4F4F7 /* fa-regular-400.svg in Resources */,
-				0975616726093BE600F01055 /* recordAnimation.json in Resources */,
 				09E98DC3260539E900C4F4F7 /* fa-solid-900.ttf in Resources */,
-				09BA6C1A260AB873003DBFD3 /* sendLaterAnimation.json in Resources */,
 				09E98DCC260539E900C4F4F7 /* fa-regular-400.ttf in Resources */,
 				09E98DC6260539E900C4F4F7 /* fa-solid-900.eot in Resources */,
 				09E98DD7260539E900C4F4F7 /* FONTLOG.txt in Resources */,
 				09E98DE3260539E900C4F4F7 /* README.txt in Resources */,
 				09E98DD4260539E900C4F4F7 /* LICENCE-FAQ.txt in Resources */,
+				0935134326560407000E3EF2 /* mailmoIconAnimation.json in Resources */,
 				09E98DE0260539E900C4F4F7 /* Ubuntu-LI.ttf in Resources */,
 				09E98DD3260539E900C4F4F7 /* copyright.txt in Resources */,
 				09E98DC5260539E900C4F4F7 /* fa-regular-400.woff2 in Resources */,
 				09E98DE7260539E900C4F4F7 /* UbuntuMono-B.ttf in Resources */,
 				09E98DE2260539E900C4F4F7 /* Ubuntu-C.ttf in Resources */,
 				09E98DE5260539E900C4F4F7 /* UbuntuMono-R.ttf in Resources */,
+				093513482656040F000E3EF2 /* sendLaterAnimation.json in Resources */,
 				09E98DD6260539E900C4F4F7 /* CONTRIBUTING.txt in Resources */,
+				09A879D026560455002300E2 /* dotsAnimation.json in Resources */,
+				0935135226560422000E3EF2 /* welcomeAnimation.json in Resources */,
 				09E98DD1260539E900C4F4F7 /* fa-regular-400.eot in Resources */,
 				09E98DCD260539E900C4F4F7 /* fa-solid-900.woff2 in Resources */,
 				09E98DDD260539E900C4F4F7 /* Ubuntu-Th.ttf in Resources */,
 				09E98DDC260539E900C4F4F7 /* TRADEMARKS.txt in Resources */,
+				09F28D07265603D300EAC5FF /* voiceAnimation.json in Resources */,
 				09E98DD0260539E900C4F4F7 /* fa-brands-400.ttf in Resources */,
 				09E98DDE260539E900C4F4F7 /* Ubuntu-MI.ttf in Resources */,
 				09E98DCA260539E900C4F4F7 /* fa-solid-900.svg in Resources */,
 				09E98DDF260539E900C4F4F7 /* Ubuntu-R.ttf in Resources */,
 				09E98DD2260539E900C4F4F7 /* fontawesome-all.css in Resources */,
 				095ABFF12642326E00031A77 /* GoogleService-Info.plist in Resources */,
+				0935134D26560418000E3EF2 /* sendNowAnimation.gif in Resources */,
 				09E98D582605397A00C4F4F7 /* Assets.xcassets in Resources */,
 				09E98DCB260539E900C4F4F7 /* fa-solid-900.woff in Resources */,
 				09E98E4226053A6300C4F4F7 /* LaunchScreen.storyboard in Resources */,

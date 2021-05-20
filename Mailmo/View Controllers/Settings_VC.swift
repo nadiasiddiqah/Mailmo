@@ -20,10 +20,13 @@ class Settings_VC: UIViewController {
     }()
     
     // MARK: - Outlets
+    @IBOutlet weak var emailButton: UIButton!
     
     // MARK: - View Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupView()
     }
     
     // MARK: - Navigation
@@ -41,7 +44,90 @@ class Settings_VC: UIViewController {
     }
     
     // MARK: - Action Methods
+    @IBAction func changeEmail(_ sender: Any) {
+        
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "Would you like to update your email address?",
+                                          message: nil,
+                                          preferredStyle: .alert)
+            alert.addTextField { (textField) in
+                textField.placeholder = "Enter new email"
+                textField.addTarget(alert, action: #selector(alert.textDidChangeInAlert), for: .editingChanged)
+            }
+            
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            
+            let saveAction = UIAlertAction(title: "Save", style: .default, handler: { (_) in
+                guard let prefEmail = alert.textFields?[0].text else { return }
+                
+                let cleanedPrefEmail = prefEmail.trimmingCharacters(in: .whitespacesAndNewlines)
+                self.emailButton.setTitle("\(cleanedPrefEmail)", for: .normal)
+                currentUserInfo?.prefEmail = cleanedPrefEmail
+                self.postPrefEmail()
+            })
+            saveAction.isEnabled = false
+            alert.addAction(saveAction)
+            
+            self.present(alert, animated: true, completion: nil)
+        }
+        
+    }
+    
     @IBAction func pressedLogOut(_ sender: Any) {
+        let alert = UIAlertController(title: nil,
+                                      message: "Are you sure you want to log out?",
+                                      preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Log Out", style: .destructive, handler: { (_) in
+            self.logOut()
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+    
+    @IBAction func pressedRate(_ sender: Any) {
+    }
+    
+    @IBAction func pressedPremium(_ sender: Any) {
+    }
+    
+    // MARK: - View Methods
+    func setupView() {
+        retrieveEmail()
+    }
+    
+    // MARK: - Methods
+    func retrieveEmail() {
+        emailButton.titleLabel?.minimumScaleFactor = 0.5
+        emailButton.titleLabel?.numberOfLines = 1
+        emailButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        if let user = currentUserInfo {
+            if user.prefEmail == "No pref set" {
+                emailButton.setTitle("\(user.email)", for: .normal)
+            } else {
+                emailButton.setTitle("\(user.prefEmail)", for: .normal)
+            }
+        }
+    }
+    
+    func postPrefEmail() {
+        
+        let firebaseAuth = Auth.auth()
+        let firebaseData = Database.database().reference()
+        
+        // Post data to Firebase
+        if let uid = firebaseAuth.currentUser?.uid {
+            print("Successfully posted data to Firebase")
+            if let user = currentUserInfo {
+                firebaseData.child("users/\(uid)").setValue(["name": user.name,
+                                                             "email": user.email,
+                                                             "prefEmail": user.prefEmail])
+            }
+
+        }
+    }
+    
+    
+    func logOut() {
         // Show HUD
         hudView(show: true)
         
@@ -55,10 +141,10 @@ class Settings_VC: UIViewController {
         } catch {
             dismissHud(hud, text: "Error", detailText: error.localizedDescription, delay: 1)
         }
-        print("Signed out")
+        print("Logged out")
     }
     
-    // MARK: - Methods
+    
     func hudView(show: Bool) {
         if show {
             hud.textLabel.text = "Logging out..."

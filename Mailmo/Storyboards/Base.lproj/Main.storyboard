@@ -344,7 +344,7 @@
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" image="square.and.arrow.up" catalog="system"/>
                                         <connections>
-                                            <action selector="signOut:" destination="3na-6K-Ofu" eventType="touchUpInside" id="NU8-sd-Jvd"/>
+                                            <action selector="pressedLogOut:" destination="3na-6K-Ofu" eventType="touchUpInside" id="NU8-sd-Jvd"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1367,10 +1367,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QY0-nc-seA" userLabel="Settings View">
-                                <rect key="frame" x="0.0" y="157.33333333333334" width="428" height="296.33333333333326"/>
+                                <rect key="frame" x="0.0" y="157.33333333333334" width="428" height="370.33333333333326"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="z6c-tB-mil">
-                                        <rect key="frame" x="34" y="52.666666666666671" width="360" height="190.66666666666663"/>
+                                        <rect key="frame" x="34" y="56.333333333333314" width="360" height="257.66666666666669"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uhC-lW-Vam">
                                                 <rect key="frame" x="0.0" y="0.0" width="360" height="57"/>
@@ -1389,8 +1389,25 @@
                                                     <action selector="pressedLogOut:" destination="YYs-5a-7vz" eventType="touchUpInside" id="hzO-gd-IWJ"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Mo-LU-PVe">
+                                                <rect key="frame" x="0.0" y="67.000000000000028" width="360" height="56.666666666666657"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="7Mo-LU-PVe" secondAttribute="height" multiplier="348:55" id="ds7-NW-vG8"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                                <inset key="titleEdgeInsets" minX="50" minY="0.0" maxX="15" maxY="0.0"/>
+                                                <state key="normal" backgroundImage="defEmail_button">
+                                                    <color key="titleColor" red="0.99416750669999998" green="0.62556493280000003" blue="0.51368534560000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                </state>
+                                                <variation key="heightClass=regular-widthClass=regular">
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="35"/>
+                                                </variation>
+                                                <connections>
+                                                    <action selector="changeEmail:" destination="YYs-5a-7vz" eventType="touchUpInside" id="sl3-Mn-sqx"/>
+                                                </connections>
+                                            </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hst-DH-YDy">
-                                                <rect key="frame" x="0.0" y="67" width="360" height="57"/>
+                                                <rect key="frame" x="0.0" y="133.66666666666666" width="360" height="57"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="hst-DH-YDy" secondAttribute="height" multiplier="348:55" id="pI1-Q7-nDp"/>
                                                 </constraints>
@@ -1402,9 +1419,12 @@
                                                 <variation key="heightClass=regular-widthClass=regular">
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="35"/>
                                                 </variation>
+                                                <connections>
+                                                    <action selector="pressedRate:" destination="YYs-5a-7vz" eventType="touchUpInside" id="M3I-Mv-cwR"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WDf-qn-2p1">
-                                                <rect key="frame" x="0.0" y="134" width="360" height="56.666666666666657"/>
+                                                <rect key="frame" x="0.0" y="200.66666666666666" width="360" height="56.999999999999972"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="WDf-qn-2p1" secondAttribute="height" multiplier="348:55" id="gqn-1A-UA9"/>
                                                 </constraints>
@@ -1416,10 +1436,14 @@
                                                 <variation key="heightClass=regular-widthClass=regular">
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="35"/>
                                                 </variation>
+                                                <connections>
+                                                    <action selector="pressedPremium:" destination="YYs-5a-7vz" eventType="touchUpInside" id="DKf-Lm-m8T"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="WDf-qn-2p1" firstAttribute="height" secondItem="uhC-lW-Vam" secondAttribute="height" id="4hb-36-4pw"/>
+                                            <constraint firstItem="7Mo-LU-PVe" firstAttribute="width" secondItem="7Mo-LU-PVe" secondAttribute="height" multiplier="348:55" id="txr-Ia-xr6"/>
                                             <constraint firstItem="hst-DH-YDy" firstAttribute="height" secondItem="uhC-lW-Vam" secondAttribute="height" id="xX2-qX-0mj"/>
                                         </constraints>
                                     </stackView>
@@ -1437,7 +1461,7 @@
                             <constraint firstItem="QY0-nc-seA" firstAttribute="leading" secondItem="lig-lF-Lbh" secondAttribute="leading" id="69x-Kt-HZ4"/>
                             <constraint firstItem="7WE-g3-7v1" firstAttribute="height" secondItem="mqB-Oc-PrF" secondAttribute="height" multiplier="0.169837" id="KU2-Jh-m4d"/>
                             <constraint firstAttribute="trailing" secondItem="7WE-g3-7v1" secondAttribute="trailing" id="MSe-s1-EC7"/>
-                            <constraint firstItem="QY0-nc-seA" firstAttribute="height" secondItem="mqB-Oc-PrF" secondAttribute="height" multiplier="0.32" id="fAp-Od-7eX"/>
+                            <constraint firstItem="QY0-nc-seA" firstAttribute="height" secondItem="mqB-Oc-PrF" secondAttribute="height" multiplier="0.4" id="fAp-Od-7eX"/>
                             <constraint firstItem="QY0-nc-seA" firstAttribute="trailing" secondItem="lig-lF-Lbh" secondAttribute="trailing" id="gJg-MW-WEw"/>
                             <constraint firstItem="z6c-tB-mil" firstAttribute="width" secondItem="mqB-Oc-PrF" secondAttribute="width" multiplier="0.84058" id="i69-qf-rdd"/>
                             <constraint firstItem="7WE-g3-7v1" firstAttribute="leading" secondItem="mqB-Oc-PrF" secondAttribute="leading" id="rwX-Uk-XXJ"/>
@@ -1447,6 +1471,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="wuF-bt-Aax"/>
                     <nil key="simulatedTopBarMetrics"/>
+                    <connections>
+                        <outlet property="emailButton" destination="7Mo-LU-PVe" id="imn-wj-wKA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lOO-vm-puv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="zqK-eU-oPc" userLabel="Exit" sceneMemberID="exit"/>
@@ -1575,10 +1602,13 @@
                                         </variation>
                                     </textView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="9dr-7L-1gx" userLabel="Send Stack">
-                                        <rect key="frame" x="61" y="417.66666666666663" width="306" height="101"/>
+                                        <rect key="frame" x="61" y="417.66666666666663" width="306" height="100.66666666666663"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Pp-4Q-9gR">
-                                                <rect key="frame" x="0.0" y="0.0" width="306" height="43"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="306" height="42.666666666666664"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="0Pp-4Q-9gR" secondAttribute="height" multiplier="306:43" id="BRx-LS-Gzd"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                 <state key="normal" title="Send now" backgroundImage="send_now_button">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1591,7 +1621,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZxZ-eC-g02">
-                                                <rect key="frame" x="0.0" y="58" width="306" height="43"/>
+                                                <rect key="frame" x="0.0" y="57.666666666666629" width="306" height="43"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                 <state key="normal" title="Send later" backgroundImage="send_later_button">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1991,6 +2021,7 @@
         <image name="back_arrow" width="25" height="25"/>
         <image name="chevron.left" catalog="system" width="96" height="128"/>
         <image name="chevron.right" catalog="system" width="96" height="128"/>
+        <image name="defEmail_button" width="348" height="55"/>
         <image name="google_button" width="132" height="40"/>
         <image name="history_button" width="143" height="143"/>
         <image name="logOut_button" width="348" height="55"/>
@@ -2004,8 +2035,8 @@
         <image name="premium_button" width="348" height="55"/>
         <image name="rate_button" width="348" height="55"/>
         <image name="restart_button" width="40" height="40"/>
-        <image name="send_later_button" width="250" height="43"/>
-        <image name="send_now_button" width="250" height="43"/>
+        <image name="send_later_button" width="306" height="43"/>
+        <image name="send_now_button" width="306" height="43"/>
         <image name="sent_now" width="35" height="35"/>
         <image name="settings_button" width="143" height="143"/>
         <image name="signin_background" width="414" height="478"/>

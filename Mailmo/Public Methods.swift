@@ -18,6 +18,8 @@ var hud: JGProgressHUD = {
     return hud
 }()
 
+var currentUserInfo: CurrentUser?
+
 // MARK: - Classes / Structs
 struct EmailInfo {
     var email: String
@@ -31,6 +33,17 @@ struct SendGridData {
 
 struct FirebaseData {
     var subject, body, sendAtString: String
+}
+
+struct CurrentUser {
+    var uid, name, email, prefEmail: String
+    
+    init(uid: String, dictionary: [String: Any]) {
+        self.uid = uid
+        self.name = dictionary["name"] as? String ?? "No name set"
+        self.email = dictionary["email"] as? String ?? "No email set"
+        self.prefEmail = dictionary["prefEmail"] as? String ?? "No pref set"
+    }
 }
 
 // MARK: - Methods
@@ -155,6 +168,23 @@ extension UIAlertController {
             for constraint in subView.constraints where constraint.debugDescription.contains("width == - 16") {
                 subView.removeConstraint(constraint)
             }
+        }
+    }
+}
+
+extension UIAlertController {
+    
+    func isEmailValid(_ email: String) -> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+
+        let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailPred.evaluate(with: email)
+    }
+
+    @objc func textDidChangeInAlert() {
+        if let email = textFields?[0].text,
+            let action = actions.last {
+            action.isEnabled = isEmailValid(email)
         }
     }
 }
