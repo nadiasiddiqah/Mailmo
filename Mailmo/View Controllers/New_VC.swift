@@ -178,7 +178,7 @@ class New_VC: UIViewController, SFSpeechRecognizerDelegate {
     // MARK: - General Methods
     func setupView() {
         // Check for permissions
-        requestPermission()
+        requestPermissions()
         
         // Initialize textView, savedText, timeLeft
         speechTextView.fadeTransition(0.6)
@@ -197,7 +197,7 @@ class New_VC: UIViewController, SFSpeechRecognizerDelegate {
         didPressPause = false
         
         // Intialize speechButton + tapToLabel text
-        speechOrNextButton.isEnabled = true
+//        speechOrNextButton.isEnabled = true
         speechOrNextButton.setImage(nil, for: .normal)
         tapToLabel.text = "Tap to start"
     }
@@ -279,27 +279,51 @@ class New_VC: UIViewController, SFSpeechRecognizerDelegate {
     // MARK: - Speech Recognizer Permission Methods
     
     // Request speech recognition / microphone permissions
-    func requestPermission() {
+    func requestPermissions() {
         speechOrNextButton.isEnabled = false
         speechRecognizer?.delegate = self
-    
-        // Requests + checks speech recognition authStatus
+        
+        // Requests speech recognition / microphone permissions
         SFSpeechRecognizer.requestAuthorization { [self] (authStatus) in
-            var isButtonEnabled = false
+            var isSpeechEnabled = false
+            var isMicEnabled = false
     
-            // Checks for authStatus
+            // Checks for speech recognition authStatus
             switch authStatus {
             case .authorized:
-                isButtonEnabled = true
+                isSpeechEnabled = true
             default:
-                isButtonEnabled = false
+                isSpeechEnabled = false
+            }
+            
+            // Requests + checks microphone authStatus
+            switch AVAudioSession.sharedInstance().recordPermission {
+            
+            case .undetermined:
+                AVAudioSession.sharedInstance().requestRecordPermission { (granted) in
+                    if granted {
+                        isMicEnabled = true
+                    } else {
+                        isMicEnabled = false
+                    }
+                }
+            case .denied:
+                isMicEnabled = false
+            case .granted:
+                isMicEnabled = true
+            @unknown default:
+                isMicEnabled = false
             }
      
             // Enable speakButton based on authStatus
             OperationQueue.main.addOperation {
-                self.speechOrNextButton.isEnabled = isButtonEnabled
+                if isSpeechEnabled && isMicEnabled {
+                    self.speechOrNextButton.isEnabled = true
+                } else {
+                    self.speechOrNextButton.isEnabled = false
+                }
                 
-                if isButtonEnabled == false {
+                if isSpeechEnabled == false {
                     handlePermissionFailed()
                 }
             }
@@ -525,7 +549,7 @@ class New_VC: UIViewController, SFSpeechRecognizerDelegate {
             UIApplication.shared.open(settingsURL)
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) in
-            self.performSegue(withIdentifier: "backToMain", sender: nil)
+            self.performSegue(withIdentifier: "unwindFromNewToMain", sender: nil)
         }))
         present(alert, animated: true, completion: nil)
     }
