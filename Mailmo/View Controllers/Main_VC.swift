@@ -85,12 +85,12 @@ class Main_VC: UIViewController {
     }
 
     // MARK: - Action Methods
-    @IBAction func signOut(_ sender: Any) {
+    @IBAction func pressedLogOut(_ sender: Any) {
         let alert = UIAlertController(title: nil,
                                       message: "Are you sure you want to log out?",
                                       preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Log Out", style: .destructive, handler: { (_) in
-            self.signOut()
+            self.logOut()
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alert.pruneNegativeWidthConstraints()
@@ -135,24 +135,38 @@ class Main_VC: UIViewController {
     
     func retrieveUserInfo() {
         if let uid = self.firebaseAuth.currentUser?.uid {
-            // Retrieve user's name for msgBody
-            self.firebaseData.child("users/\(uid)/name").observeSingleEvent(of: .value) { (snapshot) in
-                if let name = snapshot.value as? String {
+            // Retrieve userSnapshot
+            self.firebaseData.child("users/\(uid)").observeSingleEvent(of: .value) { (snapshot) in
+                guard let userSnapshot = snapshot.value as? [String: Any] else { return }
+                print(userSnapshot)
+
+                // Save userSnapshot to currentUserInfo
+                currentUserInfo = CurrentUser(uid: uid, dictionary: userSnapshot)
+
+                // Retrieve user's name for welcomeText
+                if let user = currentUserInfo {
                     if self.userExists {
-                        if name == "No name set" {
-                            self.welcomeText = "Welcome back!"
-                        } else {
-                            self.welcomeText = "Welcome back, \(name)!"
-                        }
+                        self.welcomeTextPicker(checkName: user.name,
+                                               genericText: "Welcome back!",
+                                               nameText: "Welcome back, \(user.name)!")
                     } else {
-                        if name == "No name set" {
-                            self.welcomeText = "Welcome to Mailmo!"
-                        } else {
-                            self.welcomeText = "Welcome to Mailmo, \(name)!"
-                        }
+                        self.welcomeTextPicker(checkName: user.name,
+                                               genericText: "Welcome to Mailmo!",
+                                               nameText: "Welcome to Mailmo, \(user.name)!")
                     }
                 }
+                
+            } withCancel: { (error) in
+                print(error)
             }
+        }
+    }
+    
+    func welcomeTextPicker(checkName: String, genericText: String, nameText: String) {
+        if checkName != "No name set" {
+            self.welcomeText = nameText
+        } else {
+            self.welcomeText = genericText
         }
     }
     
@@ -175,7 +189,7 @@ class Main_VC: UIViewController {
         }
     }
     
-    func signOut() {
+    func logOut() {
         // Show HUD
         hudView(show: true)
         
@@ -189,7 +203,7 @@ class Main_VC: UIViewController {
         } catch {
             dismissHud(hud, text: "Error", detailText: error.localizedDescription, delay: 1)
         }
-        print("Signed out")
+        print("Logged out")
     }
     
 }
