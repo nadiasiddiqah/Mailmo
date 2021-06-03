@@ -11,6 +11,7 @@ import Foundation
 import FoundationNetworking
 #endif
 import Firebase
+import SwiftMessages
 
 class New_Edit_VC: UIViewController {
     
@@ -22,15 +23,19 @@ class New_Edit_VC: UIViewController {
     
     // MARK: - Variables
     var mailmoSubject = String()
-    var to = EmailInfo(email: "nadiasiddiqah@gmail.com", name: "Nadia")
-    var from = EmailInfo(email: "nadiasiddiqah@gmail.com", name: "Mailmo")
+    var to: EmailInfo?
+    var from = EmailInfo(email: "sender@em.mailmo.app", name: "Mailmo")
     let today = Date()
+    
+    var name = String()
+    var email = String()
+    var prefEmail = String()
     
     let firebaseAuth = Auth.auth()
     let firebaseData = Database.database().reference()
     
     // Body passed from New_VC
-    var email = SendGridData(subject: "", body: "", sendAt: nil)
+    var emailContent = SendGridData(subject: "", body: "", sendAt: nil)
     
     // Semaphore object (to ensure one thread accesses SendGrid at a time)
     var semaphore = DispatchSemaphore(value: 0)
@@ -40,20 +45,146 @@ class New_Edit_VC: UIViewController {
     // MARK: - View Controller Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupEditView()
+        setupView()
     }
     
     // MARK: - General Methods
-    func setupEditView() {
+    
+    func setupView() {
         // Delegates for textField + textView
         subjectTextField.delegate = self
         editTextView.delegate = self
         
+        // Retrieve currentUserInfo
+        retrieveUserInfo()
+            
+        // Check if critical currentUserInfo is missing
+        checkIfUserInfoIsMissing()
+            
         // Initialize editTextView from var passed from New_VC
-        editTextView.text = email.body
+        editTextView.text = emailContent.body
         
         // Swipe/tap on screen to hide keyboard
         gesturesToHideKeyboard()
+    }
+    
+    func retrieveUserInfo() {
+        if let user = currentUserInfo {
+            name = user.name
+            email = user.email
+            prefEmail = user.prefEmail
+        }
+    }
+    
+    func checkIfUserInfoIsMissing() {
+        if name == n_a && email == n_a && prefEmail == n_a ||
+            name == n_a && (email == n_a || prefEmail == n_a) ||
+            name == n_a && (email != n_a && prefEmail != n_a) ||
+            name != n_a && email == n_a && prefEmail == n_a {
+            
+            print("Missing info", currentUserInfo!)
+            sendButton(enable: false)
+            
+            DispatchQueue.main.async {
+                self.showMissingUserInfoAlert()
+            }
+        } else {
+            // Check if prefEmail is set
+            print("No missing info", currentUserInfo!)
+            
+            sendButton(enable: true)
+            
+            if prefEmail != n_a {
+                to = EmailInfo(email: prefEmail, name: name)
+            } else {
+                to = EmailInfo(email: email, name: name)
+            }
+        }
+    }
+    
+    func showMissingUserInfoAlert() {
+        let alert = UIAlertController(title: "Missing user information:",
+                                      message: "Please fill in missing fields to continue",
+                                      preferredStyle: .alert)
+        
+        // nameField text field
+        alert.addTextField { (nameField) in
+            nameField.placeholder = "Enter name"
+            if self.name == n_a {
+                nameField.addTarget(alert, action: #selector(alert.bothFieldsDidChangeInAlert), for: .editingChanged)
+            } else {
+                nameField.text = self.name
+            }
+        }
+        
+        // emailField text field
+        alert.addTextField { (emailField) in
+            emailField.placeholder = "Enter email"
+            if self.prefEmail != n_a {
+                emailField.text = self.prefEmail
+            } else if self.email != n_a {
+                emailField.text = self.email
+            } else {
+                emailField.addTarget(alert, action: #selector(alert.bothFieldsDidChangeInAlert), for: .editingChanged)
+            }
+        }
+        
+        // Cancel button action
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) in
+            self.showCancelAlert()
+        }))
+        
+        // Save button action
+        let saveAction = UIAlertAction(title: "Save", style: .default, handler: { (_) in
+            guard let name = alert.textFields?[0].text,
+                  let prefEmail = alert.textFields?[1].text else { return }
+            
+            let cleanedName = name.trimmingCharacters(in: .whitespacesAndNewlines)
+            let cleanedPrefEmail = prefEmail.trimmingCharacters(in: .whitespacesAndNewlines)
+            currentUserInfo?.name = cleanedName
+            currentUserInfo?.prefEmail = cleanedPrefEmail
+            self.updateData()
+            self.sendButton(enable: true)
+        })
+        saveAction.isEnabled = false
+        alert.addAction(saveAction)
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func showCancelAlert() {
+        let alert = UIAlertController(title: "Please update missing user info to send email",
+                                      message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Update Info", style: .default, handler: { (_) in
+            self.showMissingUserInfoAlert()
+        }))
+        alert.addAction(UIAlertAction(title: "Back to Main", style: .cancel, handler: { (_) in
+            self.performSegue(withIdentifier: "unwindFromEditToMain", sender: nil)
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func updateData() {
+        
+        // Post data to Firebase
+        if let uid = firebaseAuth.currentUser?.uid {
+            print("Successfully posted data to Firebase")
+            if let user = currentUserInfo {
+                firebaseData.child("users/\(uid)").setValue(["name": user.name,
+                                                             "email": user.email,
+                                                             "prefEmail": user.prefEmail])
+            }
+        }
+    }
+    
+    func sendButton(enable: Bool) {
+        if enable {
+            sendNowButton.isEnabled = true
+            sendLaterButton.isEnabled = true
+        } else {
+            sendNowButton.isEnabled = false
+            sendLaterButton.isEnabled = false
+        }
     }
     
     // MARK: - Send Methods
@@ -80,7 +211,7 @@ class New_Edit_VC: UIViewController {
            _ = segue.destination as! SendNow_VC
         } else if segue.identifier == "showSendLaterPicker" {
             let controller = segue.destination as! SendLaterPicker_VC
-            controller.to = to
+            controller.to = to!
             controller.from = from
             controller.email.subject = subjectTextField.text ?? ""
             controller.email.body = editTextView.text
@@ -115,11 +246,11 @@ class New_Edit_VC: UIViewController {
         
         if let subject = subjectTextField.text {
             if subject == "" {
-                email.subject = "New Mailmo \(defaultSubject.string(from: today))"
+                emailContent.subject = "New Mailmo \(defaultSubject.string(from: today))"
             } else {
-                email.subject = subject
+                emailContent.subject = subject
             }
-            print(email.subject)
+            print(emailContent.subject)
         }
     }
     
@@ -129,8 +260,8 @@ class New_Edit_VC: UIViewController {
         // Post data to Firebase
         if let uid = firebaseAuth.currentUser?.uid {
             print("Successfully posted data to Firebase")
-            firebaseData.child("posts/\(uid)").child(calculateSendTime()).setValue(["subject": email.subject,
-                                                                                    "body": email.body,
+            firebaseData.child("posts/\(uid)").child(calculateSendTime()).setValue(["subject": emailContent.subject,
+                                                                                    "body": emailContent.body,
                                                                                     "sendAtString": sendTime])
         }
     }
@@ -138,9 +269,9 @@ class New_Edit_VC: UIViewController {
     func sendEmail() {
         // Email String Object (w/ personalization parameters)
         checkforEmptySubject()
-        let emailString = emailFormatter(to: to.email, toName: to.name ?? "",
-                                         from: from.email, fromName: from.name ?? "",
-                                         subject: email.subject, body: email.body,
+        let emailString = emailFormatter(to: to!.email, toName: to!.name!,
+                                         from: from.email, fromName: from.name!,
+                                         subject: emailContent.subject, body: emailContent.body,
                                          sendAt: nil)
         
         // Convert Email String -> UTF8 Data Object
@@ -225,7 +356,7 @@ extension New_Edit_VC: UITextViewDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {
         if let enteredText = editTextView.text {
             let textWithBreaks = enteredText.replacingOccurrences(of: "\n", with: "<br>")
-            email.body = textWithBreaks
+            emailContent.body = textWithBreaks
         }
         view.endEditing(true)
     }

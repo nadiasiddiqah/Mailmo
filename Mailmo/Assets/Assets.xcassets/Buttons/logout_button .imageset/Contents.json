@@ -1,6 +1,7 @@
 {
   "images" : [
     {
+      "filename" : "logout_button 4.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -9,7 +10,6 @@
       "scale" : "2x"
     },
     {
-      "filename" : "logOut_button_3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

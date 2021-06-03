@@ -10,8 +10,11 @@ import UIKit
 import Lottie
 import JGProgressHUD
 import SwiftMessages
+import CryptoKit
 
 // MARK: - Variables
+let n_a = "Not Set"
+
 var hud: JGProgressHUD = {
     let hud = JGProgressHUD(style: .extraLight)
     hud.interactionType = .blockAllTouches
@@ -40,9 +43,9 @@ struct CurrentUser {
     
     init(uid: String, dictionary: [String: Any]) {
         self.uid = uid
-        self.name = dictionary["name"] as? String ?? "No name set"
-        self.email = dictionary["email"] as? String ?? "No email set"
-        self.prefEmail = dictionary["prefEmail"] as? String ?? "No pref set"
+        self.name = dictionary["name"] as? String ?? n_a
+        self.email = dictionary["email"] as? String ?? n_a
+        self.prefEmail = dictionary["prefEmail"] as? String ?? n_a
     }
 }
 
@@ -65,6 +68,13 @@ func isEmailValid(_ email: String) -> Bool {
 
     let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
     return emailPred.evaluate(with: email)
+}
+
+func isNameValid(_ name: String) -> Bool {
+    guard name.count >= 2, name.count < 18 else { return false }
+
+    let predicateTest = NSPredicate(format: "SELF MATCHES %@", "^(([^ ]?)(^[a-zA-Z].*[a-zA-Z]$)([^ ]?))$")
+    return predicateTest.evaluate(with: name)
 }
 
 func loadAnimation(fileName: String, loadingView: UIView) -> AnimationView {
@@ -149,6 +159,50 @@ func dismissHud(_ hud: JGProgressHUD, text: String, detailText: String, delay: T
     hud.dismiss(afterDelay: delay, animated: true)
 }
 
+
+// MARK: - Generate Nonce for Apple Auth
+func randomNonceString(length: Int = 32) -> String {
+  precondition(length > 0)
+  let charset: Array<Character> =
+      Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
+  var result = ""
+  var remainingLength = length
+
+  while remainingLength > 0 {
+    let randoms: [UInt8] = (0 ..< 16).map { _ in
+      var random: UInt8 = 0
+      let errorCode = SecRandomCopyBytes(kSecRandomDefault, 1, &random)
+      if errorCode != errSecSuccess {
+        fatalError("Unable to generate nonce. SecRandomCopyBytes failed with OSStatus \(errorCode)")
+      }
+      return random
+    }
+
+    randoms.forEach { random in
+      if remainingLength == 0 {
+        return
+      }
+
+      if random < charset.count {
+        result.append(charset[Int(random)])
+        remainingLength -= 1
+      }
+    }
+  }
+
+  return result
+}
+
+func sha256(_ input: String) -> String {
+  let inputData = Data(input.utf8)
+  let hashedData = SHA256.hash(data: inputData)
+  let hashString = hashedData.compactMap {
+    return String(format: "%02x", $0)
+  }.joined()
+
+  return hashString
+}
+
 // MARK: - UIView Extensions
 extension UIView {
     func fadeTransition(_ duration: CFTimeInterval) {
@@ -181,10 +235,37 @@ extension UIAlertController {
         return emailPred.evaluate(with: email)
     }
 
-    @objc func textDidChangeInAlert() {
+    @objc func fieldDidChangeInAlert() {
         if let email = textFields?[0].text,
             let action = actions.last {
             action.isEnabled = isEmailValid(email)
         }
+    }
+    
+    @objc func bothFieldsDidChangeInAlert() {
+        if let name = textFields?[0].text,
+           let email = textFields?[1].text,
+            let action = actions.last {
+            
+            action.isEnabled = isEmailValid(email) && isNameValid(name)
+        }
+    }
+}
+
+fileprivate let minimumHitArea = CGSize(width: 100, height: 100)
+
+extension UIButton {
+    open override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        // if the button is hidden/disabled/transparent it can't be hit
+        if self.isHidden || !self.isUserInteractionEnabled || self.alpha < 0.01 { return nil }
+
+        // increase the hit frame to be at least as big as `minimumHitArea`
+        let buttonSize = self.bounds.size
+        let widthToAdd = max(minimumHitArea.width - buttonSize.width, 0)
+        let heightToAdd = max(minimumHitArea.height - buttonSize.height, 0)
+        let largerFrame = self.bounds.insetBy(dx: -widthToAdd / 2, dy: -heightToAdd / 2)
+
+        // perform hit test on larger frame
+        return (largerFrame.contains(point)) ? self : nil
     }
 }

@@ -12,6 +12,9 @@ class SendLaterPicker_VC: UIViewController {
     
     // MARK: - Outlets
     @IBOutlet weak var datePicker: UIDatePicker!
+    @IBOutlet weak var selectDateAndTimeButton: UIButton!
+    @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var nextButton: UIButton!
     
     // MARK: - Variables
     var initialDate = Date()
@@ -32,13 +35,39 @@ class SendLaterPicker_VC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupView()
+    }
+    
+    // MARK: - Navigation
+    @IBAction func nextButton(_ sender: Any) {
+        nextAction()
+    }
+    
+    @IBAction func selectDateAndTimeButton(_ sender: Any) {
+        nextAction()
+    }
+    
+    // MARK: - Action Methods
+    
+    @IBAction func updateDatePicker(_ sender: UIDatePicker) {
+        let currentDate = Date()
+        if currentDate > minDate {
+            setupDatePicker(startDate: currentDate)
+            sender.setDate(minDate, animated: true)
+        }
+    }
+    
+    // MARK: - Helper Methods
+    func setupView() {
+        selectDateAndTimeButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        
         datePicker.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         
         setupDatePicker(startDate: initialDate)
     }
     
-    // MARK: - Navigation
-    @IBAction func nextButton(_ sender: Any) {
+    func nextAction() {
         hudView(show: true, text: "Scheduling to send later...")
         calculateSendAt()
         sendEmail()
@@ -53,17 +82,6 @@ class SendLaterPicker_VC: UIViewController {
         }
     }
     
-    // MARK: - Action Methods
-    
-    @IBAction func updateDatePicker(_ sender: UIDatePicker) {
-        let currentDate = Date()
-        if currentDate > minDate {
-            setupDatePicker(startDate: currentDate)
-            sender.setDate(minDate, animated: true)
-        }
-    }
-    
-    // MARK: - Helper Methods
     func hudView(show: Bool, text: String) {
         if show {
             hud.textLabel.text = text
