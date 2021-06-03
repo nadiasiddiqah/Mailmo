@@ -100,7 +100,7 @@ class New_VC: UIViewController, SFSpeechRecognizerDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showNewEdit" {
             let controller = segue.destination as! New_Edit_VC
-            controller.email.body = speechTextView.text
+            controller.emailContent.body = speechTextView.text
         } 
     }
     

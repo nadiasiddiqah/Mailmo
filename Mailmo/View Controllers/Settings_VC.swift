@@ -52,7 +52,7 @@ class Settings_VC: UIViewController {
                                           preferredStyle: .alert)
             alert.addTextField { (textField) in
                 textField.placeholder = "Enter new email"
-                textField.addTarget(alert, action: #selector(alert.textDidChangeInAlert), for: .editingChanged)
+                textField.addTarget(alert, action: #selector(alert.fieldDidChangeInAlert), for: .editingChanged)
             }
             
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -85,9 +85,28 @@ class Settings_VC: UIViewController {
     }
     
     @IBAction func pressedRate(_ sender: Any) {
+        let alert = UIAlertController(title: "Enjoying Mailmo?",
+                                      message: "Your app store review helps spread the word and improve the Mailmo app!",
+                                      preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Rate Now", style: .default, handler: { (_) in
+            self.pressedRateNow()
+        }))
+        alert.addAction(UIAlertAction(title: "Send Feedback", style: .default, handler: { (_) in
+            self.pressedRateNow()
+        }))
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
     
-    @IBAction func pressedPremium(_ sender: Any) {
+    func pressedRateNow() {
+        guard let scene = view.window?.windowScene else { return }
+        AppStoreReviewManager.requestReviewIfAppropriate(scene: scene)
+        
+        // In case user already has reviewed app, direct them to app store link
+        guard let writeReviewURL = URL(string: "https://apps.apple.com/app/id1570551825?action=write-review") else {
+            fatalError("Expected a valid URL")
+        }
+        UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
     }
     
     // MARK: - View Methods
@@ -101,7 +120,7 @@ class Settings_VC: UIViewController {
         emailButton.titleLabel?.numberOfLines = 1
         emailButton.titleLabel?.adjustsFontSizeToFitWidth = true
         if let user = currentUserInfo {
-            if user.prefEmail == "No pref set" {
+            if user.prefEmail == n_a {
                 emailButton.setTitle("\(user.email)", for: .normal)
             } else {
                 emailButton.setTitle("\(user.prefEmail)", for: .normal)

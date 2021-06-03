@@ -8,6 +8,7 @@
 import UIKit
 import Lottie
 import GoogleSignIn
+import AuthenticationServices
 import Firebase
 import JGProgressHUD
 import SwiftMessages
@@ -115,29 +116,35 @@ class Main_VC: UIViewController {
     func setupView() {
         welcomeAnimation.play(fromProgress: 0, toProgress: 1, loopMode: .loop, completion: nil)
         
-        retrieveUserInfo()
-        
-        if showStatusPopup {
-            showStatusPopup = false
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-                self.statusPopup()
+        DispatchQueue.main.async {
+            self.retrieveUserInfo()
+            
+            if self.showStatusPopup {
+                self.showStatusPopup = false
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                    self.statusPopup()
+                }
+            }
+            
+            if self.showWelcomePopup {
+                self.showWelcomePopup = false
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                    self.welcomePopup()
+                }
             }
         }
-        
-        
-        if showWelcomePopup {
-            showWelcomePopup = false
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-                self.welcomePopup()
-            }
-        }
+
     }
     
     func retrieveUserInfo() {
         if let uid = self.firebaseAuth.currentUser?.uid {
+            print("retrieveUser: \(uid)")
             // Retrieve userSnapshot
             self.firebaseData.child("users/\(uid)").observeSingleEvent(of: .value) { (snapshot) in
-                guard let userSnapshot = snapshot.value as? [String: Any] else { return }
+                guard let userSnapshot = snapshot.value as? [String: Any] else {
+                    print("no snapshot")
+                    return
+                }
                 print(userSnapshot)
 
                 // Save userSnapshot to currentUserInfo
@@ -145,6 +152,7 @@ class Main_VC: UIViewController {
 
                 // Retrieve user's name for welcomeText
                 if let user = currentUserInfo {
+                    print(user.name)
                     if self.userExists {
                         self.welcomeTextPicker(checkName: user.name,
                                                genericText: "Welcome back!",
@@ -163,10 +171,10 @@ class Main_VC: UIViewController {
     }
     
     func welcomeTextPicker(checkName: String, genericText: String, nameText: String) {
-        if checkName != "No name set" {
-            self.welcomeText = nameText
-        } else {
+        if checkName == n_a || checkName == "" {
             self.welcomeText = genericText
+        } else {
+            self.welcomeText = nameText
         }
     }
     
@@ -195,7 +203,7 @@ class Main_VC: UIViewController {
         
         // Sign user out of Google
         GIDSignIn.sharedInstance()?.signOut()
-        
+       
         // Sign user out of Firebase
         do {
             try firebaseAuth.signOut()
