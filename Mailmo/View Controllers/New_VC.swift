@@ -12,6 +12,8 @@ import TinyConstraints
 import Speech
 import AVFoundation
 import Accelerate
+//import Gifu
+//import TinyConstraints
 
 class New_VC: UIViewController, SFSpeechRecognizerDelegate {
     
@@ -57,12 +59,10 @@ class New_VC: UIViewController, SFSpeechRecognizerDelegate {
         loadAnimation(fileName: "recordAnimation", loadingView: recordView)
     }()
     
-//    lazy var nextButtonGif: GIFImageView = {
-//        let gif = GIFImageView(frame: CGRect(x: speakButton.frame.origin.x, y: speakButton.frame.origin.y,
-//                                             width: speakButton.frame.width, height: speakButton.frame.height))
-//        gif.frame = speakButton.frame
+//    lazy var nextAnimation: GIFImageView = {
+//        let gif = GIFImageView()
 //        gif.contentMode = .scaleAspectFit
-//        gif.animate(withGIFNamed: "nextButton")
+//        gif.animate(withGIFNamed: "nextAnimation")
 //
 //        return gif
 //    }()
@@ -99,7 +99,7 @@ class New_VC: UIViewController, SFSpeechRecognizerDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showNewEdit" {
-            let controller = segue.destination as! New_Edit_VC
+            let controller = segue.destination as! Edit_VC
             controller.emailContent.body = speechTextView.text
         } 
     }
@@ -197,7 +197,6 @@ class New_VC: UIViewController, SFSpeechRecognizerDelegate {
         didPressPause = false
         
         // Intialize speechButton + tapToLabel text
-//        speechOrNextButton.isEnabled = true
         speechOrNextButton.setImage(nil, for: .normal)
         tapToLabel.text = "Tap to start"
     }
@@ -268,8 +267,15 @@ class New_VC: UIViewController, SFSpeechRecognizerDelegate {
             print("unsuccessful speech-to-text")
         } else {
             // If tapped + speech-to-text is successful -> show nextButton
-            recordAnimation.isHidden = true
-//            speakButton.addSubview(nextButtonGif)
+//            recordAnimation.isHidden = true
+//
+//            speechOrNextButton.addSubview(nextAnimation)
+//            nextAnimation.centerInSuperview()
+//            nextAnimation.width(speechOrNextButton.frame.width)
+//            nextAnimation.height(speechOrNextButton.frame.height)
+//            nextAnimation.leftToSuperview()
+//            nextAnimation.rightToSuperview()
+            
             speechOrNextButton.setImage(UIImage(named: "next_button"), for: .normal)
             tapToLabel.text = "Next Step"
             print("successful speech-to-text")

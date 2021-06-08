@@ -19,7 +19,7 @@ class SendNow_VC: UIViewController {
             self.performSegue(withIdentifier: "backToMain_Now", sender: self)
         }
 
-        return  gif
+        return gif
     }()
 
     // MARK: - View Controller Methods

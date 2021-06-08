@@ -19,13 +19,21 @@ class Main_VC: UIViewController {
     let firebaseAuth = Auth.auth()
     let firebaseData = Database.database().reference()
     
-    var userExists = Bool()
-    var showWelcomePopup = Bool()
     var welcomeText = String()
     
     var showStatusPopup = Bool()
     var iconText = String()
     var statusText = String()
+    
+    // Passed from SignIn_VC
+    var userExists = Bool()
+    var showWelcomePopup = Bool()
+    var showTutorialView = Bool()
+    
+    @IBOutlet weak var tutorialView: UIView!
+    @IBOutlet weak var shadowView: UIView!
+    @IBOutlet weak var startedButton: UIButton!
+    @IBOutlet weak var bottomButtons: UIView!
     
     // MARK: - Outlet Variables
     @IBOutlet weak var welcomeIcon: UIImageView!
@@ -44,14 +52,13 @@ class Main_VC: UIViewController {
     // MARK: - View Controller Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        checkIfUserIsSignedIn()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = true
         welcomeAnimation.play(fromProgress: 0, toProgress: 1, loopMode: .loop, completion: nil)
+        checkIfUserIsSignedIn()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -98,6 +105,12 @@ class Main_VC: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
+    @IBAction func pressedStarted(_ sender: Any) {
+        tutorialPopup(show: false)
+        bottomButtons.isUserInteractionEnabled = true
+        setupView()
+    }
+    
     // MARK: - Methods
     // Checks if user can stay signed in
     func checkIfUserIsSignedIn() {
@@ -109,7 +122,75 @@ class Main_VC: UIViewController {
                 self.present(navController, animated: true, completion: nil)
             }
         } else {
-            setupView()
+            tutorialView.alpha = 0.0
+            shadowView.alpha = 0.0
+            retrieveUserInfo()
+        }
+    }
+    
+    func retrieveUserInfo() {
+        if let uid = self.firebaseAuth.currentUser?.uid {
+            print("retrieveUser: \(uid)")
+            
+//            DispatchQueue.main.async {
+//                self.firebaseData.child("posts/\(uid)").observeSingleEvent(of: .value) { (snapshot) in
+//                    
+//                    if snapshot.value is NSNull {
+//                        self.showTutorialView = true
+//                    } else {
+//                        
+//                    }
+//                }
+//            }
+            
+            // Retrieve userSnapshot
+            self.firebaseData.child("users/\(uid)").observeSingleEvent(of: .value) { (snapshot) in
+                guard let userSnapshot = snapshot.value as? [String: Any] else {
+                    print("no snapshot")
+                    return
+                }
+                print("snapshot: \(userSnapshot)")
+
+                // Save userSnapshot to currentUserInfo
+                currentUserInfo = CurrentUser(uid: uid, dictionary: userSnapshot)
+
+                // Retrieve user's name for welcomeText
+                if let user = currentUserInfo {
+                    if self.userExists {
+                        self.welcomeTextPicker(checkName: user.name,
+                                               genericText: "Welcome back!",
+                                               nameText: "Welcome back, \(user.name)!")
+                    } else {
+                        self.welcomeTextPicker(checkName: user.name,
+                                               genericText: "Welcome to Mailmo!",
+                                               nameText: "Welcome to Mailmo, \(user.name)!")
+                    }
+                }
+                
+                self.setupView()
+                
+            } withCancel: { (error) in
+                print(error)
+            }
+        }
+    }
+
+    
+    func tutorialPopup(show: Bool) {
+        if show {
+            UIView.animate(withDuration: 1, delay: 0,
+                           options: .curveEaseIn,
+                           animations: {
+                            self.tutorialView.alpha = 1.0
+                            self.shadowView.alpha = 1.0
+                           }, completion: nil)
+        } else {
+            UIView.animate(withDuration: 1, delay: 0,
+                           options: .curveEaseOut,
+                           animations: {
+                            self.tutorialView.alpha = 0.0
+                            self.shadowView.alpha = 0.0
+                           }, completion: nil)
         }
     }
     
@@ -117,7 +198,16 @@ class Main_VC: UIViewController {
         welcomeAnimation.play(fromProgress: 0, toProgress: 1, loopMode: .loop, completion: nil)
         
         DispatchQueue.main.async {
-            self.retrieveUserInfo()
+            
+            if self.showTutorialView {
+                self.showTutorialView = false
+                self.welcomeAnimation.pause()
+                self.bottomButtons.isUserInteractionEnabled = false
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                    self.tutorialPopup(show: true)
+                }
+            }
             
             if self.showStatusPopup {
                 self.showStatusPopup = false
@@ -131,41 +221,6 @@ class Main_VC: UIViewController {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
                     self.welcomePopup()
                 }
-            }
-        }
-
-    }
-    
-    func retrieveUserInfo() {
-        if let uid = self.firebaseAuth.currentUser?.uid {
-            print("retrieveUser: \(uid)")
-            // Retrieve userSnapshot
-            self.firebaseData.child("users/\(uid)").observeSingleEvent(of: .value) { (snapshot) in
-                guard let userSnapshot = snapshot.value as? [String: Any] else {
-                    print("no snapshot")
-                    return
-                }
-                print(userSnapshot)
-
-                // Save userSnapshot to currentUserInfo
-                currentUserInfo = CurrentUser(uid: uid, dictionary: userSnapshot)
-
-                // Retrieve user's name for welcomeText
-                if let user = currentUserInfo {
-                    print(user.name)
-                    if self.userExists {
-                        self.welcomeTextPicker(checkName: user.name,
-                                               genericText: "Welcome back!",
-                                               nameText: "Welcome back, \(user.name)!")
-                    } else {
-                        self.welcomeTextPicker(checkName: user.name,
-                                               genericText: "Welcome to Mailmo!",
-                                               nameText: "Welcome to Mailmo, \(user.name)!")
-                    }
-                }
-                
-            } withCancel: { (error) in
-                print(error)
             }
         }
     }
