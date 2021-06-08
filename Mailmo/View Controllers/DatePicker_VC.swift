@@ -1,5 +1,5 @@
 //
-//  SendLaterPicker_VC.swift
+//  DatePicker_VC.swift
 //  Mailmo
 //
 //  Created by Nadia Siddiqah on 3/23/21.
@@ -8,11 +8,13 @@
 import UIKit
 import Firebase
 
-class SendLaterPicker_VC: UIViewController {
+class DatePicker_VC: UIViewController {
     
     // MARK: - Outlets
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var selectDateAndTimeButton: UIButton!
+    @IBOutlet weak var datePickerView: UIView!
+    @IBOutlet weak var buttonView: UIView!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var nextButton: UIButton!
     
@@ -25,7 +27,7 @@ class SendLaterPicker_VC: UIViewController {
     var semaphore = DispatchSemaphore(value: 0)
     var sendSuccess = false
     
-    // Passed from New_Edit_VC
+    // Passed from Edit_VC
     var to = EmailInfo(email: "", name: "")
     var from = EmailInfo(email: "", name: "")
     var email = SendGridData(subject: "", body: "", sendAt: 0)
@@ -62,7 +64,8 @@ class SendLaterPicker_VC: UIViewController {
     func setupView() {
         selectDateAndTimeButton.titleLabel?.adjustsFontSizeToFitWidth = true
         
-        datePicker.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        datePickerView.roundCorners([.topLeft, .topRight], radius: 10)
+        buttonView.roundCorners([.bottomLeft, .bottomRight], radius: 10)
         
         setupDatePicker(startDate: initialDate)
     }

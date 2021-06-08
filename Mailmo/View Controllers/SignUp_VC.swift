@@ -22,6 +22,7 @@ class SignUp_VC: UIViewController {
     var confirmPass = String()
     
     var userExists = false
+    var showTutorialView = false
     
     fileprivate var currentNonce: String?
     
@@ -53,6 +54,7 @@ class SignUp_VC: UIViewController {
         let mainVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "MainVC") as! Main_VC
         mainVC.userExists = userExists
         mainVC.showWelcomePopup = true
+        mainVC.showTutorialView = showTutorialView
         view.window?.rootViewController = mainVC
         view.window?.makeKeyAndVisible()
     }
@@ -222,9 +224,12 @@ class SignUp_VC: UIViewController {
                 if snapshot.exists() {
                     // If user exists
                     self.userExists = true
+                    self.showTutorialView = false
+        
                 } else {
                     // If user doesn't exist, create new user
                     self.userExists = false
+                    self.showTutorialView = true
                     self.firebaseData.child("users/\(uid)").setValue(["name": name,
                                                                       "email": email])
                 }
@@ -272,8 +277,8 @@ extension SignUp_VC: GIDSignInDelegate {
                                                              accessToken: googleAuth.accessToken)
         
         // Retrive google user's email + name
-        let email = user.profile.email ?? "No email set"
-        name = user.profile.givenName ?? "No name set"
+        let email = user.profile.email ?? "Not Set"
+        name = user.profile.givenName ?? "Not Set"
         print("Successfully authenticated with Google")
         
         // Firebase sign in with googleCredential
@@ -344,8 +349,8 @@ extension SignUp_VC: ASAuthorizationControllerDelegate {
         }
 
         // Retrieve apple user's email + name
-        let email = appleCredential.email ?? "No email set"
-        let name = appleCredential.fullName?.givenName ?? "No name set"
+        let email = appleCredential.email ?? "Not Set"
+        let name = appleCredential.fullName?.givenName ?? "Not Set"
 
         print("Successfully authenticated with Apple")
 

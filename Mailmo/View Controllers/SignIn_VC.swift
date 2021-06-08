@@ -24,6 +24,7 @@ class SignIn_VC: UIViewController {
     var email = String()
     var pass = String()
     var userExists = false
+    var showTutorialView = false
     
     fileprivate var currentNonce: String?
     
@@ -73,6 +74,7 @@ class SignIn_VC: UIViewController {
         let mainVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "MainVC") as! Main_VC
         mainVC.userExists = userExists
         mainVC.showWelcomePopup = true
+        mainVC.showTutorialView = showTutorialView
         self.view.window?.rootViewController = mainVC
         self.view.window?.makeKeyAndVisible()
     }
@@ -245,16 +247,15 @@ class SignIn_VC: UIViewController {
                 if snapshot.exists() {
                     // If user exists
                     self.userExists = true
+                    self.showTutorialView = false
                 } else {
                     // If user doesn't exist, create new user
                     self.userExists = false
-                    self.firebaseData.child("users/\(uid)").setValue(["name": name,
-                                                                      "email": email])
+                    self.showTutorialView = true
                 }
 
                 // Transition to main screen
                 DispatchQueue.main.async {
-                    print(self.userExists)
                     self.transitionToMain()
                 }
             }
@@ -293,8 +294,8 @@ extension SignIn_VC: GIDSignInDelegate {
                                                              accessToken: googleAuth.accessToken)
         
         // Retrieve google user's email + name
-        let email = user.profile.email ?? "No email set"
-        let name = user.profile.givenName ?? "No name set"
+        let email = user.profile.email ?? "Not Set"
+        let name = user.profile.givenName ?? "Not Set"
         print("Successfully authenticated with Google")
         
         // Firebase sign in with googleCredential
@@ -365,8 +366,8 @@ extension SignIn_VC: ASAuthorizationControllerDelegate {
         }
 
         // Retrieve apple user's email + name
-        let email = appleCredential.email ?? "No email set"
-        let name = appleCredential.fullName?.givenName ?? "No name set"
+        let email = appleCredential.email ?? "Not Set"
+        let name = appleCredential.fullName?.givenName ?? "Not Set"
 
         print("Successfully authenticated with Apple")
 

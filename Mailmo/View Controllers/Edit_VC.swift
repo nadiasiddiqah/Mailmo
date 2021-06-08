@@ -1,5 +1,5 @@
 //
-//  New_Edit_VC.swift
+//  Edit_VC.swift
 //  Mailmo
 //
 //  Created by Nadia Siddiqah on 3/23/21.
@@ -13,8 +13,8 @@ import FoundationNetworking
 import Firebase
 import SwiftMessages
 
-class New_Edit_VC: UIViewController {
-    
+class Edit_VC: UIViewController {
+
     // MARK: - Outlets
     @IBOutlet weak var subjectTextField: UITextField!
     @IBOutlet weak var editTextView: UITextView!
@@ -210,7 +210,7 @@ class New_Edit_VC: UIViewController {
         if segue.identifier == "showSendNow" {
            _ = segue.destination as! SendNow_VC
         } else if segue.identifier == "showSendLaterPicker" {
-            let controller = segue.destination as! SendLaterPicker_VC
+            let controller = segue.destination as! DatePicker_VC
             controller.to = to!
             controller.from = from
             controller.email.subject = subjectTextField.text ?? ""
@@ -326,7 +326,7 @@ class New_Edit_VC: UIViewController {
 }
 
 // MARK: - Text Field Delegate Methods
-extension New_Edit_VC: UITextFieldDelegate {
+extension Edit_VC: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         if let enteredSubject = subjectTextField.text {
             mailmoSubject = enteredSubject
@@ -342,7 +342,7 @@ extension New_Edit_VC: UITextFieldDelegate {
 }
 
 // MARK: - Text View Delegate Methods
-extension New_Edit_VC: UITextViewDelegate {
+extension Edit_VC: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         if textView.text == "" {
             sendNowButton.isEnabled = false
