@@ -46,6 +46,11 @@ class History_VC: UIViewController {
         if segue.identifier == "showHistoryDetail" {
             let controller = segue.destination as! HistoryDetails_VC
             controller.rowDetail = selectedRow
+        } else if segue.identifier == "unwindFromHistoryToMain" {
+            let controller = segue.destination as! Main_VC
+            if controller.noOfEmails == 1 {
+                controller.stopHistoryPulse = true
+            }
         }
     }
     

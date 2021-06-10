@@ -45,6 +45,7 @@ class Edit_VC: UIViewController {
     // MARK: - View Controller Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupView()
     }
     
