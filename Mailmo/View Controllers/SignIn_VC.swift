@@ -75,6 +75,7 @@ class SignIn_VC: UIViewController {
         mainVC.userExists = userExists
         mainVC.showWelcomePopup = true
         mainVC.showTutorialView = showTutorialView
+    
         self.view.window?.rootViewController = mainVC
         self.view.window?.makeKeyAndVisible()
     }
@@ -252,6 +253,8 @@ class SignIn_VC: UIViewController {
                     // If user doesn't exist, create new user
                     self.userExists = false
                     self.showTutorialView = true
+                    self.firebaseData.child("users/\(uid)").setValue(["name": name,
+                                                                      "email": email])
                 }
 
                 // Transition to main screen

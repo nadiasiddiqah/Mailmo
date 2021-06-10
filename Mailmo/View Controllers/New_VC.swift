@@ -101,7 +101,10 @@ class New_VC: UIViewController, SFSpeechRecognizerDelegate {
         if segue.identifier == "showNewEdit" {
             let controller = segue.destination as! Edit_VC
             controller.emailContent.body = speechTextView.text
-        } 
+        } else if segue.identifier == "unwindFromNewToMain" {
+            let controller = segue.destination as! Main_VC
+            controller.showPulsingButton = false
+        }
     }
     
     // MARK: - Action Methods
