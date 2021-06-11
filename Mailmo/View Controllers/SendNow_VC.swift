@@ -8,10 +8,15 @@
 import UIKit
 import Gifu
 import TinyConstraints
+import Firebase
 
 class SendNow_VC: UIViewController {
     
-    // MARK: - Lazy Variables
+    // MARK: - Variables
+    let firebaseAuth = Auth.auth()
+    let firebaseData = Database.database().reference()
+    var databaseHandler: DatabaseHandle?
+    
     lazy var sendNowAnimation: GIFImageView = {
         let gif = GIFImageView()
         
@@ -19,7 +24,7 @@ class SendNow_VC: UIViewController {
             self.performSegue(withIdentifier: "backToMain_Now", sender: self)
         }
 
-        return  gif
+        return gif
     }()
 
     // MARK: - View Controller Methods

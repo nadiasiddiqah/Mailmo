@@ -8,6 +8,7 @@
 import UIKit
 import Firebase
 import GoogleSignIn
+import AuthenticationServices
 
 class SignUp_VC: UIViewController {
     
@@ -21,6 +22,9 @@ class SignUp_VC: UIViewController {
     var confirmPass = String()
     
     var userExists = false
+    var showTutorialView = false
+    
+    fileprivate var currentNonce: String?
     
     // MARK: - Outlets
     @IBOutlet weak var nameField: UITextField!
@@ -38,24 +42,26 @@ class SignUp_VC: UIViewController {
     
     // MARK: - Navigation
     @IBAction func backButton(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
+        navigationController?.popToRootViewController(animated: true)
     }
     
     func transitionToMain() {
         // Dismiss HUD
-        hud.dismiss(animated: true)
+        Utils.hud.dismiss(animated: true)
         dismiss(animated: true, completion: nil)
         
         // Set new rootVC as MainVC (when user logs in)
         let mainVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "MainVC") as! Main_VC
         mainVC.userExists = userExists
         mainVC.showWelcomePopup = true
+        mainVC.showTutorialView = showTutorialView
+        
         view.window?.rootViewController = mainVC
         view.window?.makeKeyAndVisible()
     }
     
     @IBAction func backToLogin(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
+        navigationController?.popToRootViewController(animated: true)
     }
     
     // MARK: - Action Methods
@@ -75,24 +81,27 @@ class SignUp_VC: UIViewController {
             hudView(show: true, text: "Creating new account...")
             
             // Create new user
-            firebaseAuth.createUser(withEmail: email, password: pass) { (result, error) in
+            firebaseAuth.createUser(withEmail: email, password: pass) { [weak self] (result, error) in
+                
+                guard let strongSelf = self else { return }
+                
                 if error != nil {
                     // Failed to create user
-                    dismissHud(hud, text: "Error", detailText: "Failed to create new user", delay: 0.5)
+                    Utils.dismissHud(Utils.hud, text: "Error", detailText: "Failed to create new user", delay: 0.5)
                     return
                 }
                 
                 // Created user successfully
                 if let uid = result?.user.uid {
                     print("Successfully created new user")
-                    self.userExists = false
-                    self.errorHandler("", isHidden: true)
+                    strongSelf.userExists = false
+                    strongSelf.errorHandler("", isHidden: true)
                     
-                    self.firebaseData.child("users/\(uid)").setValue(["name": self.name.capitalized,
-                                                                      "email": self.email])
+                    strongSelf.firebaseData.child("users/\(uid)").setValue(["name": strongSelf.name.capitalized,
+                                                                            "email": strongSelf.email])
                     // Transition to main screen
                     DispatchQueue.main.async {
-                        self.transitionToMain()
+                        strongSelf.transitionToMain()
                     }
                 }
         
@@ -102,6 +111,24 @@ class SignUp_VC: UIViewController {
     }
     
     @IBAction func signUpWithApple(_ sender: Any) {
+        
+        // Show HUD view
+        hudView(show: true, text: "Authenticating with Apple...")
+        
+        // Generate nonce
+        let nonce = Utils.randomNonceString()
+        currentNonce = nonce
+    
+        // Create apple auth request
+        let appleAuthRequest = ASAuthorizationAppleIDProvider().createRequest()
+        appleAuthRequest.requestedScopes = [.fullName, .email]
+        appleAuthRequest.nonce = Utils.sha256(nonce)
+    
+        // Present apple auth controller
+        let authController = ASAuthorizationController(authorizationRequests: [appleAuthRequest])
+        authController.delegate = self
+        authController.presentationContextProvider = self
+        authController.performRequests()
     }
     
     @IBAction func signUpWithGoogle(_ sender: Any) {
@@ -131,13 +158,13 @@ class SignUp_VC: UIViewController {
     
     func hudView(show: Bool, text: String) {
         if show {
-            hud.textLabel.text = text
-            hud.detailTextLabel.text = nil
-            hud.show(in: view, animated: true)
+            Utils.hud.textLabel.text = text
+            Utils.hud.detailTextLabel.text = nil
+            Utils.hud.show(in: view, animated: true)
         } else {
-            hud.textLabel.text = text
-            hud.detailTextLabel.text = nil
-            hud.dismiss(animated: true)
+            Utils.hud.textLabel.text = text
+            Utils.hud.detailTextLabel.text = nil
+            Utils.hud.dismiss(animated: true)
             dismiss(animated: true, completion: nil)
         }
     }
@@ -165,13 +192,13 @@ class SignUp_VC: UIViewController {
         }
         
         // Check if email is valid
-        if !isEmailValid(email) {
+        if !Utils.isEmailValid(email) {
             // Email is not valid
             return "Invalid email address."
         }
         
         // Check if password is secure
-        if !isPasswordValid(pass) {
+        if !Utils.isPasswordValid(pass) {
             // Password isn't secure enough
             return "Password requires 8+ characters, a special character and a number."
         }
@@ -194,6 +221,34 @@ class SignUp_VC: UIViewController {
         }
     }
     
+    func checkIfUserExistsInFirebase(name: String, email: String) {
+        print("name: \(name), email: \(email)")
+        if let uid = self.firebaseAuth.currentUser?.uid {
+            self.firebaseData.child("users/\(uid)").observeSingleEvent(of: .value) { [weak self] (snapshot) in
+                
+                guard let strongSelf = self else { return }
+                
+                if snapshot.exists() {
+                    // If user exists
+                    strongSelf.userExists = true
+                    strongSelf.showTutorialView = false
+        
+                } else {
+                    // If user doesn't exist, create new user
+                    strongSelf.userExists = false
+                    strongSelf.showTutorialView = true
+                    strongSelf.firebaseData.child("users/\(uid)").setValue(["name": name,
+                                                                      "email": email])
+                }
+
+                // Transition to main screen
+                DispatchQueue.main.async {
+                    strongSelf.transitionToMain()
+                }
+            }
+        }
+    }
+    
     // MARK: - Error Handler Methods
     func errorHandler(_ message: String, isHidden: Bool) {
         errorLabel.text = message
@@ -211,16 +266,16 @@ extension SignUp_VC: GIDSignInDelegate {
         
         // Check for google sign in error
         if let error = error {
-            dismissHud(hud, text: "Error", detailText: error.localizedDescription, delay: 0.5)
+            Utils.dismissHud(Utils.hud, text: "Error", detailText: error.localizedDescription, delay: 0.5)
             return
         }
         
         // Sign in Google user with firebase
-        signIntoFirebase(user: user)
+        signIntoFirebaseViaGoogle(user: user)
         
     }
         
-    fileprivate func signIntoFirebase(user: GIDGoogleUser!) {
+    fileprivate func signIntoFirebaseViaGoogle(user: GIDGoogleUser!) {
         
         // Check for user's googleAuth and googleCredential
         guard let googleAuth = user.authentication else { return }
@@ -228,38 +283,24 @@ extension SignUp_VC: GIDSignInDelegate {
                                                              accessToken: googleAuth.accessToken)
         
         // Retrive google user's email + name
-        let email = user.profile.email ?? "No email set"
-        name = user.profile.givenName ?? "No name set"
+        let email = user.profile.email ?? "Not Set"
+        name = user.profile.givenName ?? "Not Set"
         print("Successfully authenticated with Google")
         
         // Firebase sign in with googleCredential
-        firebaseAuth.signIn(with: googleCredential) { (result, error) in
+        firebaseAuth.signIn(with: googleCredential) { [weak self] (result, error) in
+            
+            guard let strongSelf = self else { return }
         
             // Check for firebase sign in error
             if error != nil {
-                dismissHud(hud, text: "Error", detailText: "Failed to create a Firebase user with Google", delay: 1)
+                Utils.dismissHud(Utils.hud, text: "Error", detailText: "Failed to create a Firebase user with Google", delay: 1)
                 return
             }
+            print("Successfully authenticated with Firebase")
             
             // Check if user exists
-            if let uid = self.firebaseAuth.currentUser?.uid {
-                self.firebaseData.child("users/\(uid)").observeSingleEvent(of: .value) { (snapshot) in
-                    if snapshot.exists() {
-                        // If user exists
-                        self.userExists = true
-                    } else {
-                        // If user doesn't exist, create new user
-                        self.userExists = false
-                        self.firebaseData.child("users/\(uid)").setValue(["name": self.name,
-                                                                          "email": email])
-                    }
-                    // Transition to main screen
-                    DispatchQueue.main.async {
-                        self.transitionToMain()
-                    }
-                }
-            }
-            
+            strongSelf.checkIfUserExistsInFirebase(name: strongSelf.name, email: email)
         }
     }
         
@@ -268,4 +309,90 @@ extension SignUp_VC: GIDSignInDelegate {
               withError error: Error!) {
         print("User has disconnected")
     }
+}
+
+extension SignUp_VC: ASAuthorizationControllerDelegate {
+    
+    // Handle apple authorization error
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        
+        guard let error = error as? ASAuthorizationError else { return }
+
+        switch error.code {
+        case .canceled:
+            Utils.dismissHud(Utils.hud, text: "Error", detailText: "Apple authorization cancelled", delay: 0.5)
+        case .invalidResponse:
+            Utils.dismissHud(Utils.hud, text: "Error", detailText: "Apple authorization invalid", delay: 0.5)
+        case .failed:
+            Utils.dismissHud(Utils.hud, text: "Error", detailText: "Apple authorization failed", delay: 0.5)
+        default:
+            Utils.dismissHud(Utils.hud, text: "Error", detailText: "Apple authorization error", delay: 0.5)
+        }
+    }
+    
+    // Handle apple authorization screen
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+
+        if let appleCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
+
+            signIntoFirebaseViaApple(appleCredential: appleCredential)
+        }
+    }
+    
+    fileprivate func signIntoFirebaseViaApple(appleCredential: ASAuthorizationAppleIDCredential) {
+
+        guard let nonce = currentNonce else {
+            fatalError("Invalid state: A login callback was received, but no login request was sent.")
+        }
+
+        guard let idToken = appleCredential.identityToken else {
+            print("Unable to fetch identity token")
+            return
+        }
+
+        guard let idTokenString = String(data: idToken, encoding: .utf8) else {
+            print("Unable to serialize token from data", idToken.debugDescription)
+            return
+        }
+
+        // Retrieve apple user's email + name
+        let email = appleCredential.email ?? "Not Set"
+        let name = appleCredential.fullName?.givenName ?? "Not Set"
+
+        print("Successfully authenticated with Apple")
+
+        // Initialize Firebase credential with apple idTokenString
+        let firebaseCredential = OAuthProvider.credential(withProviderID: "apple.com",
+                                                          idToken: idTokenString,
+                                                          rawNonce: nonce)
+
+        // Firebase sign in
+        firebaseAuth.signIn(with: firebaseCredential) { [weak self] (result, error) in
+            guard let strongSelf = self else { return }
+            
+            // Check for firebase sign in error
+            if error != nil {
+                Utils.dismissHud(Utils.hud, text: "Error", detailText: "Failed to create a Firebase user with Apple", delay: 0.5)
+                return
+            }
+            print("Successfully authenticated with Firebase")
+            
+            // Check if user exists
+            DispatchQueue.main.async {
+                strongSelf.checkIfUserExistsInFirebase(name: name, email: email)
+            }
+
+        }
+
+    }
+    
+}
+
+extension SignUp_VC: ASAuthorizationControllerPresentationContextProviding {
+    
+    // Present apple auth in current view window
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return view.window!
+    }
+    
 }

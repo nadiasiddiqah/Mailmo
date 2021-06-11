@@ -1,12 +1,10 @@
 {
   "images" : [
     {
-      "filename" : "tapButton_1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "tapButton_2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },

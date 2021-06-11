@@ -35,7 +35,6 @@ class History_VC: UIViewController {
     
     // MARK: - Navigation Methods
     @IBAction func unwindFromNewToHistory(_ unwindSegue: UIStoryboardSegue) {
-        print("go back to main")
         navigationController?.popViewController(animated: true)
     }
     
@@ -46,6 +45,11 @@ class History_VC: UIViewController {
         if segue.identifier == "showHistoryDetail" {
             let controller = segue.destination as! HistoryDetails_VC
             controller.rowDetail = selectedRow
+        } else if segue.identifier == "unwindFromHistoryToMain" {
+            let controller = segue.destination as! Main_VC
+            if controller.noOfEmails == 1 {
+                controller.stopHistoryPulse = true
+            }
         }
     }
     
@@ -55,31 +59,35 @@ class History_VC: UIViewController {
     func checkIfDataExists() {
         if let uid = firebaseAuth.currentUser?.uid {
             userID = uid
-            databaseHandler = firebaseData.child("posts/\(uid)").observe(.value, with: { (snapshot) in
+            databaseHandler = firebaseData.child("posts/\(uid)").observe(.value, with: { [weak self] (snapshot) in
+                guard let strongSelf = self else { return }
+                
                 guard snapshot.exists() else {
                     DispatchQueue.main.async {
-                        self.noMailmoHistory()
+                        strongSelf.noMailmoHistory()
                     }
                     return
                 }
-                self.fetchData()
+                strongSelf.fetchData()
             })
         }
     }
     
     func fetchData() {
-        databaseHandler = firebaseData.child("posts/\(userID)").observe(.childAdded, with: { (snapshot) in
+        databaseHandler = firebaseData.child("posts/\(userID)").observe(.childAdded, with: { [weak self] (snapshot) in
+            guard let strongSelf = self else { return }
+            
             // If snapshot exists, append childSnapshot to allEmails
             if let subject = snapshot.childSnapshot(forPath: "subject").value as? String,
                let body = snapshot.childSnapshot(forPath: "body").value as? String,
                let sendAtString = snapshot.childSnapshot(forPath: "sendAtString").value as? String {
-                self.allEmails.append(FirebaseData(subject: subject, body: body, sendAtString: sendAtString))
+                strongSelf.allEmails.append(FirebaseData(subject: subject, body: body, sendAtString: sendAtString))
             }
 
             // Sort emails, show table view, and start refeshing
-            self.sortEmails()
-            self.showTableView()
-            self.startRefreshing()
+            strongSelf.sortEmails()
+            strongSelf.showTableView()
+            strongSelf.startRefreshing()
         })
     }
     
@@ -91,11 +99,13 @@ class History_VC: UIViewController {
         // Show alert
         let alert = UIAlertController(title: "No Mailmo History",
                                       message: nil, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Record Mailmo", style: .default, handler: { (_) in
-            self.performSegue(withIdentifier: "showNew", sender: nil)
+        alert.addAction(UIAlertAction(title: "Record Mailmo", style: .default, handler: { [weak self] (_) in
+            guard let strongSelf = self else { return }
+            strongSelf.performSegue(withIdentifier: "showNew", sender: nil)
         }))
-        alert.addAction(UIAlertAction(title: "Back to Main", style: .cancel, handler: { (_) in
-            self.performSegue(withIdentifier: "unwindFromHistoryToMain", sender: nil)
+        alert.addAction(UIAlertAction(title: "Back to Main", style: .cancel, handler: { [weak self] (_) in
+            guard let strongSelf = self else { return }
+            strongSelf.performSegue(withIdentifier: "unwindFromHistoryToMain", sender: nil)
         }))
         present(alert, animated: true, completion: nil)
     }
@@ -109,7 +119,7 @@ class History_VC: UIViewController {
         
         for email in allEmails {
             // Convert each email's sendAtString to UTC
-            let sendAtInt = convertStringToUTC(email.sendAtString)
+            let sendAtInt = Utils.convertStringToUTC(email.sendAtString)
             
             // Compare each email's UTC vs timeNow's UTC
             if timeNow >= sendAtInt {
@@ -119,8 +129,8 @@ class History_VC: UIViewController {
             }
         }
         
-        sentEmails = sent.sorted(by: { convertStringToUTC($0.sendAtString) > convertStringToUTC($1.sendAtString) })
-        scheduledEmails = scheduled.sorted(by: { convertStringToUTC($0.sendAtString) > convertStringToUTC($1.sendAtString) })
+        sentEmails = sent.sorted(by: { Utils.convertStringToUTC($0.sendAtString) > Utils.convertStringToUTC($1.sendAtString) })
+        scheduledEmails = scheduled.sorted(by: { Utils.convertStringToUTC($0.sendAtString) > Utils.convertStringToUTC($1.sendAtString) })
     }
     
     func showTableView() {
@@ -138,7 +148,6 @@ class History_VC: UIViewController {
     }
     
     func refreshTableView() {
-        print("refreshing data")
         
         sortEmails()
         DispatchQueue.main.async {
