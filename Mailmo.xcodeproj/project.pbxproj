@@ -8,7 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		09016C742614173000B11BF0 /* New_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09016C732614173000B11BF0 /* New_VC.swift */; };
-		09016C7F2614178C00B11BF0 /* Public Methods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09016C7E2614178C00B11BF0 /* Public Methods.swift */; };
+		09016C7F2614178C00B11BF0 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09016C7E2614178C00B11BF0 /* Utils.swift */; };
+		091DD2D42672B5990074FB10 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091DD2D32672B5990074FB10 /* Extensions.swift */; };
 		0924BB012668575600F93671 /* AppStoreReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0924BB002668575600F93671 /* AppStoreReviewManager.swift */; };
 		0924BB0E2669A0D300F93671 /* sendNowAnimation.gif in Resources */ = {isa = PBXBuildFile; fileRef = 0924BB0D2669A0D100F93671 /* sendNowAnimation.gif */; };
 		0924F1002613CD1300C0E909 /* AudioVisualizerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0924F0FF2613CD1300C0E909 /* AudioVisualizerView.swift */; };
@@ -18,6 +19,10 @@
 		0935135226560422000E3EF2 /* welcomeAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 0935135126560422000E3EF2 /* welcomeAnimation.json */; };
 		093D27B32631023000C4CBCB /* HistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093D27B22631023000C4CBCB /* HistoryCell.swift */; };
 		095ABFF12642326E00031A77 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 095ABFF02642326E00031A77 /* GoogleService-Info.plist */; };
+		096EE2912672CD2800FEBCEA /* EmailInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096EE2902672CD2800FEBCEA /* EmailInfo.swift */; };
+		096EE2962672CD6C00FEBCEA /* SendGridData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096EE2952672CD6C00FEBCEA /* SendGridData.swift */; };
+		096EE29E2672CD9100FEBCEA /* FirebaseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096EE29D2672CD9100FEBCEA /* FirebaseData.swift */; };
+		096EE2A32672CDE900FEBCEA /* CurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096EE2A22672CDE900FEBCEA /* CurrentUser.swift */; };
 		09A6E2F7264221F800C67575 /* SignUp_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A6E2F6264221F600C67575 /* SignUp_VC.swift */; };
 		09A879D026560455002300E2 /* dotsAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 09A879CF26560455002300E2 /* dotsAnimation.json */; };
 		09A879D52656045F002300E2 /* recordAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 09A879D42656045F002300E2 /* recordAnimation.json */; };
@@ -30,7 +35,6 @@
 		09BA6C2C260C133B003DBFD3 /* HistoryDetails_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BA6C2B260C133B003DBFD3 /* HistoryDetails_VC.swift */; };
 		09E98D4C2605397900C4F4F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E98D4B2605397900C4F4F7 /* AppDelegate.swift */; };
 		09E98D4E2605397900C4F4F7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E98D4D2605397900C4F4F7 /* SceneDelegate.swift */; };
-		09E98D562605397900C4F4F7 /* Mailmo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 09E98D542605397900C4F4F7 /* Mailmo.xcdatamodeld */; };
 		09E98D582605397A00C4F4F7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09E98D572605397A00C4F4F7 /* Assets.xcassets */; };
 		09E98D662605397A00C4F4F7 /* MailmoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E98D652605397A00C4F4F7 /* MailmoTests.swift */; };
 		09E98D712605397A00C4F4F7 /* MailmoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E98D702605397A00C4F4F7 /* MailmoUITests.swift */; };
@@ -100,7 +104,8 @@
 
 /* Begin PBXFileReference section */
 		09016C732614173000B11BF0 /* New_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = New_VC.swift; sourceTree = "<group>"; };
-		09016C7E2614178C00B11BF0 /* Public Methods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Public Methods.swift"; sourceTree = "<group>"; };
+		09016C7E2614178C00B11BF0 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		091DD2D32672B5990074FB10 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		0924BB002668575600F93671 /* AppStoreReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreReviewManager.swift; sourceTree = "<group>"; };
 		0924BB0D2669A0D100F93671 /* sendNowAnimation.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = sendNowAnimation.gif; sourceTree = "<group>"; };
 		0924F0B02613BAD200C0E909 /* AudioKit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AudioKit.xcframework; path = ../../Downloads/AudioKit.xcframework; sourceTree = "<group>"; };
@@ -113,6 +118,10 @@
 		093D27B22631023000C4CBCB /* HistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCell.swift; sourceTree = "<group>"; };
 		095ABFF02642326E00031A77 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		095AC07F2645B45800031A77 /* SendGrid_Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = SendGrid_Config.xcconfig; sourceTree = "<group>"; };
+		096EE2902672CD2800FEBCEA /* EmailInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailInfo.swift; sourceTree = "<group>"; };
+		096EE2952672CD6C00FEBCEA /* SendGridData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendGridData.swift; sourceTree = "<group>"; };
+		096EE29D2672CD9100FEBCEA /* FirebaseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseData.swift; sourceTree = "<group>"; };
+		096EE2A22672CDE900FEBCEA /* CurrentUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUser.swift; sourceTree = "<group>"; };
 		09A6E2F6264221F600C67575 /* SignUp_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp_VC.swift; sourceTree = "<group>"; };
 		09A879CF26560455002300E2 /* dotsAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dotsAnimation.json; sourceTree = "<group>"; };
 		09A879D42656045F002300E2 /* recordAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = recordAnimation.json; sourceTree = "<group>"; };
@@ -127,7 +136,6 @@
 		09E98D482605397900C4F4F7 /* Mailmo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mailmo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09E98D4B2605397900C4F4F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		09E98D4D2605397900C4F4F7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		09E98D552605397900C4F4F7 /* Mailmo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Mailmo.xcdatamodel; sourceTree = "<group>"; };
 		09E98D572605397A00C4F4F7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		09E98D5C2605397A00C4F4F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		09E98D612605397A00C4F4F7 /* MailmoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MailmoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -217,6 +225,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		096EE2AA2672E1E100FEBCEA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				096EE2902672CD2800FEBCEA /* EmailInfo.swift */,
+				096EE2952672CD6C00FEBCEA /* SendGridData.swift */,
+				096EE29D2672CD9100FEBCEA /* FirebaseData.swift */,
+				096EE2A22672CDE900FEBCEA /* CurrentUser.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		096EE2AB2672E24900FEBCEA /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				0924F0FF2613CD1300C0E909 /* AudioVisualizerView.swift */,
+				091DD2D32672B5990074FB10 /* Extensions.swift */,
+				09016C7E2614178C00B11BF0 /* Utils.swift */,
+				093D27B22631023000C4CBCB /* HistoryCell.swift */,
+				0924BB002668575600F93671 /* AppStoreReviewManager.swift */,
+				092AA3F0266FFD660025F4E6 /* PulseAnimation.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		09E98D3F2605397900C4F4F7 = {
 			isa = PBXGroup;
 			children = (
@@ -247,16 +279,12 @@
 				09E98D4D2605397900C4F4F7 /* SceneDelegate.swift */,
 				09E98D5C2605397A00C4F4F7 /* Info.plist */,
 				095ABFF02642326E00031A77 /* GoogleService-Info.plist */,
-				09E98D542605397900C4F4F7 /* Mailmo.xcdatamodeld */,
+				095AC07F2645B45800031A77 /* SendGrid_Config.xcconfig */,
 				09E98E5B26053A9F00C4F4F7 /* Assets */,
 				09E98E3D26053A6300C4F4F7 /* Storyboards */,
+				096EE2AA2672E1E100FEBCEA /* Models */,
 				09E98E4726053A6B00C4F4F7 /* View Controllers */,
-				0924F0FF2613CD1300C0E909 /* AudioVisualizerView.swift */,
-				09016C7E2614178C00B11BF0 /* Public Methods.swift */,
-				093D27B22631023000C4CBCB /* HistoryCell.swift */,
-				095AC07F2645B45800031A77 /* SendGrid_Config.xcconfig */,
-				0924BB002668575600F93671 /* AppStoreReviewManager.swift */,
-				092AA3F0266FFD660025F4E6 /* PulseAnimation.swift */,
+				096EE2AB2672E24900FEBCEA /* Helpers */,
 			);
 			path = Mailmo;
 			sourceTree = "<group>";
@@ -753,21 +781,25 @@
 				09E98E4A26053A6B00C4F4F7 /* Main_VC.swift in Sources */,
 				09BA6C1F260AE7D9003DBFD3 /* History_VC.swift in Sources */,
 				092AA3F1266FFD660025F4E6 /* PulseAnimation.swift in Sources */,
-				09016C7F2614178C00B11BF0 /* Public Methods.swift in Sources */,
+				09016C7F2614178C00B11BF0 /* Utils.swift in Sources */,
 				09E98E4B26053A6B00C4F4F7 /* SignIn_VC.swift in Sources */,
 				09BA6C2C260C133B003DBFD3 /* HistoryDetails_VC.swift in Sources */,
+				096EE29E2672CD9100FEBCEA /* FirebaseData.swift in Sources */,
 				0924BB012668575600F93671 /* AppStoreReviewManager.swift in Sources */,
 				09016C742614173000B11BF0 /* New_VC.swift in Sources */,
+				096EE2912672CD2800FEBCEA /* EmailInfo.swift in Sources */,
 				09BA6C08260AB73E003DBFD3 /* DatePicker_VC.swift in Sources */,
 				09BA6C0D260AB74F003DBFD3 /* SendLater_VC.swift in Sources */,
 				0924F1002613CD1300C0E909 /* AudioVisualizerView.swift in Sources */,
 				09BA6BD5260A5DEA003DBFD3 /* Edit_VC.swift in Sources */,
 				09E98D4C2605397900C4F4F7 /* AppDelegate.swift in Sources */,
 				09BA6BE4260A84D8003DBFD3 /* SendNow_VC.swift in Sources */,
+				096EE2962672CD6C00FEBCEA /* SendGridData.swift in Sources */,
 				09BA6C27260C131F003DBFD3 /* Settings_VC.swift in Sources */,
+				091DD2D42672B5990074FB10 /* Extensions.swift in Sources */,
 				09A6E2F7264221F800C67575 /* SignUp_VC.swift in Sources */,
-				09E98D562605397900C4F4F7 /* Mailmo.xcdatamodeld in Sources */,
 				093D27B32631023000C4CBCB /* HistoryCell.swift in Sources */,
+				096EE2A32672CDE900FEBCEA /* CurrentUser.swift in Sources */,
 				09E98D4E2605397900C4F4F7 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1115,19 +1147,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		09E98D542605397900C4F4F7 /* Mailmo.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				09E98D552605397900C4F4F7 /* Mailmo.xcdatamodel */,
-			);
-			currentVersion = 09E98D552605397900C4F4F7 /* Mailmo.xcdatamodel */;
-			path = Mailmo.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 09E98D402605397900C4F4F7 /* Project object */;
 }

@@ -28,7 +28,7 @@ class HistoryDetails_VC: UIViewController {
     // MARK: - Helper Methods
     func setupView() {
         if let row = rowDetail {
-            let timeNow = convertDateToString(Date())
+            let timeNow = Utils.convertDateToString(Date())
             
             if timeNow >= row.sendAtString {
                 sendAtLabel.text = "Sent: \(row.sendAtString)"

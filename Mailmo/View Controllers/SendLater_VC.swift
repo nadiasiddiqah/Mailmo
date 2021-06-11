@@ -15,7 +15,7 @@ class SendLater_VC: UIViewController {
     
     // MARK: - Lazy Variables
     lazy var sendLaterAnimation: AnimationView = {
-        loadAnimation(fileName: "sendLaterAnimation", loadingView: sendLaterView)
+        Utils.loadAnimation(fileName: "sendLaterAnimation", loadingView: sendLaterView)
     }()
 
     // MARK: - View Controller Methods
@@ -48,8 +48,9 @@ class SendLater_VC: UIViewController {
     
     // MARK: - Methods
     func playAnimation() {
-        sendLaterAnimation.play(fromProgress: 0, toProgress: 0.999, loopMode: .playOnce) { _ in
-            self.performSegue(withIdentifier: "backToMain_Later", sender: nil)
+        sendLaterAnimation.play(fromProgress: 0, toProgress: 0.999, loopMode: .playOnce) { [weak self] _ in
+            guard let strongSelf = self else { return }
+            strongSelf.performSegue(withIdentifier: "backToMain_Later", sender: nil)
         }
     }
 

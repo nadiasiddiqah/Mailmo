@@ -55,7 +55,7 @@ class Main_VC: UIViewController {
 
     // MARK: - Lazy Variables
     lazy var welcomeAnimation: AnimationView = {
-        loadAnimation(fileName: "welcomeAnimation", loadingView: welcomeIcon)
+        Utils.loadAnimation(fileName: "welcomeAnimation", loadingView: welcomeIcon)
     }()
 
     lazy var hud: JGProgressHUD = {
@@ -114,8 +114,10 @@ class Main_VC: UIViewController {
         let alert = UIAlertController(title: nil,
                                       message: "Are you sure you want to log out?",
                                       preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "Log Out", style: .destructive, handler: { (_) in
-            self.logOut(dueToError: false)
+        alert.addAction(UIAlertAction(title: "Log Out", style: .destructive, handler: { [weak self] (_) in
+            guard let strongSelf = self else { return }
+            
+            strongSelf.logOut(dueToError: false)
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alert.pruneNegativeWidthConstraints()
@@ -159,23 +161,25 @@ class Main_VC: UIViewController {
         if let uid = firebaseAuth.currentUser?.uid {
             userID = uid
             
-            databaseHandler = firebaseData.child("posts/\(uid)").observe(.value, with: { (snapshot) in
+            databaseHandler = firebaseData.child("posts/\(uid)").observe(.value, with: { [weak self] (snapshot) in
+                guard let strongSelf = self else { return }
+                        
                 // Find noOfEmails
-                self.noOfEmails = Int(snapshot.childrenCount)
+                strongSelf.noOfEmails = Int(snapshot.childrenCount)
                 
-                if self.noOfEmails == 0 && self.showTutorialView == false {
+                if strongSelf.noOfEmails == 0 && strongSelf.showTutorialView == false {
                     // Show pulsing newButton + buttonHints (noOfEmails = 0)
                     UIView.animate(withDuration: 0.6) {
-                        self.showPulsingButton(button: self.newButton, color: #colorLiteral(red: 0.9423340559, green: 0.3914486766, blue: 0.2496597767, alpha: 1))
+                        strongSelf.showPulsingButton(button: strongSelf.newButton, color: #colorLiteral(red: 0.9423340559, green: 0.3914486766, blue: 0.2496597767, alpha: 1))
                         
-                        self.showViews(show: true, views: [self.startHint, self.historyHint, self.settingsHint])
+                        strongSelf.showViews(show: true, views: [strongSelf.startHint, strongSelf.historyHint, strongSelf.settingsHint])
                     }
-                } else if self.noOfEmails == 1 && self.stopHistoryPulse == false {
+                } else if strongSelf.noOfEmails == 1 && strongSelf.stopHistoryPulse == false {
                     // Show pulsing historyButton + historyInfo buttonHint (noOfEmails = 1)
                     UIView.animate(withDuration: 0.6) {
-                        self.showPulsingButton(button: self.historyButton, color: #colorLiteral(red: 0.9080473781, green: 0.3728664517, blue: 0.6483925581, alpha: 1))
+                        strongSelf.showPulsingButton(button: strongSelf.historyButton, color: #colorLiteral(red: 0.9080473781, green: 0.3728664517, blue: 0.6483925581, alpha: 1))
 
-                        self.showViews(show: true, views: [self.newHint, self.historyHint, self.settingsHint])
+                        strongSelf.showViews(show: true, views: [strongSelf.newHint, strongSelf.historyHint, strongSelf.settingsHint])
                     }
                 }
                 
@@ -200,29 +204,29 @@ class Main_VC: UIViewController {
     // Retrieve currentUserInfo
     func retrieveUserInfo() {
     
-        firebaseData.child("users/\(userID)").observeSingleEvent(of: .value) { (snapshot) in
+        firebaseData.child("users/\(userID)").observeSingleEvent(of: .value) { [weak self] (snapshot) in
+            guard let strongSelf = self else { return }
 
             // If there is no user snapshot
             guard let userSnapshot = snapshot.value as? [String: Any] else { return }
-            print("snapshot: \(userSnapshot)")
 
             // Save userSnapshot to currentUserInfo
-            currentUserInfo = CurrentUser(uid: self.userID, dictionary: userSnapshot)
+            Utils.currentUserInfo = CurrentUser(uid: strongSelf.userID, dictionary: userSnapshot)
 
             // Retrieve user's name for welcomeText
-            if let user = currentUserInfo {
-                if self.userExists {
-                    self.welcomeTextPicker(checkName: user.name,
+            if let user = Utils.currentUserInfo {
+                if strongSelf.userExists {
+                    strongSelf.welcomeTextPicker(checkName: user.name,
                                            genericText: "Welcome back!",
                                            nameText: "Welcome back, \(user.name)!")
                 } else {
-                    self.welcomeTextPicker(checkName: user.name,
+                    strongSelf.welcomeTextPicker(checkName: user.name,
                                            genericText: "Welcome to Mailmo!",
                                            nameText: "Welcome to Mailmo, \(user.name)!")
                 }
             }
 
-            self.setupPopups()
+            strongSelf.setupPopups()
 
         } withCancel: { (error) in
             print("error: \(error)")
@@ -237,7 +241,6 @@ class Main_VC: UIViewController {
 
         DispatchQueue.main.async {
 
-            print("showTutorialView: \(self.showTutorialView)")
             if self.showTutorialView {
                 self.welcomeAnimation.pause()
                 self.bottomButtons.isUserInteractionEnabled = false
@@ -304,7 +307,7 @@ class Main_VC: UIViewController {
     }
 
     func welcomeTextPicker(checkName: String, genericText: String, nameText: String) {
-        if checkName == n_a || checkName == "" {
+        if checkName == Utils.n_a || checkName == "" {
             self.welcomeText = genericText
         } else {
             self.welcomeText = nameText
@@ -312,12 +315,12 @@ class Main_VC: UIViewController {
     }
 
     func statusPopup() {
-        popupFormatter(body: statusText, iconText: iconText)
+        Utils.popupFormatter(body: statusText, iconText: iconText)
     }
 
     func welcomePopup() {
         let iconText = ["😎", "👋🏽", "🤙🏽", "🤗"].randomElement()!
-        popupFormatter(body: welcomeText, iconText: iconText)
+        Utils.popupFormatter(body: welcomeText, iconText: iconText)
     }
 
     func hudView(show: Bool, text: String) {
@@ -346,7 +349,7 @@ class Main_VC: UIViewController {
             try firebaseAuth.signOut()
             transitionToSignIn()
         } catch {
-            dismissHud(hud, text: "Error", detailText: error.localizedDescription, delay: 1)
+            Utils.dismissHud(Utils.hud, text: "Error", detailText: error.localizedDescription, delay: 1)
         }
         print("Logged out")
     }
