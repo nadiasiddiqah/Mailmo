@@ -12,6 +12,8 @@ import TinyConstraints
 import Speech
 import AVFoundation
 import Accelerate
+//import Gifu
+//import TinyConstraints
 
 class New_VC: UIViewController, SFSpeechRecognizerDelegate {
     
@@ -50,22 +52,12 @@ class New_VC: UIViewController, SFSpeechRecognizerDelegate {
     
     // MARK: - Lottie Animation Variables
     lazy var dotsAnimation: AnimationView = {
-        loadAnimation(fileName: "dotsAnimation", loadingView: dotsView)
+        Utils.loadAnimation(fileName: "dotsAnimation", loadingView: dotsView)
     }()
     
     lazy var recordAnimation: AnimationView = {
-        loadAnimation(fileName: "recordAnimation", loadingView: recordView)
+        Utils.loadAnimation(fileName: "recordAnimation", loadingView: recordView)
     }()
-    
-//    lazy var nextButtonGif: GIFImageView = {
-//        let gif = GIFImageView(frame: CGRect(x: speakButton.frame.origin.x, y: speakButton.frame.origin.y,
-//                                             width: speakButton.frame.width, height: speakButton.frame.height))
-//        gif.frame = speakButton.frame
-//        gif.contentMode = .scaleAspectFit
-//        gif.animate(withGIFNamed: "nextButton")
-//
-//        return gif
-//    }()
     
     // MARK: - View Controller Methods
     override func viewDidLoad() {
@@ -99,9 +91,12 @@ class New_VC: UIViewController, SFSpeechRecognizerDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showNewEdit" {
-            let controller = segue.destination as! New_Edit_VC
-            controller.email.body = speechTextView.text
-        } 
+            let controller = segue.destination as! Edit_VC
+            controller.emailContent.body = speechTextView.text
+        } else if segue.identifier == "unwindFromNewToMain" {
+            let controller = segue.destination as! Main_VC
+            controller.showPulsingButton = false
+        }
     }
     
     // MARK: - Action Methods
@@ -110,31 +105,21 @@ class New_VC: UIViewController, SFSpeechRecognizerDelegate {
     @IBAction func didTapSpeechOrNextButton(_ sender: UIButton) {
         if !audioEngine.isRunning && speechOrNextButton.currentImage == nil &&
             !didPressPause && speechTextView.text != noVoice {
-            // Tap to start
-            print("tap to start")
-            
-            // Start speech recognizer
+            // Tap to start speech recognizer
             showTapToFinish(showDots: true, isPaused: false)
             
             // Stop timer after 5s if no voice detected
             DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) { [self] in
                 if speechTextView.text == introText {
-                    print("voice not detected after 5s")
                     voiceNotDetected()
                 }
             }
         } else if audioEngine.isRunning && speechTextView.text != noVoice
                     && didPressPause {
-            // Tap to stop (if paused)
-            print("tap to finish")
+            // Tap to finish or stop (if paused)
             determineNextStep()
         } else if speechTextView.text == noVoice || didPressPause {
-            // Tap to retry/resume
-            if didPressPause {
-                print("tap to resume")
-            } else {
-                print("tap to retry")
-            }
+            // Tap to retry or resume
             
             // Start speech recognizer
             showTapToFinish(showDots: !didPressPause, isPaused: didPressPause)
@@ -147,13 +132,12 @@ class New_VC: UIViewController, SFSpeechRecognizerDelegate {
             }
         } else {
             // Tap to finish
-            print("tap to finish")
             determineNextStep()
         }
     }
     
+    // Tap to restart
     @IBAction func restartButton(_ sender: Any) {
-        print("tap to restart")
         speechOrNextButton.isEnabled = false
         resetNewView()
     }
@@ -178,7 +162,7 @@ class New_VC: UIViewController, SFSpeechRecognizerDelegate {
     // MARK: - General Methods
     func setupView() {
         // Check for permissions
-        requestPermission()
+        requestPermissions()
         
         // Initialize textView, savedText, timeLeft
         speechTextView.fadeTransition(0.6)
@@ -197,7 +181,6 @@ class New_VC: UIViewController, SFSpeechRecognizerDelegate {
         didPressPause = false
         
         // Intialize speechButton + tapToLabel text
-        speechOrNextButton.isEnabled = true
         speechOrNextButton.setImage(nil, for: .normal)
         tapToLabel.text = "Tap to start"
     }
@@ -265,42 +248,64 @@ class New_VC: UIViewController, SFSpeechRecognizerDelegate {
         } else if speechTextView.text == introText || speechTextView.text == noVoice {
             // If tapped + no speech-to-text -> retry
             voiceNotDetected()
-            print("unsuccessful speech-to-text")
         } else {
             // If tapped + speech-to-text is successful -> show nextButton
-            recordAnimation.isHidden = true
-//            speakButton.addSubview(nextButtonGif)
             speechOrNextButton.setImage(UIImage(named: "next_button"), for: .normal)
             tapToLabel.text = "Next Step"
-            print("successful speech-to-text")
         }
     }
   
     // MARK: - Speech Recognizer Permission Methods
     
     // Request speech recognition / microphone permissions
-    func requestPermission() {
+    func requestPermissions() {
         speechOrNextButton.isEnabled = false
         speechRecognizer?.delegate = self
+        
+        // Requests speech recognition / microphone permissions
+        SFSpeechRecognizer.requestAuthorization { [weak self] (authStatus) in
+            guard let strongSelf = self else { return }
+            
+            var isSpeechEnabled = false
+            var isMicEnabled = false
     
-        // Requests + checks speech recognition authStatus
-        SFSpeechRecognizer.requestAuthorization { [self] (authStatus) in
-            var isButtonEnabled = false
-    
-            // Checks for authStatus
+            // Checks for speech recognition authStatus
             switch authStatus {
             case .authorized:
-                isButtonEnabled = true
+                isSpeechEnabled = true
             default:
-                isButtonEnabled = false
+                isSpeechEnabled = false
+            }
+            
+            // Requests + checks microphone authStatus
+            switch AVAudioSession.sharedInstance().recordPermission {
+            
+            case .undetermined:
+                AVAudioSession.sharedInstance().requestRecordPermission { (granted) in
+                    if granted {
+                        isMicEnabled = true
+                    } else {
+                        isMicEnabled = false
+                    }
+                }
+            case .denied:
+                isMicEnabled = false
+            case .granted:
+                isMicEnabled = true
+            @unknown default:
+                isMicEnabled = false
             }
      
             // Enable speakButton based on authStatus
             OperationQueue.main.addOperation {
-                self.speechOrNextButton.isEnabled = isButtonEnabled
+                if isSpeechEnabled && isMicEnabled {
+                    strongSelf.speechOrNextButton.isEnabled = true
+                } else {
+                    strongSelf.speechOrNextButton.isEnabled = false
+                }
                 
-                if isButtonEnabled == false {
-                    handlePermissionFailed()
+                if isSpeechEnabled == false {
+                    strongSelf.handlePermissionFailed()
                 }
             }
         }
@@ -320,8 +325,8 @@ class New_VC: UIViewController, SFSpeechRecognizerDelegate {
     // MARK: - Timer Methods
     func startTimer() {
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self,
-                                           selector: #selector(updateTimer),
-                                           userInfo: nil, repeats: true)
+                                     selector: #selector(updateTimer),
+                                     userInfo: nil, repeats: true)
     }
     
     @objc func updateTimer() {
@@ -347,8 +352,8 @@ class New_VC: UIViewController, SFSpeechRecognizerDelegate {
     }
     
     // MARK: - Speech Recognizer Methods
+    
     func startSpeechRecognizer() {
-        print("start speech recognizer")
         
         // Create new speech recognition request
         recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
@@ -385,15 +390,18 @@ class New_VC: UIViewController, SFSpeechRecognizerDelegate {
         let outputFormat = inputNode.outputFormat(forBus: 0)
         
         // Install audio tap to record, monitor, and observe output of inputNode
-        inputNode.installTap(onBus: 0, bufferSize: 1024, format: outputFormat) { (buffer, _) in
-            self.recognitionRequest?.append(buffer)
+        inputNode.installTap(onBus: 0, bufferSize: 1024, format: outputFormat) { [weak self] (buffer, _) in
+            guard let strongSelf = self else { return }
+            
+            strongSelf.recognitionRequest?.append(buffer)
             
             // Configure audioView based on audio tap
             let level: Float = -50
             let length: UInt32 = 1024
             buffer.frameLength = length
             
-            let channels = UnsafeBufferPointer(start: buffer.floatChannelData, count: Int(buffer.format.channelCount))
+            let channels = UnsafeBufferPointer(start: buffer.floatChannelData,
+                                               count: Int(buffer.format.channelCount))
             var value: Float = 0
             vDSP_meamgv(channels[0], 1, &value, vDSP_Length(length))
             
@@ -407,21 +415,21 @@ class New_VC: UIViewController, SFSpeechRecognizerDelegate {
             let silent = average < level
             let ts = NSDate().timeIntervalSince1970
             
-            if ts - self.renderTs > 0.1 {
+            if ts - strongSelf.renderTs > 0.1 {
                 let floats = UnsafeBufferPointer(start: channels[0], count: Int(buffer.frameLength))
                 let frame = floats.map({ (f) -> Int in
                     return Int(f * Float(Int16.max))
                 })
                 DispatchQueue.main.async {
-                    self.renderTs = ts
-                    let len = self.audioView.waveforms.count
+                    strongSelf.renderTs = ts
+                    let len = strongSelf.audioView.waveforms.count
                     for i in 0 ..< len {
                         let idx = ((frame.count - 1) * i) / len
                         let f: Float = sqrt(1.5 * abs(Float(frame[idx])) / Float(Int16.max))
-                        self.audioView.waveforms[i] = min(49, Int(f * 50))
+                        strongSelf.audioView.waveforms[i] = min(49, Int(f * 50))
                     }
-                    self.audioView.active = !silent
-                    self.audioView.setNeedsDisplay()
+                    strongSelf.audioView.active = !silent
+                    strongSelf.audioView.setNeedsDisplay()
                 }
             }
         }
@@ -439,46 +447,44 @@ class New_VC: UIViewController, SFSpeechRecognizerDelegate {
         // Set up speech recognizer task
         recognitionRequest.shouldReportPartialResults = true
         
-        recognitionTask = speechRecognizer.recognitionTask(with: recognitionRequest, resultHandler: { [self] (result, error) in
+        recognitionTask = speechRecognizer.recognitionTask(with: recognitionRequest, resultHandler: { [weak self] (result, error) in
             
-            audioView.isHidden = false
-            dotsAnimation.isHidden = true
-            pauseButton.isEnabled = true
+            guard let strongSelf = self else { return }
+            
+            strongSelf.audioView.isHidden = false
+            strongSelf.dotsAnimation.isHidden = true
+            strongSelf.pauseButton.isEnabled = true
             
             // Check if there is results
             if let result = result {
                 let bestString = result.bestTranscription.formattedString
                 
-                if didPressPause {
+                if strongSelf.didPressPause {
                     // Pressed pause button
                     if !bestString.contains("I") {
-                        speechTextView.text = savedText + " " + bestString.lowercased()
+                        strongSelf.speechTextView.text = strongSelf.savedText + " " + bestString.lowercased()
                     }
                 } else {
                     // Pressed tap to finish button
-                    speechTextView.text = bestString
+                    strongSelf.speechTextView.text = bestString
                 }
             }
     
             // Check if there is non-nil error
             if error != nil {
                 
-                if recognitionTask != nil || didPressPause {
+                if strongSelf.recognitionTask != nil || strongSelf.didPressPause {
                     // Update savedText (for pauses)
-                    savedText = speechTextView.text
+                    strongSelf.savedText = strongSelf.speechTextView.text
                     
-                    if !didPressPause {
-                        stopSpeechRecognizer()
+                    if !strongSelf.didPressPause {
+                        strongSelf.stopSpeechRecognizer()
                     }
                 }
                 
                 // Remove audio tap + enable speechOrNextButton
                 inputNode.removeTap(onBus: 0)
-                speechOrNextButton.isEnabled = true
-                
-                print("speechTextView: \(speechTextView.text ?? "no text")")
-                print("savedText: \(savedText)")
-            
+                strongSelf.speechOrNextButton.isEnabled = true
             }
         })
     }
@@ -490,9 +496,8 @@ class New_VC: UIViewController, SFSpeechRecognizerDelegate {
         }
     }
     
+    // Stop audio for speech recognizer
     func stopSpeechRecognizer() {
-        // Stop audio for speech recognizer
-        print("stop speech recognizer")
         audioEngine.stop()
         recognitionRequest?.endAudio()
         
@@ -524,8 +529,9 @@ class New_VC: UIViewController, SFSpeechRecognizerDelegate {
             let settingsURL = URL(string: UIApplication.openSettingsURLString)!
             UIApplication.shared.open(settingsURL)
         }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) in
-            self.performSegue(withIdentifier: "backToMain", sender: nil)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { [weak self] (_) in
+            guard let strongSelf = self else { return }
+            strongSelf.performSegue(withIdentifier: "unwindFromNewToMain", sender: nil)
         }))
         present(alert, animated: true, completion: nil)
     }

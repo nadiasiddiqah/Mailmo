@@ -1,12 +1,10 @@
 {
   "images" : [
     {
-      "filename" : "newMailmo_background_1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "newMailmo_background_2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
