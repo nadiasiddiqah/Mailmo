@@ -13,11 +13,8 @@ import JGProgressHUD
 class Settings_VC: UIViewController {
     
     // MARK: - Variables
-    lazy var hud: JGProgressHUD = {
-        let hud = JGProgressHUD(style: .extraLight)
-        hud.interactionType = .blockAllTouches
-        return hud
-    }()
+    let firebaseAuth = Auth.auth()
+    let firebaseData = Database.database().reference()
     
     // MARK: - Outlets
     @IBOutlet weak var emailButton: UIButton!
@@ -57,13 +54,15 @@ class Settings_VC: UIViewController {
             
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
             
-            let saveAction = UIAlertAction(title: "Save", style: .default, handler: { (_) in
+            let saveAction = UIAlertAction(title: "Save", style: .default, handler: { [weak self] (_) in
+                guard let strongSelf = self else { return }
+                
                 guard let prefEmail = alert.textFields?[0].text else { return }
                 
                 let cleanedPrefEmail = prefEmail.trimmingCharacters(in: .whitespacesAndNewlines)
-                self.emailButton.setTitle("\(cleanedPrefEmail)", for: .normal)
-                currentUserInfo?.prefEmail = cleanedPrefEmail
-                self.postPrefEmail()
+                strongSelf.emailButton.setTitle("\(cleanedPrefEmail)", for: .normal)
+                Utils.currentUserInfo?.prefEmail = cleanedPrefEmail
+                strongSelf.postPrefEmail()
             })
             saveAction.isEnabled = false
             alert.addAction(saveAction)
@@ -77,8 +76,10 @@ class Settings_VC: UIViewController {
         let alert = UIAlertController(title: nil,
                                       message: "Are you sure you want to log out?",
                                       preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Log Out", style: .destructive, handler: { (_) in
-            self.logOut()
+        alert.addAction(UIAlertAction(title: "Log Out", style: .destructive, handler: { [weak self] (_) in
+            guard let strongSelf = self else { return }
+
+            strongSelf.logOut()
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
@@ -88,11 +89,13 @@ class Settings_VC: UIViewController {
         let alert = UIAlertController(title: "Enjoying Mailmo?",
                                       message: "Your app store review helps spread the word and improve the Mailmo app!",
                                       preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Rate Now", style: .default, handler: { (_) in
-            self.pressedRateNow()
+        alert.addAction(UIAlertAction(title: "Rate Now", style: .default, handler: { [weak self] (_) in
+            guard let strongSelf = self else { return }
+            strongSelf.pressedRateNow()
         }))
-        alert.addAction(UIAlertAction(title: "Send Feedback", style: .default, handler: { (_) in
-            self.pressedRateNow()
+        alert.addAction(UIAlertAction(title: "Send Feedback", style: .default, handler: { [weak self] (_) in
+            guard let strongSelf = self else { return }
+            strongSelf.pressedRateNow()
         }))
         alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
@@ -119,8 +122,8 @@ class Settings_VC: UIViewController {
         emailButton.titleLabel?.minimumScaleFactor = 0.5
         emailButton.titleLabel?.numberOfLines = 1
         emailButton.titleLabel?.adjustsFontSizeToFitWidth = true
-        if let user = currentUserInfo {
-            if user.prefEmail == n_a {
+        if let user = Utils.currentUserInfo {
+            if user.prefEmail == Utils.n_a {
                 emailButton.setTitle("\(user.email)", for: .normal)
             } else {
                 emailButton.setTitle("\(user.prefEmail)", for: .normal)
@@ -130,13 +133,10 @@ class Settings_VC: UIViewController {
     
     func postPrefEmail() {
         
-        let firebaseAuth = Auth.auth()
-        let firebaseData = Database.database().reference()
-        
         // Post data to Firebase
         if let uid = firebaseAuth.currentUser?.uid {
             print("Successfully posted data to Firebase")
-            if let user = currentUserInfo {
+            if let user = Utils.currentUserInfo { 
                 firebaseData.child("users/\(uid)").setValue(["name": user.name,
                                                              "email": user.email,
                                                              "prefEmail": user.prefEmail])
@@ -158,7 +158,7 @@ class Settings_VC: UIViewController {
             try Auth.auth().signOut()
             transitionToSignIn()
         } catch {
-            dismissHud(hud, text: "Error", detailText: error.localizedDescription, delay: 1)
+            Utils.dismissHud(Utils.hud, text: "Error", detailText: error.localizedDescription, delay: 1)
         }
         print("Logged out")
     }
@@ -166,11 +166,11 @@ class Settings_VC: UIViewController {
     
     func hudView(show: Bool) {
         if show {
-            hud.textLabel.text = "Logging out..."
-            hud.detailTextLabel.text = nil
-            hud.show(in: view, animated: true)
+            Utils.hud.textLabel.text = "Logging out..."
+            Utils.hud.detailTextLabel.text = nil
+            Utils.hud.show(in: view, animated: true)
         } else {
-            hud.dismiss(afterDelay: 1.5, animated: true)
+            Utils.hud.dismiss(afterDelay: 1.5, animated: true)
         }
     }
     

@@ -42,12 +42,16 @@ class SignIn_VC: UIViewController {
     }
     
     lazy var mailmoAnimation: AnimationView = {
-        loadAnimation(fileName: "mailmoIconAnimation", loadingView: mailmoIcon)
+        Utils.loadAnimation(fileName: "mailmoIconAnimation", loadingView: mailmoIcon)
     }()
     
     // MARK: - View Controller Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         // Listens for changes in auth status
         authStateListener()
@@ -67,7 +71,7 @@ class SignIn_VC: UIViewController {
     func transitionToMain() {
         print("transition to main")
         // Dismiss HUD
-        hud.dismiss(animated: true)
+        Utils.hud.dismiss(animated: true)
         dismiss(animated: true, completion: nil)
         
         // Set new rootVC as MainVC (when user logs in)
@@ -97,11 +101,13 @@ class SignIn_VC: UIViewController {
             hudView(show: true, text: "Logging in...")
     
             // Log in User
-            firebaseAuth.signIn(withEmail: email, password: pass) { (result, error) in
+            firebaseAuth.signIn(withEmail: email, password: pass) { [weak self] (result, error) in
+                
+                guard let self = self else { return }
                 
                 if error != nil {
                     // Firebase sign in error
-                    dismissHud(hud, text: "Error", detailText: "Failed to create new user", delay: 0.5)
+                    Utils.dismissHud(Utils.hud, text: "Error", detailText: "Failed to create new user", delay: 0.5)
                 } else {
                     // Sign in successful
                     self.errorHandler("", isHidden: true)
@@ -125,13 +131,13 @@ class SignIn_VC: UIViewController {
         hudView(show: true, text: "Authenticating with Apple...")
         
         // Generate nonce
-        let nonce = randomNonceString()
+        let nonce = Utils.randomNonceString()
         currentNonce = nonce
     
         // Create apple auth request
         let appleAuthRequest = ASAuthorizationAppleIDProvider().createRequest()
         appleAuthRequest.requestedScopes = [.fullName, .email]
-        appleAuthRequest.nonce = sha256(nonce)
+        appleAuthRequest.nonce = Utils.sha256(nonce)
     
         // Present apple auth controller
         let authController = ASAuthorizationController(authorizationRequests: [appleAuthRequest])
@@ -168,17 +174,19 @@ class SignIn_VC: UIViewController {
     
     func authStateListener() {
 
-        authHandler = firebaseAuth.addStateDidChangeListener({ (auth, user) in
+        authHandler = firebaseAuth.addStateDidChangeListener({ [weak self] (auth, user) in
             
-            if hud.isHidden {
-                if self.firebaseAuth.currentUser != nil {
+            guard let strongSelf = self else { return }
+            
+            if Utils.hud.isHidden {
+                if strongSelf.firebaseAuth.currentUser != nil {
                     // Transition to main screen
-                    self.userExists = true
-                    self.transitionToMain()
+                    strongSelf.userExists = true
+                    strongSelf.transitionToMain()
                 } else {
                     // Stay in sign-in screen
-                    self.userExists = false
-                    self.setupView()
+                    strongSelf.userExists = false
+                    strongSelf.setupView()
                 }
             }
 
@@ -187,21 +195,22 @@ class SignIn_VC: UIViewController {
     
     func playAnimation() {
         mailmoAnimation.animationSpeed = 0.25
-        mailmoAnimation.play(fromFrame: MailmoAnimationFrames.start.rawValue, toFrame: MailmoAnimationFrames.firing.rawValue, loopMode: .none) { _ in
-            self.mailmoAnimation.animationSpeed = 0.15
-            self.mailmoAnimation.play(fromFrame: MailmoAnimationFrames.firing.rawValue, toFrame: MailmoAnimationFrames.narrow.rawValue, loopMode: .autoReverse, completion: nil)
+        mailmoAnimation.play(fromFrame: MailmoAnimationFrames.start.rawValue, toFrame: MailmoAnimationFrames.firing.rawValue, loopMode: .none) { [weak self] _ in
+            guard let strongSelf = self else { return }
+            strongSelf.mailmoAnimation.animationSpeed = 0.15
+            strongSelf.mailmoAnimation.play(fromFrame: MailmoAnimationFrames.firing.rawValue, toFrame: MailmoAnimationFrames.narrow.rawValue, loopMode: .autoReverse, completion: nil)
         }
     }
     
     func hudView(show: Bool, text: String) {
         if show {
-            hud.textLabel.text = text
-            hud.detailTextLabel.text = nil
-            hud.show(in: view, animated: true)
+            Utils.hud.textLabel.text = text
+            Utils.hud.detailTextLabel.text = nil
+            Utils.hud.show(in: view, animated: true)
         } else {
-            hud.textLabel.text = text
-            hud.detailTextLabel.text = nil
-            hud.dismiss(animated: true)
+            Utils.hud.textLabel.text = text
+            Utils.hud.detailTextLabel.text = nil
+            Utils.hud.dismiss(animated: true)
             dismiss(animated: true, completion: nil)
         }
     }
@@ -227,13 +236,13 @@ class SignIn_VC: UIViewController {
         }
         
         // Check if email is valid
-        if !isEmailValid(email) {
+        if !Utils.isEmailValid(email) {
             // Email is not valid
             return "Invalid email address."
         }
         
         // Check if password is secure
-        if !isPasswordValid(pass) {
+        if !Utils.isPasswordValid(pass) {
             // Password isn't secure enough
             return "Password requires 8+ characters, a special character and a number."
         }
@@ -244,22 +253,25 @@ class SignIn_VC: UIViewController {
     func checkIfUserExistsInFirebase(name: String, email: String) {
         print("name: \(name), email: \(email)")
         if let uid = self.firebaseAuth.currentUser?.uid {
-            self.firebaseData.child("users/\(uid)").observeSingleEvent(of: .value) { (snapshot) in
+            self.firebaseData.child("users/\(uid)").observeSingleEvent(of: .value) { [weak self] (snapshot) in
+                
+                guard let strongSelf = self else { return }
+                
                 if snapshot.exists() {
                     // If user exists
-                    self.userExists = true
-                    self.showTutorialView = false
+                    strongSelf.userExists = true
+                    strongSelf.showTutorialView = false
                 } else {
                     // If user doesn't exist, create new user
-                    self.userExists = false
-                    self.showTutorialView = true
-                    self.firebaseData.child("users/\(uid)").setValue(["name": name,
-                                                                      "email": email])
+                    strongSelf.userExists = false
+                    strongSelf.showTutorialView = true
+                    strongSelf.firebaseData.child("users/\(uid)").setValue(["name": name,
+                                                                            "email": email])
                 }
 
                 // Transition to main screen
                 DispatchQueue.main.async {
-                    self.transitionToMain()
+                    self?.transitionToMain()
                 }
             }
         }
@@ -281,7 +293,7 @@ extension SignIn_VC: GIDSignInDelegate {
         
         // Check for google sign in error
         if let error = error {
-            dismissHud(hud, text: "Error", detailText: error.localizedDescription, delay: 0.5)
+            Utils.dismissHud(Utils.hud, text: "Error", detailText: error.localizedDescription, delay: 0.5)
             return
         }
         
@@ -302,17 +314,19 @@ extension SignIn_VC: GIDSignInDelegate {
         print("Successfully authenticated with Google")
         
         // Firebase sign in with googleCredential
-        firebaseAuth.signIn(with: googleCredential) { (result, error) in
+        firebaseAuth.signIn(with: googleCredential) { [weak self] (result, error) in
+            
+            guard let strongSelf = self else { return }
             
             // Check for firebase sign in error
             if error != nil {
-                dismissHud(hud, text: "Error", detailText: "Failed to create a Firebase user with Google", delay: 0.5)
+                Utils.dismissHud(Utils.hud, text: "Error", detailText: "Failed to create a Firebase user with Google", delay: 0.5)
                 return
             }
             print("Successfully authenticated with Firebase")
 
             // Check if user exists
-            self.checkIfUserExistsInFirebase(name: name, email: email)
+            strongSelf.checkIfUserExistsInFirebase(name: name, email: email)
             
         }
     }
@@ -333,13 +347,13 @@ extension SignIn_VC: ASAuthorizationControllerDelegate {
 
         switch error.code {
         case .canceled:
-            dismissHud(hud, text: "Error", detailText: "Apple authorization cancelled", delay: 0.5)
+            Utils.dismissHud(Utils.hud, text: "Error", detailText: "Apple authorization cancelled", delay: 0.5)
         case .invalidResponse:
-            dismissHud(hud, text: "Error", detailText: "Apple authorization invalid", delay: 0.5)
+            Utils.dismissHud(Utils.hud, text: "Error", detailText: "Apple authorization invalid", delay: 0.5)
         case .failed:
-            dismissHud(hud, text: "Error", detailText: "Apple authorization failed", delay: 0.5)
+            Utils.dismissHud(Utils.hud, text: "Error", detailText: "Apple authorization failed", delay: 0.5)
         default:
-            dismissHud(hud, text: "Error", detailText: "Apple authorization error", delay: 0.5)
+            Utils.dismissHud(Utils.hud, text: "Error", detailText: "Apple authorization error", delay: 0.5)
         }
     }
     
@@ -380,17 +394,20 @@ extension SignIn_VC: ASAuthorizationControllerDelegate {
                                                           rawNonce: nonce)
 
         // Firebase sign in
-        firebaseAuth.signIn(with: firebaseCredential) { (result, error) in
+        firebaseAuth.signIn(with: firebaseCredential) { [weak self] (result, error) in
+            
+            guard let strongSelf = self else { return }
+            
             // Check for firebase sign in error
             if error != nil {
-                dismissHud(hud, text: "Error", detailText: "Failed to create a Firebase user with Apple", delay: 0.5)
+                Utils.dismissHud(Utils.hud, text: "Error", detailText: "Failed to create a Firebase user with Apple", delay: 0.5)
                 return
             }
             print("Successfully authenticated with Firebase")
             
             // Check if user exists
             DispatchQueue.main.async {
-                self.checkIfUserExistsInFirebase(name: name, email: email)
+                strongSelf.checkIfUserExistsInFirebase(name: name, email: email)
             }
 
         }

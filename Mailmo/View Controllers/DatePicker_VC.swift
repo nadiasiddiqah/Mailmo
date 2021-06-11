@@ -77,7 +77,7 @@ class DatePicker_VC: UIViewController {
         
         if sendSuccess {
             postData()
-            dismissHud(hud, text: "Scheduling to send later...", detailText: "", delay: 0.8)
+            Utils.dismissHud(Utils.hud, text: "Scheduling to send later...", detailText: "", delay: 0.8)
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
                 self.performSegue(withIdentifier: "showSendLater", sender: nil)
@@ -87,9 +87,9 @@ class DatePicker_VC: UIViewController {
     
     func hudView(show: Bool, text: String) {
         if show {
-            hud.textLabel.text = text
-            hud.detailTextLabel.text = nil
-            hud.show(in: view, animated: true)
+            Utils.hud.textLabel.text = text
+            Utils.hud.detailTextLabel.text = nil
+            Utils.hud.show(in: view, animated: true)
         }
     }
     
@@ -111,14 +111,13 @@ class DatePicker_VC: UIViewController {
     }
     
     func postData() {
-        let sendTime = convertDateToString(datePicker.date)
+        let sendTime = Utils.convertDateToString(datePicker.date)
         
         // Post data to Firebase
         if let uid = firebaseAuth.currentUser?.uid {
-            print("Successfully posted data to Firebase")
-            firebaseData.child("posts/\(uid)").child(calculateSendTime()).setValue(["subject": email.subject,
-                                                                                    "body": email.body,
-                                                                                    "sendAtString": sendTime])
+            firebaseData.child("posts/\(uid)").child(Utils.calculateSendTime()).setValue(["subject": email.subject,
+                                                                                          "body": email.body,
+                                                                                          "sendAtString": sendTime])
         }
     }
     
@@ -130,10 +129,10 @@ class DatePicker_VC: UIViewController {
     func sendEmail() {
         // Email String Object (w/ personalization parameters)
         checkforEmptySubject()
-        let emailString = emailFormatter(to: to.email, toName: to.name ?? "",
-                                         from: from.email, fromName: from.name!,
-                                         subject: email.subject, body: email.body,
-                                         sendAt: email.sendAt)
+        let emailString = Utils.emailFormatter(to: to.email, toName: to.name ?? "",
+                                               from: from.email, fromName: from.name!,
+                                               subject: email.subject, body: email.body,
+                                               sendAt: email.sendAt)
         
         // Convert Email String -> UTF8 Data Object
         let emailData = emailString.data(using: .utf8)
@@ -157,18 +156,19 @@ class DatePicker_VC: UIViewController {
         urlRequest.httpBody = emailData
         
         // Create shared SendGrid URLSession dataTask object
-        let dataTask = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
+        let dataTask = URLSession.shared.dataTask(with: urlRequest) { [weak self] (data, response, error) in
+            guard let strongSelf = self else { return }
+            
             guard let data = data else {
                 // Show error if no data received from SendGrid + suspend semaphore
-                self.sendSuccess = false
-                print(String(describing: error))
-                self.semaphore.signal()
+                strongSelf.sendSuccess = false
+                strongSelf.semaphore.signal()
                 return
             }
             // Suspend semaphore if data is received from SendGrid
-            self.sendSuccess = true
+            strongSelf.sendSuccess = true
             print(String(data: data, encoding: .utf8)!)
-            self.semaphore.signal()
+            strongSelf.semaphore.signal()
         }
         //  Resume task (post emailData to SendGrid) + start semaphore
         dataTask.resume()
@@ -179,8 +179,9 @@ class DatePicker_VC: UIViewController {
     func handleInvalidAPI() {
         let alert = UIAlertController(title: "Error has occurred",
                                       message: "Mailmo email server is currently unavailable.", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Back to Main", style: .cancel, handler: { (_) in
-            self.performSegue(withIdentifier: "unwindFromEditToMain", sender: nil)
+        alert.addAction(UIAlertAction(title: "Back to Main", style: .cancel, handler: { [weak self] (_) in
+            guard let strongSelf = self else { return }
+            strongSelf.performSegue(withIdentifier: "unwindFromEditToMain", sender: nil)
         }))
         present(alert, animated: true, completion: nil)
     }

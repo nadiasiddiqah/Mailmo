@@ -22,6 +22,8 @@ class Edit_VC: UIViewController {
     @IBOutlet weak var sendLaterButton: UIButton!
     
     // MARK: - Variables
+    let n_a = "Not Set"
+    
     var mailmoSubject = String()
     var to: EmailInfo?
     var from = EmailInfo(email: "sender@em.mailmo.app", name: "Mailmo")
@@ -70,7 +72,7 @@ class Edit_VC: UIViewController {
     }
     
     func retrieveUserInfo() {
-        if let user = currentUserInfo {
+        if let user = Utils.currentUserInfo {
             name = user.name
             email = user.email
             prefEmail = user.prefEmail
@@ -79,11 +81,10 @@ class Edit_VC: UIViewController {
     
     func checkIfUserInfoIsMissing() {
         if name == n_a && email == n_a && prefEmail == n_a ||
-            name == n_a && (email == n_a || prefEmail == n_a) ||
-            name == n_a && (email != n_a && prefEmail != n_a) ||
-            name != n_a && email == n_a && prefEmail == n_a {
+           name == n_a && (email == n_a || prefEmail == n_a) ||
+           name == n_a && (email != n_a && prefEmail != n_a) ||
+           name != n_a && email == n_a && prefEmail == n_a {
             
-            print("Missing info", currentUserInfo!)
             sendButton(enable: false)
             
             DispatchQueue.main.async {
@@ -91,8 +92,6 @@ class Edit_VC: UIViewController {
             }
         } else {
             // Check if prefEmail is set
-            print("No missing info", currentUserInfo!)
-            
             sendButton(enable: true)
             
             if prefEmail != n_a {
@@ -109,43 +108,50 @@ class Edit_VC: UIViewController {
                                       preferredStyle: .alert)
         
         // nameField text field
-        alert.addTextField { (nameField) in
+        alert.addTextField { [weak self] (nameField) in
+            guard let strongSelf = self else { return }
+            
             nameField.placeholder = "Enter name"
-            if self.name == n_a {
+            if strongSelf.name == strongSelf.n_a {
                 nameField.addTarget(alert, action: #selector(alert.bothFieldsDidChangeInAlert), for: .editingChanged)
             } else {
-                nameField.text = self.name
+                nameField.text = strongSelf.name
             }
         }
         
         // emailField text field
-        alert.addTextField { (emailField) in
+        alert.addTextField { [weak self] (emailField) in
+            guard let strongSelf = self else { return }
+            
             emailField.placeholder = "Enter email"
-            if self.prefEmail != n_a {
-                emailField.text = self.prefEmail
-            } else if self.email != n_a {
-                emailField.text = self.email
+            if strongSelf.prefEmail != strongSelf.n_a {
+                emailField.text = strongSelf.prefEmail
+            } else if strongSelf.email != strongSelf.n_a {
+                emailField.text = strongSelf.email
             } else {
                 emailField.addTarget(alert, action: #selector(alert.bothFieldsDidChangeInAlert), for: .editingChanged)
             }
         }
         
         // Cancel button action
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) in
-            self.showCancelAlert()
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { [weak self] (_) in
+            guard let strongSelf = self else { return }
+            strongSelf.showCancelAlert()
         }))
         
         // Save button action
-        let saveAction = UIAlertAction(title: "Save", style: .default, handler: { (_) in
+        let saveAction = UIAlertAction(title: "Save", style: .default, handler: { [weak self] (_) in
+            guard let strongSelf = self else { return }
+            
             guard let name = alert.textFields?[0].text,
                   let prefEmail = alert.textFields?[1].text else { return }
             
             let cleanedName = name.trimmingCharacters(in: .whitespacesAndNewlines)
             let cleanedPrefEmail = prefEmail.trimmingCharacters(in: .whitespacesAndNewlines)
-            currentUserInfo?.name = cleanedName
-            currentUserInfo?.prefEmail = cleanedPrefEmail
-            self.updateData()
-            self.sendButton(enable: true)
+            Utils.currentUserInfo?.name = cleanedName
+            Utils.currentUserInfo?.prefEmail = cleanedPrefEmail
+            strongSelf.updateData()
+            strongSelf.sendButton(enable: true)
         })
         saveAction.isEnabled = false
         alert.addAction(saveAction)
@@ -156,11 +162,13 @@ class Edit_VC: UIViewController {
     func showCancelAlert() {
         let alert = UIAlertController(title: "Please update missing user info to send email",
                                       message: nil, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Update Info", style: .default, handler: { (_) in
-            self.showMissingUserInfoAlert()
+        alert.addAction(UIAlertAction(title: "Update Info", style: .default, handler: { [weak self] (_) in
+            guard let strongSelf = self else { return }
+            strongSelf.showMissingUserInfoAlert()
         }))
-        alert.addAction(UIAlertAction(title: "Back to Main", style: .cancel, handler: { (_) in
-            self.performSegue(withIdentifier: "unwindFromEditToMain", sender: nil)
+        alert.addAction(UIAlertAction(title: "Back to Main", style: .cancel, handler: { [weak self] (_) in
+            guard let strongSelf = self else { return }
+            strongSelf.performSegue(withIdentifier: "unwindFromEditToMain", sender: nil)
         }))
         self.present(alert, animated: true, completion: nil)
     }
@@ -170,7 +178,7 @@ class Edit_VC: UIViewController {
         // Post data to Firebase
         if let uid = firebaseAuth.currentUser?.uid {
             print("Successfully posted data to Firebase")
-            if let user = currentUserInfo {
+            if let user = Utils.currentUserInfo {
                 firebaseData.child("users/\(uid)").setValue(["name": user.name,
                                                              "email": user.email,
                                                              "prefEmail": user.prefEmail])
@@ -194,7 +202,7 @@ class Edit_VC: UIViewController {
         sendEmail()
         if sendSuccess {
             postData()
-            dismissHud(hud, text: "Preparing to send...", detailText: "", delay: 0.8)
+            Utils.dismissHud(Utils.hud, text: "Preparing to send...", detailText: "", delay: 0.8)
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
                 self.performSegue(withIdentifier: "showSendNow", sender: nil)
@@ -225,9 +233,9 @@ class Edit_VC: UIViewController {
     // MARK: - Helper Methods
     func hudView(show: Bool, text: String) {
         if show {
-            hud.textLabel.text = text
-            hud.detailTextLabel.text = nil
-            hud.show(in: view, animated: true)
+            Utils.hud.textLabel.text = text
+            Utils.hud.detailTextLabel.text = nil
+            Utils.hud.show(in: view, animated: true)
         }
     }
     
@@ -256,31 +264,31 @@ class Edit_VC: UIViewController {
     }
     
     func postData() {
-        let sendTime = convertDateToString(today)
+        let sendTime = Utils.convertDateToString(today)
         
         // Post data to Firebase
         if let uid = firebaseAuth.currentUser?.uid {
             print("Successfully posted data to Firebase")
-            firebaseData.child("posts/\(uid)").child(calculateSendTime()).setValue(["subject": emailContent.subject,
-                                                                                    "body": emailContent.body,
-                                                                                    "sendAtString": sendTime])
+            firebaseData.child("posts/\(uid)").child(Utils.calculateSendTime()).setValue(["subject": emailContent.subject,
+                                                                                          "body": emailContent.body,
+                                                                                          "sendAtString": sendTime])
         }
     }
     
     func sendEmail() {
         // Email String Object (w/ personalization parameters)
         checkforEmptySubject()
-        let emailString = emailFormatter(to: to!.email, toName: to!.name!,
-                                         from: from.email, fromName: from.name!,
-                                         subject: emailContent.subject, body: emailContent.body,
-                                         sendAt: nil)
+        let emailString = Utils.emailFormatter(to: to!.email, toName: to!.name!,
+                                               from: from.email, fromName: from.name!,
+                                               subject: emailContent.subject, body: emailContent.body,
+                                               sendAt: nil)
         
         // Convert Email String -> UTF8 Data Object
         let emailData = emailString.data(using: .utf8)
         
         // Create SendGrid urlRequest
         var urlRequest = URLRequest(url: URL(string: "https://api.sendgrid.com/v3/mail/send")!,
-                                 timeoutInterval: Double.infinity)
+                                    timeoutInterval: Double.infinity)
         // Check if sendGrid API key is broken
         guard let apiKey = Bundle.main.infoDictionary?["SendGridAPI_Key"] as? String else {
             sendSuccess = false
@@ -297,18 +305,18 @@ class Edit_VC: UIViewController {
         urlRequest.httpBody = emailData
         
         // Create shared SendGrid URLSession dataTask object
-        let dataTask = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
-            guard let data = data else {
+        let dataTask = URLSession.shared.dataTask(with: urlRequest) { [weak self] (data, response, error) in
+            guard let strongSelf = self else { return }
+            
+            guard data != nil else {
                 // Show error if no data received from SendGrid + suspend semaphore
-                self.sendSuccess = false
-                print(String(describing: error))
-                self.semaphore.signal()
+                strongSelf.sendSuccess = false
+                strongSelf.semaphore.signal()
                 return
             }
             // Suspend semaphore if data is received from SendGrid
-            self.sendSuccess = true
-            print(String(data: data, encoding: .utf8)!)
-            self.semaphore.signal()
+            strongSelf.sendSuccess = true
+            strongSelf.semaphore.signal()
         }
         // Resume task (post emailData to SendGrid) + start semaphore
         dataTask.resume()
@@ -319,8 +327,9 @@ class Edit_VC: UIViewController {
     func handleInvalidAPI() {
         let alert = UIAlertController(title: "Error has occurred",
                                       message: "Mailmo email server is currently unavailable.", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Back to Main", style: .cancel, handler: { (_) in
-            self.performSegue(withIdentifier: "unwindFromEditToMain", sender: nil)
+        alert.addAction(UIAlertAction(title: "Back to Main", style: .cancel, handler: { [weak self] (_) in
+            guard let strongSelf = self else { return }
+            strongSelf.performSegue(withIdentifier: "unwindFromEditToMain", sender: nil)
         }))
         present(alert, animated: true, completion: nil)
     }
