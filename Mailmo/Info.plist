@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>SendGridAPI_Key</key>
-	<string>$(SendGridAPI_Key)</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -39,6 +37,8 @@
 	<string>Mailmo requires access to the microphone to record voice memos.</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>Mailmo requires access to speech recongition to transcribe memos from voice to text. </string>
+	<key>SendGridAPI_Key</key>
+	<string>$(SendGridAPI_Key)</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Ubuntu-B.ttf</string>
@@ -77,8 +77,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
