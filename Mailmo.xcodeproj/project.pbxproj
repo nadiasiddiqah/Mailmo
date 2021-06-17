@@ -23,6 +23,8 @@
 		096EE2962672CD6C00FEBCEA /* SendGridData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096EE2952672CD6C00FEBCEA /* SendGridData.swift */; };
 		096EE29E2672CD9100FEBCEA /* FirebaseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096EE29D2672CD9100FEBCEA /* FirebaseData.swift */; };
 		096EE2A32672CDE900FEBCEA /* CurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096EE2A22672CDE900FEBCEA /* CurrentUser.swift */; };
+		098CABA82678195A005A54D0 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098CABA72678195A005A54D0 /* SnapshotHelper.swift */; };
+		098CABB826795BB9005A54D0 /* Snapfile in Resources */ = {isa = PBXBuildFile; fileRef = 098CABB726795BB9005A54D0 /* Snapfile */; };
 		09A6E2F7264221F800C67575 /* SignUp_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A6E2F6264221F600C67575 /* SignUp_VC.swift */; };
 		09A879D026560455002300E2 /* dotsAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 09A879CF26560455002300E2 /* dotsAnimation.json */; };
 		09A879D52656045F002300E2 /* recordAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 09A879D42656045F002300E2 /* recordAnimation.json */; };
@@ -80,9 +82,9 @@
 		09E98E4A26053A6B00C4F4F7 /* Main_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E98E4826053A6B00C4F4F7 /* Main_VC.swift */; };
 		09E98E4B26053A6B00C4F4F7 /* SignIn_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E98E4926053A6B00C4F4F7 /* SignIn_VC.swift */; };
 		09F28D07265603D300EAC5FF /* voiceAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 09F28D06265603D300EAC5FF /* voiceAnimation.json */; };
-		3CBB65EABAAD35963A1AC3D6 /* Pods_Mailmo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D0FF59A3BADA9E5F2060F55 /* Pods_Mailmo.framework */; };
-		474A6C2B269743740854BEF3 /* Pods_MailmoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12359E55CFD6BA1DF18D0FEF /* Pods_MailmoTests.framework */; };
-		E9AB2EEE0A76219C45A40A8E /* Pods_Mailmo_MailmoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6903071BCBC8E5D4F5717192 /* Pods_Mailmo_MailmoUITests.framework */; };
+		4DC62933DB0A58E4DA14FF07 /* Pods_Mailmo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F091395A489FF5836F65527 /* Pods_Mailmo.framework */; };
+		8A28394C2DAAAFB1313CD94A /* Pods_Mailmo_MailmoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5576FEC13E765AF517D37692 /* Pods_Mailmo_MailmoUITests.framework */; };
+		918AAF4A88F15CF8E2EEA639 /* Pods_MailmoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B3D3F6AD504F2DF738ADC52 /* Pods_MailmoTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -122,6 +124,8 @@
 		096EE2952672CD6C00FEBCEA /* SendGridData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendGridData.swift; sourceTree = "<group>"; };
 		096EE29D2672CD9100FEBCEA /* FirebaseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseData.swift; sourceTree = "<group>"; };
 		096EE2A22672CDE900FEBCEA /* CurrentUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUser.swift; sourceTree = "<group>"; };
+		098CABA72678195A005A54D0 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
+		098CABB726795BB9005A54D0 /* Snapfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Snapfile; sourceTree = "<group>"; };
 		09A6E2F6264221F600C67575 /* SignUp_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUp_VC.swift; sourceTree = "<group>"; };
 		09A879CF26560455002300E2 /* dotsAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dotsAnimation.json; sourceTree = "<group>"; };
 		09A879D42656045F002300E2 /* recordAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = recordAnimation.json; sourceTree = "<group>"; };
@@ -186,15 +190,15 @@
 		09E98E4826053A6B00C4F4F7 /* Main_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Main_VC.swift; sourceTree = "<group>"; };
 		09E98E4926053A6B00C4F4F7 /* SignIn_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignIn_VC.swift; sourceTree = "<group>"; };
 		09F28D06265603D300EAC5FF /* voiceAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = voiceAnimation.json; sourceTree = "<group>"; };
-		12359E55CFD6BA1DF18D0FEF /* Pods_MailmoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MailmoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		24D29AEB57FAA99D3E4A6369 /* Pods-MailmoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MailmoTests.debug.xcconfig"; path = "Target Support Files/Pods-MailmoTests/Pods-MailmoTests.debug.xcconfig"; sourceTree = "<group>"; };
-		4D0FF59A3BADA9E5F2060F55 /* Pods_Mailmo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mailmo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4FDC0EEB62AF24BF444961DB /* Pods-MailmoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MailmoTests.release.xcconfig"; path = "Target Support Files/Pods-MailmoTests/Pods-MailmoTests.release.xcconfig"; sourceTree = "<group>"; };
-		6903071BCBC8E5D4F5717192 /* Pods_Mailmo_MailmoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mailmo_MailmoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		98E715687F090D7228E54142 /* Pods-Mailmo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mailmo.release.xcconfig"; path = "Target Support Files/Pods-Mailmo/Pods-Mailmo.release.xcconfig"; sourceTree = "<group>"; };
-		D7370C9BC2ADA5073B55BA93 /* Pods-Mailmo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mailmo.debug.xcconfig"; path = "Target Support Files/Pods-Mailmo/Pods-Mailmo.debug.xcconfig"; sourceTree = "<group>"; };
-		DD1FFC4ED1737D5419C2FC7D /* Pods-Mailmo-MailmoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mailmo-MailmoUITests.debug.xcconfig"; path = "Target Support Files/Pods-Mailmo-MailmoUITests/Pods-Mailmo-MailmoUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		E3A1FAEB756C80E7F9254FEF /* Pods-Mailmo-MailmoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mailmo-MailmoUITests.release.xcconfig"; path = "Target Support Files/Pods-Mailmo-MailmoUITests/Pods-Mailmo-MailmoUITests.release.xcconfig"; sourceTree = "<group>"; };
+		0B3D3F6AD504F2DF738ADC52 /* Pods_MailmoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MailmoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F091395A489FF5836F65527 /* Pods_Mailmo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mailmo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		46794A3B96F50260FD7E2EF4 /* Pods-MailmoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MailmoTests.release.xcconfig"; path = "Target Support Files/Pods-MailmoTests/Pods-MailmoTests.release.xcconfig"; sourceTree = "<group>"; };
+		5576FEC13E765AF517D37692 /* Pods_Mailmo_MailmoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mailmo_MailmoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		97CB3758C9BBA52B4820C376 /* Pods-Mailmo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mailmo.debug.xcconfig"; path = "Target Support Files/Pods-Mailmo/Pods-Mailmo.debug.xcconfig"; sourceTree = "<group>"; };
+		9EB7E84DF6D411871338B4FC /* Pods-MailmoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MailmoTests.debug.xcconfig"; path = "Target Support Files/Pods-MailmoTests/Pods-MailmoTests.debug.xcconfig"; sourceTree = "<group>"; };
+		AB152D597CCB25578EF367AC /* Pods-Mailmo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mailmo.release.xcconfig"; path = "Target Support Files/Pods-Mailmo/Pods-Mailmo.release.xcconfig"; sourceTree = "<group>"; };
+		B0F009D7B3671F444F6FA2B4 /* Pods-Mailmo-MailmoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mailmo-MailmoUITests.release.xcconfig"; path = "Target Support Files/Pods-Mailmo-MailmoUITests/Pods-Mailmo-MailmoUITests.release.xcconfig"; sourceTree = "<group>"; };
+		CD32E553BDF1639AD557780E /* Pods-Mailmo-MailmoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mailmo-MailmoUITests.debug.xcconfig"; path = "Target Support Files/Pods-Mailmo-MailmoUITests/Pods-Mailmo-MailmoUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,7 +206,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3CBB65EABAAD35963A1AC3D6 /* Pods_Mailmo.framework in Frameworks */,
+				4DC62933DB0A58E4DA14FF07 /* Pods_Mailmo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,7 +214,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				474A6C2B269743740854BEF3 /* Pods_MailmoTests.framework in Frameworks */,
+				918AAF4A88F15CF8E2EEA639 /* Pods_MailmoTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -218,7 +222,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E9AB2EEE0A76219C45A40A8E /* Pods_Mailmo_MailmoUITests.framework in Frameworks */,
+				8A28394C2DAAAFB1313CD94A /* Pods_Mailmo_MailmoUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,8 +260,8 @@
 				09E98D642605397A00C4F4F7 /* MailmoTests */,
 				09E98D6F2605397A00C4F4F7 /* MailmoUITests */,
 				09E98D492605397900C4F4F7 /* Products */,
-				EC42162165D4EB1B36544E0D /* Pods */,
 				9A61292CDCD3C9BA69B1615B /* Frameworks */,
+				7AAB1092E4A92D79D2E11E80 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -302,6 +306,8 @@
 			isa = PBXGroup;
 			children = (
 				09E98D702605397A00C4F4F7 /* MailmoUITests.swift */,
+				098CABB726795BB9005A54D0 /* Snapfile */,
+				098CABA72678195A005A54D0 /* SnapshotHelper.swift */,
 				09E98D722605397A00C4F4F7 /* Info.plist */,
 			);
 			path = MailmoUITests;
@@ -434,29 +440,30 @@
 			path = Assets;
 			sourceTree = "<group>";
 		};
+		7AAB1092E4A92D79D2E11E80 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				97CB3758C9BBA52B4820C376 /* Pods-Mailmo.debug.xcconfig */,
+				AB152D597CCB25578EF367AC /* Pods-Mailmo.release.xcconfig */,
+				CD32E553BDF1639AD557780E /* Pods-Mailmo-MailmoUITests.debug.xcconfig */,
+				B0F009D7B3671F444F6FA2B4 /* Pods-Mailmo-MailmoUITests.release.xcconfig */,
+				9EB7E84DF6D411871338B4FC /* Pods-MailmoTests.debug.xcconfig */,
+				46794A3B96F50260FD7E2EF4 /* Pods-MailmoTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		9A61292CDCD3C9BA69B1615B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				0924F0BC2613BB6300C0E909 /* AudioKit */,
 				0924F0B02613BAD200C0E909 /* AudioKit.xcframework */,
-				4D0FF59A3BADA9E5F2060F55 /* Pods_Mailmo.framework */,
-				6903071BCBC8E5D4F5717192 /* Pods_Mailmo_MailmoUITests.framework */,
-				12359E55CFD6BA1DF18D0FEF /* Pods_MailmoTests.framework */,
+				1F091395A489FF5836F65527 /* Pods_Mailmo.framework */,
+				5576FEC13E765AF517D37692 /* Pods_Mailmo_MailmoUITests.framework */,
+				0B3D3F6AD504F2DF738ADC52 /* Pods_MailmoTests.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		EC42162165D4EB1B36544E0D /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				D7370C9BC2ADA5073B55BA93 /* Pods-Mailmo.debug.xcconfig */,
-				98E715687F090D7228E54142 /* Pods-Mailmo.release.xcconfig */,
-				DD1FFC4ED1737D5419C2FC7D /* Pods-Mailmo-MailmoUITests.debug.xcconfig */,
-				E3A1FAEB756C80E7F9254FEF /* Pods-Mailmo-MailmoUITests.release.xcconfig */,
-				24D29AEB57FAA99D3E4A6369 /* Pods-MailmoTests.debug.xcconfig */,
-				4FDC0EEB62AF24BF444961DB /* Pods-MailmoTests.release.xcconfig */,
-			);
-			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -466,12 +473,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 09E98D752605397A00C4F4F7 /* Build configuration list for PBXNativeTarget "Mailmo" */;
 			buildPhases = (
-				5F5829135B0E90E8796F4CC9 /* [CP] Check Pods Manifest.lock */,
+				164A6557DCFB2E458ADD64AD /* [CP] Check Pods Manifest.lock */,
 				09E98D442605397900C4F4F7 /* Sources */,
 				09E98D452605397900C4F4F7 /* Frameworks */,
 				09E98D462605397900C4F4F7 /* Resources */,
-				23596BEF3E6A2206DBDF618D /* [CP] Embed Pods Frameworks */,
-				544B4F88C7C5548CDC4C1F2E /* [CP] Copy Pods Resources */,
+				358622E2B091F2028EBC3218 /* [CP] Embed Pods Frameworks */,
+				111486BAB43E4D78EB739156 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -486,7 +493,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 09E98D782605397A00C4F4F7 /* Build configuration list for PBXNativeTarget "MailmoTests" */;
 			buildPhases = (
-				B36740D9DC254B0F9B48B70E /* [CP] Check Pods Manifest.lock */,
+				B44BFC9A4F5A5706AFA4BF66 /* [CP] Check Pods Manifest.lock */,
 				09E98D5D2605397A00C4F4F7 /* Sources */,
 				09E98D5E2605397A00C4F4F7 /* Frameworks */,
 				09E98D5F2605397A00C4F4F7 /* Resources */,
@@ -505,12 +512,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 09E98D7B2605397A00C4F4F7 /* Build configuration list for PBXNativeTarget "MailmoUITests" */;
 			buildPhases = (
-				59B75C94FA20C29249B4CA11 /* [CP] Check Pods Manifest.lock */,
+				9BB8384806F8D0262EFAFBB8 /* [CP] Check Pods Manifest.lock */,
 				09E98D682605397A00C4F4F7 /* Sources */,
 				09E98D692605397A00C4F4F7 /* Frameworks */,
 				09E98D6A2605397A00C4F4F7 /* Resources */,
-				8E675E524B00AF2E0D00AE8E /* [CP] Embed Pods Frameworks */,
-				92664DE29E7783AD08268B87 /* [CP] Copy Pods Resources */,
+				434B472EB176DE192545CE24 /* [CP] Embed Pods Frameworks */,
+				171703C7B70BD7754338944B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -631,30 +638,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				098CABB826795BB9005A54D0 /* Snapfile in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		23596BEF3E6A2206DBDF618D /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Mailmo/Pods-Mailmo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Mailmo/Pods-Mailmo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Mailmo/Pods-Mailmo-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		544B4F88C7C5548CDC4C1F2E /* [CP] Copy Pods Resources */ = {
+		111486BAB43E4D78EB739156 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -671,29 +662,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Mailmo/Pods-Mailmo-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		59B75C94FA20C29249B4CA11 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Mailmo-MailmoUITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		5F5829135B0E90E8796F4CC9 /* [CP] Check Pods Manifest.lock */ = {
+		164A6557DCFB2E458ADD64AD /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -715,24 +684,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		8E675E524B00AF2E0D00AE8E /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Mailmo-MailmoUITests/Pods-Mailmo-MailmoUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Mailmo-MailmoUITests/Pods-Mailmo-MailmoUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Mailmo-MailmoUITests/Pods-Mailmo-MailmoUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		92664DE29E7783AD08268B87 /* [CP] Copy Pods Resources */ = {
+		171703C7B70BD7754338944B /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -749,7 +701,63 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Mailmo-MailmoUITests/Pods-Mailmo-MailmoUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B36740D9DC254B0F9B48B70E /* [CP] Check Pods Manifest.lock */ = {
+		358622E2B091F2028EBC3218 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Mailmo/Pods-Mailmo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Mailmo/Pods-Mailmo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Mailmo/Pods-Mailmo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		434B472EB176DE192545CE24 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Mailmo-MailmoUITests/Pods-Mailmo-MailmoUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Mailmo-MailmoUITests/Pods-Mailmo-MailmoUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Mailmo-MailmoUITests/Pods-Mailmo-MailmoUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9BB8384806F8D0262EFAFBB8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Mailmo-MailmoUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B44BFC9A4F5A5706AFA4BF66 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -817,6 +825,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				09E98D712605397A00C4F4F7 /* MailmoUITests.swift in Sources */,
+				098CABA82678195A005A54D0 /* SnapshotHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -975,7 +984,7 @@
 		};
 		09E98D762605397A00C4F4F7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D7370C9BC2ADA5073B55BA93 /* Pods-Mailmo.debug.xcconfig */;
+			baseConfigurationReference = 97CB3758C9BBA52B4820C376 /* Pods-Mailmo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -984,6 +993,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C5GN2KM3ZR;
 				INFOPLIST_FILE = Mailmo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -992,13 +1002,13 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		09E98D772605397A00C4F4F7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 98E715687F090D7228E54142 /* Pods-Mailmo.release.xcconfig */;
+			baseConfigurationReference = AB152D597CCB25578EF367AC /* Pods-Mailmo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1007,6 +1017,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C5GN2KM3ZR;
 				INFOPLIST_FILE = Mailmo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1015,13 +1026,13 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
 		09E98D792605397A00C4F4F7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 24D29AEB57FAA99D3E4A6369 /* Pods-MailmoTests.debug.xcconfig */;
+			baseConfigurationReference = 9EB7E84DF6D411871338B4FC /* Pods-MailmoTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1044,7 +1055,7 @@
 		};
 		09E98D7A2605397A00C4F4F7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4FDC0EEB62AF24BF444961DB /* Pods-MailmoTests.release.xcconfig */;
+			baseConfigurationReference = 46794A3B96F50260FD7E2EF4 /* Pods-MailmoTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1067,7 +1078,7 @@
 		};
 		09E98D7C2605397A00C4F4F7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DD1FFC4ED1737D5419C2FC7D /* Pods-Mailmo-MailmoUITests.debug.xcconfig */;
+			baseConfigurationReference = CD32E553BDF1639AD557780E /* Pods-Mailmo-MailmoUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1088,7 +1099,7 @@
 		};
 		09E98D7D2605397A00C4F4F7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E3A1FAEB756C80E7F9254FEF /* Pods-Mailmo-MailmoUITests.release.xcconfig */;
+			baseConfigurationReference = B0F009D7B3671F444F6FA2B4 /* Pods-Mailmo-MailmoUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
