@@ -79,7 +79,7 @@ class SignIn_VC: UIViewController {
         mainVC.userExists = userExists
         mainVC.showWelcomePopup = true
         mainVC.showTutorialView = showTutorialView
-        print(showTutorialView)
+        print("showTutorialView: \(showTutorialView)")
     
         self.view.window?.rootViewController = mainVC
         self.view.window?.makeKeyAndVisible()
