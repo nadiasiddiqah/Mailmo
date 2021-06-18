@@ -22,7 +22,7 @@ class SignUp_VC: UIViewController {
     var confirmPass = String()
     
     var userExists = false
-    var showTutorialView = false
+    var showTutorialView = true
     
     fileprivate var currentNonce: String?
     
@@ -55,6 +55,7 @@ class SignUp_VC: UIViewController {
         mainVC.userExists = userExists
         mainVC.showWelcomePopup = true
         mainVC.showTutorialView = showTutorialView
+        print(showTutorialView)
         
         view.window?.rootViewController = mainVC
         view.window?.makeKeyAndVisible()
@@ -232,13 +233,11 @@ class SignUp_VC: UIViewController {
                     // If user exists
                     strongSelf.userExists = true
                     strongSelf.showTutorialView = false
-        
                 } else {
                     // If user doesn't exist, create new user
                     strongSelf.userExists = false
-                    strongSelf.showTutorialView = true
                     strongSelf.firebaseData.child("users/\(uid)").setValue(["name": name,
-                                                                      "email": email])
+                                                                            "email": email])
                 }
 
                 // Transition to main screen

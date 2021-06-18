@@ -24,7 +24,7 @@ class Utils {
     
     static var currentUserInfo: CurrentUser?
     
-    static let minimumHitArea = CGSize(width: 100, height: 100)
+    static let minimumHitArea = CGSize(width: 50, height: 50)
     
     // MARK: - Methods
     static func calculateSendTime() -> String {
