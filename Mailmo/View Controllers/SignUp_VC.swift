@@ -42,8 +42,8 @@ class SignUp_VC: UIViewController {
     
     // MARK: - Navigation
     @IBAction func backButton(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
-//        navigationController?.popToRootViewController(animated: true)
+//        navigationController?.popViewController(animated: true)
+        navigationController?.popToRootViewController(animated: true)
     }
     
     func transitionToMain() {
@@ -63,6 +63,7 @@ class SignUp_VC: UIViewController {
     }
     
     @IBAction func backToLogin(_ sender: Any) {
+//        navigationController?.popViewController(animated: true)
         navigationController?.popToRootViewController(animated: true)
     }
     
