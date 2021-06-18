@@ -126,7 +126,7 @@ class Main_VC: UIViewController {
 
     @IBAction func pressedStarted(_ sender: Any) {
         bottomButtons.isUserInteractionEnabled = true
-        setupPopups()
+        tutorialViewPermission()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.tutorialPopup(show: false)
@@ -146,20 +146,118 @@ class Main_VC: UIViewController {
                 self.present(navController, animated: true, completion: nil)
             }
         } else {
-            self.setupView()
+            retrieveUserInfo()
         }
     }
     
-    // Set up main screen UI
-    func setupView() {
+    // Retrieve currentUserInfo
+    func retrieveUserInfo() {
+        // Start welcome animation
         welcomeAnimation.play(fromProgress: 0, toProgress: 1, loopMode: .loop, completion: nil)
         
         // Hide tutorial view + buttonHints
         showViews(show: false, views: [tutorialView, startHint, historyHint, settingsHint, newHint])
         
+        // Get user's uid
+        if let uid = firebaseAuth.currentUser?.uid {
+    
+            // Retrieve user snapshot info
+            firebaseData.child("users/\(uid)").observeSingleEvent(of: .value) { [weak self] (snapshot) in
+                guard let strongSelf = self else { return }
+
+                // Guard if there is no user snapshot
+                guard let userSnapshot = snapshot.value as? [String: Any] else { return }
+
+                // Save userSnapshot to currentUserInfo
+                Utils.currentUserInfo = CurrentUser(uid: uid, dictionary: userSnapshot)
+
+                // Retrieve user's name for welcomeText
+                if let user = Utils.currentUserInfo {
+                    if strongSelf.userExists {
+                        strongSelf.welcomeTextPicker(checkName: user.name,
+                                               genericText: "Welcome back!",
+                                               nameText: "Welcome back, \(user.name)!")
+                    } else {
+                        strongSelf.welcomeTextPicker(checkName: user.name,
+                                               genericText: "Welcome to Mailmo!",
+                                               nameText: "Welcome to Mailmo, \(user.name)!")
+                    }
+                }
+
+                strongSelf.tutorialViewPermission()
+
+            } withCancel: { (error) in
+                print("error: \(error)")
+                self.logOut(dueToError: true)
+                fatalError("Error has occurred")
+            }
+            
+        }
+     
+    }
+    
+    // Determine whether to show tutorialView
+    func tutorialViewPermission() {
+        
+        DispatchQueue.main.async {
+
+            if self.showTutorialView {
+                self.welcomeAnimation.pause()
+                self.bottomButtons.isUserInteractionEnabled = false
+
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                    self.tutorialPopup(show: true)
+                    self.showTutorialView = false
+                }
+            } else {
+                self.welcomeAnimation.play(fromProgress: 0, toProgress: 1, loopMode: .loop, completion: nil)
+                self.showStatusOrWelcomePopup()
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                    self.buttonHintPermissions()
+                }
+            }
+            
+        }
+    }
+    
+    func tutorialPopup(show: Bool) {
+        if show {
+            UIView.animate(withDuration: 1, delay: 0,
+                           options: .curveEaseIn,
+                           animations: {
+                            self.tutorialView.alpha = 1.0
+                           }, completion: nil)
+        } else {
+            UIView.animate(withDuration: 1, delay: 0,
+                           options: .curveEaseOut, animations: {
+               // Hide tutorial view
+               self.tutorialView.alpha = 0.0
+            }, completion: nil)
+        }
+    }
+    
+    func showStatusOrWelcomePopup() {
+        if self.showStatusPopup {
+            self.showStatusPopup = false
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                self.statusPopup()
+            }
+        }
+
+        if self.showWelcomePopup {
+            self.showWelcomePopup = false
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                self.welcomePopup()
+            }
+        }
+    }
+    
+    // Determine whether to show buttonHints
+    func buttonHintPermissions() {
+        
         // Determine which buttonHints to show based on noOfEmails
         if let uid = firebaseAuth.currentUser?.uid {
-            userID = uid
             
             databaseHandler = firebaseData.child("posts/\(uid)").observe(.value, with: { [weak self] (snapshot) in
                 guard let strongSelf = self else { return }
@@ -184,8 +282,6 @@ class Main_VC: UIViewController {
                 }
                 
             })
-            
-            retrieveUserInfo()
         }
     }
     
@@ -198,101 +294,6 @@ class Main_VC: UIViewController {
             for view in views {
                 view.alpha = 0.0
             }
-        }
-    }
-
-    // Retrieve currentUserInfo
-    func retrieveUserInfo() {
-    
-        firebaseData.child("users/\(userID)").observeSingleEvent(of: .value) { [weak self] (snapshot) in
-            guard let strongSelf = self else { return }
-
-            // If there is no user snapshot
-            guard let userSnapshot = snapshot.value as? [String: Any] else { return }
-
-            // Save userSnapshot to currentUserInfo
-            Utils.currentUserInfo = CurrentUser(uid: strongSelf.userID, dictionary: userSnapshot)
-
-            // Retrieve user's name for welcomeText
-            if let user = Utils.currentUserInfo {
-                if strongSelf.userExists {
-                    strongSelf.welcomeTextPicker(checkName: user.name,
-                                           genericText: "Welcome back!",
-                                           nameText: "Welcome back, \(user.name)!")
-                } else {
-                    strongSelf.welcomeTextPicker(checkName: user.name,
-                                           genericText: "Welcome to Mailmo!",
-                                           nameText: "Welcome to Mailmo, \(user.name)!")
-                }
-            }
-
-            strongSelf.setupPopups()
-
-        } withCancel: { (error) in
-            print("error: \(error)")
-            self.logOut(dueToError: true)
-            fatalError("Error has occurred")
-        }
-     
-    }
-
-    func setupPopups() {
-        welcomeAnimation.play(fromProgress: 0, toProgress: 1, loopMode: .loop, completion: nil)
-
-        DispatchQueue.main.async {
-
-            if self.showTutorialView {
-                self.welcomeAnimation.pause()
-                self.bottomButtons.isUserInteractionEnabled = false
-
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                    self.tutorialPopup(show: true)
-                }
-            } else {
-                if self.showStatusPopup {
-                    self.showStatusPopup = false
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-                        self.statusPopup()
-                    }
-                }
-
-                if self.showWelcomePopup {
-                    self.showWelcomePopup = false
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-                        self.welcomePopup()
-                    }
-                }
-            }
-            self.showTutorialView = false
-        }
-    }
-    
-    func tutorialPopup(show: Bool) {
-        print("show: \(show)")
-        if show {
-            UIView.animate(withDuration: 1, delay: 0,
-                           options: .curveEaseIn,
-                           animations: {
-                            self.tutorialView.alpha = 1.0
-                           }, completion: nil)
-        } else {
-            UIView.animate(withDuration: 1, delay: 0,
-                           options: .curveEaseOut) {
-                // Hide tutorial view
-                self.tutorialView.alpha = 0.0
-            } completion: { (_) in
-                // Show pulsing New button
-                self.showPulsingButton(button: self.newButton, color: #colorLiteral(red: 0.9423340559, green: 0.3914486766, blue: 0.2496597767, alpha: 1))
-
-                // Show button hints
-                UIView.animate(withDuration: 0.6) {
-                    self.startHint.alpha = 1.0
-                    self.historyHint.alpha = 1.0
-                    self.settingsHint.alpha = 1.0
-                }
-
-            }
-
         }
     }
     
