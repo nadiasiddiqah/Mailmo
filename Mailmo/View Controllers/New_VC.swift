@@ -12,8 +12,6 @@ import TinyConstraints
 import Speech
 import AVFoundation
 import Accelerate
-//import Gifu
-//import TinyConstraints
 
 class New_VC: UIViewController, SFSpeechRecognizerDelegate {
     
@@ -30,8 +28,6 @@ class New_VC: UIViewController, SFSpeechRecognizerDelegate {
     @IBOutlet weak var tapToLabel: UILabel!
     
     // MARK: - Speech Variables
-    var isButtonEnabled: Bool = false
-    var didStartRecognizer: Bool = false
     var didPressPause: Bool = false
     
     var timer: Timer?
@@ -73,6 +69,7 @@ class New_VC: UIViewController, SFSpeechRecognizerDelegate {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        
         checkOrStopSpeechRecognizer()
     }
     
@@ -109,9 +106,9 @@ class New_VC: UIViewController, SFSpeechRecognizerDelegate {
             showTapToFinish(showDots: true, isPaused: false)
             
             // Stop timer after 5s if no voice detected
-            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) { [self] in
-                if speechTextView.text == introText {
-                    voiceNotDetected()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                if self.speechTextView.text == self.introText {
+                    self.voiceNotDetected()
                 }
             }
         } else if audioEngine.isRunning && speechTextView.text != noVoice
@@ -125,24 +122,32 @@ class New_VC: UIViewController, SFSpeechRecognizerDelegate {
             showTapToFinish(showDots: !didPressPause, isPaused: didPressPause)
 
             // Stop timer after 5s if no voice detected
-            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) { [self] in
-                if speechTextView.text == introText {
-                    voiceNotDetected()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                if self.speechTextView.text == self.introText {
+                    self.voiceNotDetected()
                 }
             }
         } else {
             // Tap to finish
             determineNextStep()
         }
+        
+        if speechOrNextButton.currentImage == nil {
+            recordAnimation.isHidden = false
+        } else {
+            recordAnimation.isHidden = true
+        }
+        
     }
     
     // Tap to restart
-    @IBAction func restartButton(_ sender: Any) {
+    @IBAction func pressedRestart(_ sender: Any) {
         speechOrNextButton.isEnabled = false
         resetNewView()
     }
-
-    @IBAction func pauseButton(_ sender: Any) {
+    
+    // Tap to pause
+    @IBAction func pressedPause(_ sender: Any) {
         checkOrStopSpeechRecognizer()
         
         // Pause speechTimer
@@ -157,7 +162,6 @@ class New_VC: UIViewController, SFSpeechRecognizerDelegate {
         
         didPressPause = true
     }
-    
     
     // MARK: - General Methods
     func setupView() {
@@ -448,17 +452,18 @@ class New_VC: UIViewController, SFSpeechRecognizerDelegate {
         recognitionRequest.shouldReportPartialResults = true
         
         recognitionTask = speechRecognizer.recognitionTask(with: recognitionRequest, resultHandler: { [weak self] (result, error) in
-            
+
             guard let strongSelf = self else { return }
-            
+
             strongSelf.audioView.isHidden = false
             strongSelf.dotsAnimation.isHidden = true
-            strongSelf.pauseButton.isEnabled = true
-            
+
             // Check if there is results
             if let result = result {
                 let bestString = result.bestTranscription.formattedString
                 
+                strongSelf.pauseButton.isEnabled = true
+
                 if strongSelf.didPressPause {
                     // Pressed pause button
                     if !bestString.contains("I") {
@@ -469,26 +474,26 @@ class New_VC: UIViewController, SFSpeechRecognizerDelegate {
                     strongSelf.speechTextView.text = bestString
                 }
             }
-    
+
             // Check if there is non-nil error
             if error != nil {
-                
+
                 if strongSelf.recognitionTask != nil || strongSelf.didPressPause {
                     // Update savedText (for pauses)
                     strongSelf.savedText = strongSelf.speechTextView.text
-                    
+
                     if !strongSelf.didPressPause {
                         strongSelf.stopSpeechRecognizer()
                     }
                 }
-                
+
                 // Remove audio tap + enable speechOrNextButton
                 inputNode.removeTap(onBus: 0)
                 strongSelf.speechOrNextButton.isEnabled = true
             }
         })
     }
-    
+        
     // Stop speech recognizer (unless stopped already)
     func checkOrStopSpeechRecognizer() {
         if recognitionTask != nil {

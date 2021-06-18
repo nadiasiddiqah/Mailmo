@@ -79,6 +79,7 @@ class SignIn_VC: UIViewController {
         mainVC.userExists = userExists
         mainVC.showWelcomePopup = true
         mainVC.showTutorialView = showTutorialView
+        print(showTutorialView)
     
         self.view.window?.rootViewController = mainVC
         self.view.window?.makeKeyAndVisible()
@@ -260,7 +261,6 @@ class SignIn_VC: UIViewController {
                 if snapshot.exists() {
                     // If user exists
                     strongSelf.userExists = true
-                    strongSelf.showTutorialView = false
                 } else {
                     // If user doesn't exist, create new user
                     strongSelf.userExists = false

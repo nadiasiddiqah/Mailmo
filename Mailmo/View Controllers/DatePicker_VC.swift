@@ -13,7 +13,7 @@ class DatePicker_VC: UIViewController {
     // MARK: - Outlets
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var selectDateAndTimeButton: UIButton!
-    @IBOutlet weak var datePickerView: UIView!
+    @IBOutlet weak var pickerView: UIView!
     @IBOutlet weak var buttonView: UIView!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var nextButton: UIButton!
@@ -64,7 +64,7 @@ class DatePicker_VC: UIViewController {
     func setupView() {
         selectDateAndTimeButton.titleLabel?.adjustsFontSizeToFitWidth = true
         
-        datePickerView.roundCorners([.topLeft, .topRight], radius: 10)
+        pickerView.roundCorners([.topLeft, .topRight], radius: 10)
         buttonView.roundCorners([.bottomLeft, .bottomRight], radius: 10)
         
         setupDatePicker(startDate: initialDate)
