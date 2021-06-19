@@ -79,7 +79,7 @@ class SignIn_VC: UIViewController {
         mainVC.userExists = userExists
         mainVC.showWelcomePopup = true
         mainVC.showTutorialView = showTutorialView
-        print(showTutorialView)
+        print("showTutorialView: \(showTutorialView)")
     
         self.view.window?.rootViewController = mainVC
         self.view.window?.makeKeyAndVisible()
@@ -108,7 +108,7 @@ class SignIn_VC: UIViewController {
                 
                 if error != nil {
                     // Firebase sign in error
-                    Utils.dismissHud(Utils.hud, text: "Error", detailText: "Failed to create new user", delay: 0.5)
+                    Utils.dismissHud(Utils.hud, text: "Error", detailText: "Invalid email and/or password", delay: 0.5)
                 } else {
                     // Sign in successful
                     self.errorHandler("", isHidden: true)
@@ -244,8 +244,8 @@ class SignIn_VC: UIViewController {
         
         // Check if password is secure
         if !Utils.isPasswordValid(pass) {
-            // Password isn't secure enough
-            return "Password requires 8+ characters, a special character and a number."
+            // Password is not valid
+            return "Invalid password."
         }
         
         return nil
