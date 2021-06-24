@@ -68,6 +68,9 @@ class SignIn_VC: UIViewController {
     }
     
     // MARK: - Navigation
+    @IBAction func unwindToSignIn(_ unwindSegue: UIStoryboardSegue) {
+    }
+    
     func transitionToMain() {
         print("transition to main")
         // Dismiss HUD
@@ -196,10 +199,9 @@ class SignIn_VC: UIViewController {
     
     func playAnimation() {
         mailmoAnimation.animationSpeed = 0.25
-        mailmoAnimation.play(fromFrame: MailmoAnimationFrames.start.rawValue, toFrame: MailmoAnimationFrames.firing.rawValue, loopMode: .none) { [weak self] _ in
-            guard let strongSelf = self else { return }
-            strongSelf.mailmoAnimation.animationSpeed = 0.15
-            strongSelf.mailmoAnimation.play(fromFrame: MailmoAnimationFrames.firing.rawValue, toFrame: MailmoAnimationFrames.narrow.rawValue, loopMode: .autoReverse, completion: nil)
+        mailmoAnimation.play(fromFrame: MailmoAnimationFrames.start.rawValue, toFrame: MailmoAnimationFrames.firing.rawValue, loopMode: .none) { _ in
+            self.mailmoAnimation.animationSpeed = 0.15
+            self.mailmoAnimation.play(fromFrame: MailmoAnimationFrames.firing.rawValue, toFrame: MailmoAnimationFrames.narrow.rawValue, loopMode: .autoReverse, completion: nil)
         }
     }
     

@@ -20,7 +20,6 @@ class Main_VC: UIViewController {
     let firebaseData = Database.database().reference()
     var databaseHandler: DatabaseHandle?
     
-    var userID = String()
     var welcomeText = String()
 
     var showStatusPopup = Bool()

@@ -101,11 +101,11 @@ class DatePicker_VC: UIViewController {
     }
     
     func checkforEmptySubject() {
-        let subjectFormatter = DateFormatter()
-        subjectFormatter.dateFormat = "M-d h:mm"
+        let formattedDate = DateFormatter()
+        formattedDate.dateFormat = "MMM d, h:mm a"
         
         if email.subject == "" {
-            email.subject = "Memo \(subjectFormatter.string(from: datePicker.date))"
+            email.subject = "🚀 Memo (\(formattedDate.string(from: datePicker.date)))"
         }
         print(email.subject)
     }

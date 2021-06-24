@@ -250,12 +250,12 @@ class Edit_VC: UIViewController {
     }
     
     func checkforEmptySubject() {
-        let defaultSubject = DateFormatter()
-        defaultSubject.dateFormat = "M-d h:mm"
+        let formattedDate = DateFormatter()
+        formattedDate.dateFormat = "MMM d, h:mm a"
         
         if let subject = subjectTextField.text {
             if subject == "" {
-                emailContent.subject = "New Mailmo \(defaultSubject.string(from: today))"
+                emailContent.subject  = "🚀 Memo [\(formattedDate.string(from: today))]"
             } else {
                 emailContent.subject = subject
             }

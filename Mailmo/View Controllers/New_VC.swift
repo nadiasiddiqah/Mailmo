@@ -74,6 +74,9 @@ class New_VC: UIViewController, SFSpeechRecognizerDelegate {
     }
     
     // MARK: - Navigation Methods
+    @IBAction func unwindToMain(_ sender: Any) {
+    }
+    
     @IBAction func backToMain(_ sender: Any) {
         resetNewView()
         performSegue(withIdentifier: "unwindFromNewToMain", sender: nil)
@@ -266,12 +269,13 @@ class New_VC: UIViewController, SFSpeechRecognizerDelegate {
         speechOrNextButton.isEnabled = false
         speechRecognizer?.delegate = self
         
+        var isSpeechEnabled = false
+        var isMicEnabled = false
+        
         // Requests speech recognition / microphone permissions
         SFSpeechRecognizer.requestAuthorization { [weak self] (authStatus) in
-            guard let strongSelf = self else { return }
             
-            var isSpeechEnabled = false
-            var isMicEnabled = false
+            guard let strongSelf = self else { return }
     
             // Checks for speech recognition authStatus
             switch authStatus {
@@ -280,39 +284,31 @@ class New_VC: UIViewController, SFSpeechRecognizerDelegate {
             default:
                 isSpeechEnabled = false
             }
-            
+
             // Requests + checks microphone authStatus
-            switch AVAudioSession.sharedInstance().recordPermission {
-            
-            case .undetermined:
-                AVAudioSession.sharedInstance().requestRecordPermission { (granted) in
-                    if granted {
-                        isMicEnabled = true
-                    } else {
-                        isMicEnabled = false
-                    }
-                }
-            case .denied:
-                isMicEnabled = false
-            case .granted:
-                isMicEnabled = true
-            @unknown default:
-                isMicEnabled = false
-            }
-     
-            // Enable speakButton based on authStatus
-            OperationQueue.main.addOperation {
-                if isSpeechEnabled && isMicEnabled {
-                    strongSelf.speechOrNextButton.isEnabled = true
-                } else {
-                    strongSelf.speechOrNextButton.isEnabled = false
+            AVAudioSession.sharedInstance().requestRecordPermission { (authStatus) in
+                switch authStatus {
+                case true:
+                    isMicEnabled = true
+                case false:
+                    isMicEnabled = false
                 }
                 
-                if isSpeechEnabled == false {
-                    strongSelf.handlePermissionFailed()
+                // Enable speakButton based on authStatus
+                OperationQueue.main.addOperation {
+                    if isSpeechEnabled && isMicEnabled {
+                        strongSelf.speechOrNextButton.isEnabled = true
+                    } else {
+                        strongSelf.speechOrNextButton.isEnabled = false
+                    }
+                    
+                    if isSpeechEnabled == false {
+                        strongSelf.handlePermissionFailed()
+                    }
                 }
             }
         }
+    
     }
     
     // Check speech recognizer availability
@@ -395,6 +391,7 @@ class New_VC: UIViewController, SFSpeechRecognizerDelegate {
         
         // Install audio tap to record, monitor, and observe output of inputNode
         inputNode.installTap(onBus: 0, bufferSize: 1024, format: outputFormat) { [weak self] (buffer, _) in
+            
             guard let strongSelf = self else { return }
             
             strongSelf.recognitionRequest?.append(buffer)
@@ -452,7 +449,7 @@ class New_VC: UIViewController, SFSpeechRecognizerDelegate {
         recognitionRequest.shouldReportPartialResults = true
         
         recognitionTask = speechRecognizer.recognitionTask(with: recognitionRequest, resultHandler: { [weak self] (result, error) in
-
+            
             guard let strongSelf = self else { return }
 
             strongSelf.audioView.isHidden = false

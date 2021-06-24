@@ -82,6 +82,7 @@ class Settings_VC: UIViewController {
             strongSelf.logOut()
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.pruneNegativeWidthConstraints()
         present(alert, animated: true, completion: nil)
     }
     

@@ -1,8 +1,8 @@
 //
 //  SnapshotHelper.swift
-//  Example
+//  SnapshotHelper
 //
-//  Created by Felix Krause on 10/8/15.
+//  Created by Nadia Siddiqah on 6/21/21.
 //
 
 // -----------------------------------------------------
