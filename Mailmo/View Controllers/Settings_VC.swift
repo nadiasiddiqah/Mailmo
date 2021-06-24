@@ -9,6 +9,7 @@ import UIKit
 import GoogleSignIn
 import Firebase
 import JGProgressHUD
+import MessageUI
 
 class Settings_VC: UIViewController {
     
@@ -30,7 +31,7 @@ class Settings_VC: UIViewController {
     func transitionToSignIn() {
         
         // Hide HUD
-        hudView(show: false)
+        hudView(show: false, text: "")
         
         // Update root view controller to SignInVC (when user signs out)
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
@@ -96,7 +97,7 @@ class Settings_VC: UIViewController {
         }))
         alert.addAction(UIAlertAction(title: "Send Feedback", style: .default, handler: { [weak self] (_) in
             guard let strongSelf = self else { return }
-            strongSelf.pressedRateNow()
+            strongSelf.pressedSendFeedback()
         }))
         alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
@@ -108,9 +109,34 @@ class Settings_VC: UIViewController {
         
         // In case user already has reviewed app, direct them to app store link
         guard let writeReviewURL = URL(string: "https://apps.apple.com/app/id1570551825?action=write-review") else {
-            fatalError("Expected a valid URL")
+            let alert = UIAlertController(title: "Error", message: "Error in loading App Store Review.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+            return
         }
         UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
+    }
+    
+    func pressedSendFeedback() {
+        let subject = "Mailmo - Send Feedback / Contact Us"
+        let sendTo = "nadiasiddiqah@gmail.com"
+        
+        // Check if user has email set up
+        if MFMailComposeViewController.canSendMail() {
+            let mailComposeVC = MFMailComposeViewController()
+            mailComposeVC.mailComposeDelegate = self
+            mailComposeVC.setSubject(subject)
+            mailComposeVC.setToRecipients([sendTo])
+            
+            present(mailComposeVC, animated: true, completion: nil)
+        } else {
+            guard let sendEmailURL = URL(string: "https://www.mailmo.app") else {
+                let alert = UIAlertController(title: "Error", message: "Unable to access Mail App.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+                return
+            }
+            UIApplication.shared.open(sendEmailURL, options: [:], completionHandler: nil)
+        }
+    
     }
     
     // MARK: - View Methods
@@ -146,10 +172,9 @@ class Settings_VC: UIViewController {
         }
     }
     
-    
     func logOut() {
         // Show HUD
-        hudView(show: true)
+        hudView(show: true, text: "Logging out...")
         
         // Sign user out of Google
         GIDSignIn.sharedInstance()?.signOut()
@@ -165,9 +190,9 @@ class Settings_VC: UIViewController {
     }
     
     
-    func hudView(show: Bool) {
+    func hudView(show: Bool, text: String) {
         if show {
-            Utils.hud.textLabel.text = "Logging out..."
+            Utils.hud.textLabel.text = text
             Utils.hud.detailTextLabel.text = nil
             Utils.hud.show(in: view, animated: true)
         } else {
@@ -175,4 +200,116 @@ class Settings_VC: UIViewController {
         }
     }
     
+}
+
+extension Settings_VC: MFMailComposeViewControllerDelegate {
+    
+    func mailComposeController(_ controller: MFMailComposeViewController,
+                               didFinishWith result: MFMailComposeResult, error: Error?) {
+        
+        if let _ = error {
+            controller.dismiss(animated: true, completion: nil)
+            return
+        }
+
+        var text = String()
+        switch result {
+        case .cancelled:
+            text = "Cancelling..."
+        case .failed:
+            text = "Failed to Send Feedback"
+        case .saved:
+            text = "Feedback Saved"
+        case .sent:
+            text = "Feedback Sent!"
+        @unknown default:
+            text = "Error in Sending Feedback..."
+        }
+
+        hudView(show: true, text: text)
+        controller.dismiss(animated: true, completion: nil)
+        hudView(show: false, text: "")
+    }
+}
+
+struct EmailParameters {
+    /// Guaranteed to be non-empty
+    let toEmails: [String]
+    let ccEmails: [String]
+    let bccEmails: [String]
+    let subject: String?
+    let body: String?
+
+    /// Defaults validation is just verifying that the email is not empty.
+    static func defaultValidateEmail(_ email: String) -> Bool {
+        return !email.isEmpty
+    }
+
+    /// Returns `nil` if `toEmails` contains at least one email address validated by `validateEmail`
+    /// A "blank" email address is defined as an address that doesn't only contain whitespace and new lines characters, as defined by CharacterSet.whitespacesAndNewlines
+    /// `validateEmail`'s default implementation is `defaultValidateEmail`.
+    init?(
+        toEmails: [String],
+        ccEmails: [String],
+        bccEmails: [String],
+        subject: String?,
+        body: String?,
+        validateEmail: (String) -> Bool = defaultValidateEmail
+    ) {
+        func parseEmails(_ emails: [String]) -> [String] {
+            return emails.map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }.filter(validateEmail)
+        }
+        let toEmails = parseEmails(toEmails)
+        let ccEmails = parseEmails(ccEmails)
+        let bccEmails = parseEmails(bccEmails)
+        if toEmails.isEmpty {
+            return nil
+        }
+        self.toEmails = toEmails
+        self.ccEmails = ccEmails
+        self.bccEmails = bccEmails
+        self.subject = subject
+        self.body = body
+    }
+
+    /// Returns `nil` if `scheme` is not `mailto`, or if it couldn't find any `to` email addresses
+    /// `validateEmail`'s default implementation is `defaultValidateEmail`.
+    /// Reference: https://tools.ietf.org/html/rfc2368
+    init?(url: URL, validateEmail: (String) -> Bool = defaultValidateEmail) {
+        guard let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
+            return nil
+        }
+        let queryItems = urlComponents.queryItems ?? []
+        func splitEmail(_ email: String) -> [String] {
+            return email.split(separator: ",").map(String.init)
+        }
+        let initialParameters = (toEmails: urlComponents.path.isEmpty ? [] : splitEmail(urlComponents.path), subject: String?(nil), body: String?(nil), ccEmails: [String](), bccEmails: [String]())
+        let emailParameters = queryItems.reduce(into: initialParameters) { emailParameters, queryItem in
+            guard let value = queryItem.value else {
+                return
+            }
+            switch queryItem.name {
+            case "to":
+                emailParameters.toEmails += splitEmail(value)
+            case "cc":
+                emailParameters.ccEmails += splitEmail(value)
+            case "bcc":
+                emailParameters.bccEmails += splitEmail(value)
+            case "subject" where emailParameters.subject == nil:
+                emailParameters.subject = value
+            case "body" where emailParameters.body == nil:
+                emailParameters.body = value
+            default:
+                break
+            }
+        }
+        self.init(
+            toEmails: emailParameters.toEmails,
+            ccEmails: emailParameters.ccEmails,
+            bccEmails: emailParameters.bccEmails,
+            subject: emailParameters.subject,
+            body: emailParameters.body,
+            validateEmail: validateEmail
+        )
+    }
 }

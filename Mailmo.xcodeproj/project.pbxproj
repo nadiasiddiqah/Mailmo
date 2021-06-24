@@ -450,7 +450,6 @@
 				9EB7E84DF6D411871338B4FC /* Pods-MailmoTests.debug.xcconfig */,
 				46794A3B96F50260FD7E2EF4 /* Pods-MailmoTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -991,6 +990,7 @@
 				CODE_SIGN_ENTITLEMENTS = Mailmo/Mailmo.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = C5GN2KM3ZR;
 				INFOPLIST_FILE = Mailmo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
@@ -1015,6 +1015,7 @@
 				CODE_SIGN_ENTITLEMENTS = Mailmo/Mailmo.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = C5GN2KM3ZR;
 				INFOPLIST_FILE = Mailmo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
