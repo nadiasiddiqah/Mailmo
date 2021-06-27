@@ -225,6 +225,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		094387622688EB9A00D26887 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0924F0FF2613CD1300C0E909 /* AudioVisualizerView.swift */,
+				093D27B22631023000C4CBCB /* HistoryCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		096EE2AA2672E1E100FEBCEA /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -239,10 +248,8 @@
 		096EE2AB2672E24900FEBCEA /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				0924F0FF2613CD1300C0E909 /* AudioVisualizerView.swift */,
 				091DD2D32672B5990074FB10 /* Extensions.swift */,
 				09016C7E2614178C00B11BF0 /* Utils.swift */,
-				093D27B22631023000C4CBCB /* HistoryCell.swift */,
 				0924BB002668575600F93671 /* AppStoreReviewManager.swift */,
 				092AA3F0266FFD660025F4E6 /* PulseAnimation.swift */,
 			);
@@ -284,6 +291,7 @@
 				09E98E3D26053A6300C4F4F7 /* Storyboards */,
 				096EE2AA2672E1E100FEBCEA /* Models */,
 				09E98E4726053A6B00C4F4F7 /* View Controllers */,
+				094387622688EB9A00D26887 /* Views */,
 				096EE2AB2672E24900FEBCEA /* Helpers */,
 			);
 			path = Mailmo;
