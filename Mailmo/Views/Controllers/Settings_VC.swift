@@ -62,7 +62,7 @@ class Settings_VC: UIViewController {
                 
                 let cleanedPrefEmail = prefEmail.trimmingCharacters(in: .whitespacesAndNewlines)
                 strongSelf.emailButton.setTitle("\(cleanedPrefEmail)", for: .normal)
-                Utils.currentUserInfo?.prefEmail = cleanedPrefEmail
+                CurrentUser_VM.currentUserInfo?.prefEmail = cleanedPrefEmail
                 strongSelf.postPrefEmail()
             })
             saveAction.isEnabled = false
@@ -149,8 +149,8 @@ class Settings_VC: UIViewController {
         emailButton.titleLabel?.minimumScaleFactor = 0.5
         emailButton.titleLabel?.numberOfLines = 1
         emailButton.titleLabel?.adjustsFontSizeToFitWidth = true
-        if let user = Utils.currentUserInfo {
-            if user.prefEmail == Utils.n_a {
+        if let user = CurrentUser_VM.currentUserInfo {
+            if user.prefEmail == CurrentUser_VM.n_a {
                 emailButton.setTitle("\(user.email)", for: .normal)
             } else {
                 emailButton.setTitle("\(user.prefEmail)", for: .normal)
@@ -163,7 +163,7 @@ class Settings_VC: UIViewController {
         // Post data to Firebase
         if let uid = firebaseAuth.currentUser?.uid {
             print("Successfully posted data to Firebase")
-            if let user = Utils.currentUserInfo { 
+            if let user = CurrentUser_VM.currentUserInfo { 
                 firebaseData.child("users/\(uid)").setValue(["name": user.name,
                                                              "email": user.email,
                                                              "prefEmail": user.prefEmail])

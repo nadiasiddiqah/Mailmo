@@ -168,10 +168,10 @@ class Main_VC: UIViewController {
                 guard let userSnapshot = snapshot.value as? [String: Any] else { return }
 
                 // Save userSnapshot to currentUserInfo
-                Utils.currentUserInfo = CurrentUser(uid: uid, dictionary: userSnapshot)
+                CurrentUser_VM.currentUserInfo = CurrentUser(uid: uid, dictionary: userSnapshot)
 
                 // Retrieve user's name for welcomeText
-                if let user = Utils.currentUserInfo {
+                if let user = CurrentUser_VM.currentUserInfo {
                     if strongSelf.userExists {
                         strongSelf.welcomeTextPicker(checkName: user.name,
                                                genericText: "Welcome back!",
@@ -307,7 +307,7 @@ class Main_VC: UIViewController {
     }
 
     func welcomeTextPicker(checkName: String, genericText: String, nameText: String) {
-        if checkName == Utils.n_a || checkName == "" {
+        if checkName == CurrentUser_VM.n_a || checkName == "" {
             self.welcomeText = genericText
         } else {
             self.welcomeText = nameText

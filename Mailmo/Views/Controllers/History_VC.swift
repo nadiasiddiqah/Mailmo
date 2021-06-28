@@ -119,7 +119,7 @@ class History_VC: UIViewController {
         
         for email in allEmails {
             // Convert each email's sendAtString to UTC
-            let sendAtInt = Utils.convertStringToUTC(email.sendAtString)
+            let sendAtInt = SendEmail_VM.convertStringToUTC(email.sendAtString)
             
             // Compare each email's UTC vs timeNow's UTC
             if timeNow >= sendAtInt {
@@ -129,8 +129,8 @@ class History_VC: UIViewController {
             }
         }
         
-        sentEmails = sent.sorted(by: { Utils.convertStringToUTC($0.sendAtString) > Utils.convertStringToUTC($1.sendAtString) })
-        scheduledEmails = scheduled.sorted(by: { Utils.convertStringToUTC($0.sendAtString) > Utils.convertStringToUTC($1.sendAtString) })
+        sentEmails = sent.sorted(by: { SendEmail_VM.convertStringToUTC($0.sendAtString) > SendEmail_VM.convertStringToUTC($1.sendAtString) })
+        scheduledEmails = scheduled.sorted(by: { SendEmail_VM.convertStringToUTC($0.sendAtString) > SendEmail_VM.convertStringToUTC($1.sendAtString) })
     }
     
     func showTableView() {

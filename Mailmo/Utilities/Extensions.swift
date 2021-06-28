@@ -75,7 +75,7 @@ extension UIAlertController {
            let email = textFields?[1].text,
             let action = actions.last {
             
-            action.isEnabled = Utils.isEmailValid(email) && Utils.isNameValid(name)
+            action.isEnabled = SendEmail_VM.isEmailValid(email) && SendEmail_VM.isNameValid(name)
         }
     }
 }

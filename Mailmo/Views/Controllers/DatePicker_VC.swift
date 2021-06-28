@@ -111,11 +111,11 @@ class DatePicker_VC: UIViewController {
     }
     
     func postData() {
-        let sendTime = Utils.convertDateToString(datePicker.date)
+        let sendTime = SendEmail_VM.convertDateToString(datePicker.date)
         
         // Post data to Firebase
         if let uid = firebaseAuth.currentUser?.uid {
-            firebaseData.child("posts/\(uid)").child(Utils.calculateSendTime()).setValue(["subject": email.subject,
+            firebaseData.child("posts/\(uid)").child(SendEmail_VM.calculateSendTime()).setValue(["subject": email.subject,
                                                                                           "body": email.body,
                                                                                           "sendAtString": sendTime])
         }
@@ -129,7 +129,7 @@ class DatePicker_VC: UIViewController {
     func sendEmail() {
         // Email String Object (w/ personalization parameters)
         checkforEmptySubject()
-        let emailString = Utils.emailFormatter(to: to.email, toName: to.name ?? "",
+        let emailString = SendEmail_VM.emailFormatter(to: to.email, toName: to.name ?? "",
                                                from: from.email, fromName: from.name!,
                                                subject: email.subject, body: email.body,
                                                sendAt: email.sendAt)

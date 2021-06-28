@@ -18,7 +18,7 @@ class HistoryCell: UITableViewCell {
     // MARK: - Helper Methods
     func configureHistoryCell(info: FirebaseData) {
         let timeNow = Int(Date().timeIntervalSince1970 / 60) * 60
-        let sendAtInt = Utils.convertStringToUTC(info.sendAtString)
+        let sendAtInt = SendEmail_VM.convertStringToUTC(info.sendAtString)
         
         if timeNow >= sendAtInt {
             // If timeNow >= sendAtString -> email is sent

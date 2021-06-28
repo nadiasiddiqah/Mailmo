@@ -72,7 +72,7 @@ class Edit_VC: UIViewController {
     }
     
     func retrieveUserInfo() {
-        if let user = Utils.currentUserInfo {
+        if let user = CurrentUser_VM.currentUserInfo {
             name = user.name
             email = user.email
             prefEmail = user.prefEmail
@@ -148,8 +148,8 @@ class Edit_VC: UIViewController {
             
             let cleanedName = name.trimmingCharacters(in: .whitespacesAndNewlines)
             let cleanedPrefEmail = prefEmail.trimmingCharacters(in: .whitespacesAndNewlines)
-            Utils.currentUserInfo?.name = cleanedName
-            Utils.currentUserInfo?.prefEmail = cleanedPrefEmail
+            CurrentUser_VM.currentUserInfo?.name = cleanedName
+            CurrentUser_VM.currentUserInfo?.prefEmail = cleanedPrefEmail
             strongSelf.updateData()
             strongSelf.sendButton(enable: true)
         })
@@ -178,7 +178,7 @@ class Edit_VC: UIViewController {
         // Post data to Firebase
         if let uid = firebaseAuth.currentUser?.uid {
             print("Successfully posted data to Firebase")
-            if let user = Utils.currentUserInfo {
+            if let user = CurrentUser_VM.currentUserInfo {
                 firebaseData.child("users/\(uid)").setValue(["name": user.name,
                                                              "email": user.email,
                                                              "prefEmail": user.prefEmail])
@@ -264,12 +264,12 @@ class Edit_VC: UIViewController {
     }
     
     func postData() {
-        let sendTime = Utils.convertDateToString(today)
+        let sendTime = SendEmail_VM.convertDateToString(today)
         
         // Post data to Firebase
         if let uid = firebaseAuth.currentUser?.uid {
             print("Successfully posted data to Firebase")
-            firebaseData.child("posts/\(uid)").child(Utils.calculateSendTime()).setValue(["subject": emailContent.subject,
+            firebaseData.child("posts/\(uid)").child(SendEmail_VM.calculateSendTime()).setValue(["subject": emailContent.subject,
                                                                                           "body": emailContent.body,
                                                                                           "sendAtString": sendTime])
         }
@@ -278,10 +278,10 @@ class Edit_VC: UIViewController {
     func sendEmail() {
         // Email String Object (w/ personalization parameters)
         checkforEmptySubject()
-        let emailString = Utils.emailFormatter(to: to!.email, toName: to!.name!,
-                                               from: from.email, fromName: from.name!,
-                                               subject: emailContent.subject, body: emailContent.body,
-                                               sendAt: nil)
+        let emailString = SendEmail_VM.emailFormatter(to: to!.email, toName: to!.name!,
+                                                      from: from.email, fromName: from.name!,
+                                                      subject: emailContent.subject,
+                                                      body: emailContent.body, sendAt: nil)
         
         // Convert Email String -> UTF8 Data Object
         let emailData = emailString.data(using: .utf8)

@@ -117,13 +117,13 @@ class SignUp_VC: UIViewController {
         hudView(show: true, text: "Authenticating with Apple...")
         
         // Generate nonce
-        let nonce = Utils.randomNonceString()
+        let nonce = RandomNonceGenerator.randomNonceString()
         currentNonce = nonce
     
         // Create apple auth request
         let appleAuthRequest = ASAuthorizationAppleIDProvider().createRequest()
         appleAuthRequest.requestedScopes = [.fullName, .email]
-        appleAuthRequest.nonce = Utils.sha256(nonce)
+        appleAuthRequest.nonce = RandomNonceGenerator.sha256(nonce)
     
         // Present apple auth controller
         let authController = ASAuthorizationController(authorizationRequests: [appleAuthRequest])
@@ -193,13 +193,13 @@ class SignUp_VC: UIViewController {
         }
         
         // Check if email is valid
-        if !Utils.isEmailValid(email) {
+        if !SendEmail_VM.isEmailValid(email) {
             // Email is not valid
             return "Invalid email address."
         }
         
         // Check if password is secure
-        if !Utils.isPasswordValid(pass) {
+        if !SendEmail_VM.isPasswordValid(pass) {
             // Password isn't secure enough
             return "Password requires 8+ characters, a special character and a number."
         }

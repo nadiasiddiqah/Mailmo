@@ -18,6 +18,9 @@
 		093513482656040F000E3EF2 /* sendLaterAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 093513472656040F000E3EF2 /* sendLaterAnimation.json */; };
 		0935135226560422000E3EF2 /* welcomeAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 0935135126560422000E3EF2 /* welcomeAnimation.json */; };
 		093D27B32631023000C4CBCB /* HistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093D27B22631023000C4CBCB /* HistoryCell.swift */; };
+		09438782268A812800D26887 /* SendEmail_VM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09438781268A812800D26887 /* SendEmail_VM.swift */; };
+		09438787268A813E00D26887 /* CurrentUser_VM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09438786268A813E00D26887 /* CurrentUser_VM.swift */; };
+		0943878C268A818400D26887 /* RandomNonceGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0943878B268A818400D26887 /* RandomNonceGenerator.swift */; };
 		095ABFF12642326E00031A77 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 095ABFF02642326E00031A77 /* GoogleService-Info.plist */; };
 		096EE2912672CD2800FEBCEA /* EmailInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096EE2902672CD2800FEBCEA /* EmailInfo.swift */; };
 		096EE2962672CD6C00FEBCEA /* SendGridData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096EE2952672CD6C00FEBCEA /* SendGridData.swift */; };
@@ -116,6 +119,9 @@
 		093513472656040F000E3EF2 /* sendLaterAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sendLaterAnimation.json; sourceTree = "<group>"; };
 		0935135126560422000E3EF2 /* welcomeAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = welcomeAnimation.json; sourceTree = "<group>"; };
 		093D27B22631023000C4CBCB /* HistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryCell.swift; sourceTree = "<group>"; };
+		09438781268A812800D26887 /* SendEmail_VM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendEmail_VM.swift; sourceTree = "<group>"; };
+		09438786268A813E00D26887 /* CurrentUser_VM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUser_VM.swift; sourceTree = "<group>"; };
+		0943878B268A818400D26887 /* RandomNonceGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomNonceGenerator.swift; sourceTree = "<group>"; };
 		095ABFF02642326E00031A77 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		095AC07F2645B45800031A77 /* SendGrid_Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = SendGrid_Config.xcconfig; sourceTree = "<group>"; };
 		096EE2902672CD2800FEBCEA /* EmailInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailInfo.swift; sourceTree = "<group>"; };
@@ -225,11 +231,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		094387622688EB9A00D26887 /* Views */ = {
+		09438775268A7EB300D26887 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				09438781268A812800D26887 /* SendEmail_VM.swift */,
+				09438786268A813E00D26887 /* CurrentUser_VM.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		09438796268A845D00D26887 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				095ABFF02642326E00031A77 /* GoogleService-Info.plist */,
+				095AC07F2645B45800031A77 /* SendGrid_Config.xcconfig */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		09438797268A863D00D26887 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				09E98E3E26053A6300C4F4F7 /* LaunchScreen.storyboard */,
+				09E98E4026053A6300C4F4F7 /* Main.storyboard */,
 				0924F0FF2613CD1300C0E909 /* AudioVisualizerView.swift */,
 				093D27B22631023000C4CBCB /* HistoryCell.swift */,
+				09E98E4726053A6B00C4F4F7 /* Controllers */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -245,15 +272,16 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		096EE2AB2672E24900FEBCEA /* Helpers */ = {
+		096EE2AB2672E24900FEBCEA /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				091DD2D32672B5990074FB10 /* Extensions.swift */,
 				09016C7E2614178C00B11BF0 /* Utils.swift */,
+				0943878B268A818400D26887 /* RandomNonceGenerator.swift */,
 				0924BB002668575600F93671 /* AppStoreReviewManager.swift */,
 				092AA3F0266FFD660025F4E6 /* PulseAnimation.swift */,
+				091DD2D32672B5990074FB10 /* Extensions.swift */,
 			);
-			path = Helpers;
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 		09E98D3F2605397900C4F4F7 = {
@@ -285,14 +313,12 @@
 				09E98D4B2605397900C4F4F7 /* AppDelegate.swift */,
 				09E98D4D2605397900C4F4F7 /* SceneDelegate.swift */,
 				09E98D5C2605397A00C4F4F7 /* Info.plist */,
-				095ABFF02642326E00031A77 /* GoogleService-Info.plist */,
-				095AC07F2645B45800031A77 /* SendGrid_Config.xcconfig */,
+				09438796268A845D00D26887 /* Services */,
 				09E98E5B26053A9F00C4F4F7 /* Assets */,
-				09E98E3D26053A6300C4F4F7 /* Storyboards */,
 				096EE2AA2672E1E100FEBCEA /* Models */,
-				09E98E4726053A6B00C4F4F7 /* View Controllers */,
-				094387622688EB9A00D26887 /* Views */,
-				096EE2AB2672E24900FEBCEA /* Helpers */,
+				09438797268A863D00D26887 /* Views */,
+				09438775268A7EB300D26887 /* ViewModels */,
+				096EE2AB2672E24900FEBCEA /* Utilities */,
 			);
 			path = Mailmo;
 			sourceTree = "<group>";
@@ -405,16 +431,7 @@
 			path = "Ubuntu Font Family";
 			sourceTree = "<group>";
 		};
-		09E98E3D26053A6300C4F4F7 /* Storyboards */ = {
-			isa = PBXGroup;
-			children = (
-				09E98E3E26053A6300C4F4F7 /* LaunchScreen.storyboard */,
-				09E98E4026053A6300C4F4F7 /* Main.storyboard */,
-			);
-			path = Storyboards;
-			sourceTree = "<group>";
-		};
-		09E98E4726053A6B00C4F4F7 /* View Controllers */ = {
+		09E98E4726053A6B00C4F4F7 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				09E98E4926053A6B00C4F4F7 /* SignIn_VC.swift */,
@@ -429,7 +446,7 @@
 				09BA6C2B260C133B003DBFD3 /* HistoryDetails_VC.swift */,
 				09BA6C26260C131F003DBFD3 /* Settings_VC.swift */,
 			);
-			path = "View Controllers";
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		09E98E5B26053A9F00C4F4F7 /* Assets */ = {
@@ -795,13 +812,16 @@
 				096EE29E2672CD9100FEBCEA /* FirebaseData.swift in Sources */,
 				0924BB012668575600F93671 /* AppStoreReviewManager.swift in Sources */,
 				09016C742614173000B11BF0 /* New_VC.swift in Sources */,
+				09438782268A812800D26887 /* SendEmail_VM.swift in Sources */,
 				096EE2912672CD2800FEBCEA /* EmailInfo.swift in Sources */,
+				0943878C268A818400D26887 /* RandomNonceGenerator.swift in Sources */,
 				09BA6C08260AB73E003DBFD3 /* DatePicker_VC.swift in Sources */,
 				09BA6C0D260AB74F003DBFD3 /* SendLater_VC.swift in Sources */,
 				0924F1002613CD1300C0E909 /* AudioVisualizerView.swift in Sources */,
 				09BA6BD5260A5DEA003DBFD3 /* Edit_VC.swift in Sources */,
 				09E98D4C2605397900C4F4F7 /* AppDelegate.swift in Sources */,
 				09BA6BE4260A84D8003DBFD3 /* SendNow_VC.swift in Sources */,
+				09438787268A813E00D26887 /* CurrentUser_VM.swift in Sources */,
 				096EE2962672CD6C00FEBCEA /* SendGridData.swift in Sources */,
 				09BA6C27260C131F003DBFD3 /* Settings_VC.swift in Sources */,
 				091DD2D42672B5990074FB10 /* Extensions.swift in Sources */,
