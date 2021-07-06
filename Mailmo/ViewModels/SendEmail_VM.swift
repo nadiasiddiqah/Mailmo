@@ -7,7 +7,7 @@
 
 import Foundation
 
-class SendEmail_VM {
+struct SendEmail_VM {
     
     static func calculateSendTime() -> String {
         let date = Date()

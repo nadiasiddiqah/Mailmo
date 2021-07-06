@@ -8,6 +8,13 @@
 import Foundation
 import UIKit
 
+// MARK: - Int Extensions
+extension Int {
+  var degreesToRadians: CGFloat {
+    return CGFloat(self) * CGFloat(Double.pi) / 180.0
+  }
+}
+
 // MARK: - UIView Extensions
 extension UIView {
     func fadeTransition(_ duration: CFTimeInterval) {

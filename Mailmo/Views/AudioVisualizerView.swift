@@ -7,12 +7,6 @@
 
 import UIKit
 
-extension Int {
-  var degreesToRadians: CGFloat {
-    return CGFloat(self) * CGFloat(Double.pi) / 180.0
-  }
-}
-
 class AudioVisualizerView: UIView {
     
     // Bar width

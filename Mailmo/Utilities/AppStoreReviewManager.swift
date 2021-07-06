@@ -8,7 +8,7 @@
 import Foundation
 import StoreKit
 
-class AppStoreReviewManager {
+struct AppStoreReviewManager {
     
     static func requestReviewIfAppropriate(scene: UIWindowScene) {
         SKStoreReviewController.requestReview(in: scene)

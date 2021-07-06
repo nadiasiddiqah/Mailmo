@@ -11,7 +11,7 @@ import Lottie
 import JGProgressHUD
 import SwiftMessages
 
-class Utils {
+struct Utils {
     
     // MARK: - Variables
     static var hud: JGProgressHUD = {

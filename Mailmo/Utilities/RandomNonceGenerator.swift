@@ -8,7 +8,7 @@
 import Foundation
 import CryptoKit
 
-class RandomNonceGenerator {
+struct RandomNonceGenerator {
     
     static func randomNonceString(length: Int = 32) -> String {
       precondition(length > 0)
