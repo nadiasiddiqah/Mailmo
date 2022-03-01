@@ -1,0 +1,8 @@
+# For more information about the Appfile, see:
+#     https://docs.fastlane.tools/advanced/#appfile
+
+app_identifier "Nadia-Siddiqah.Mailmo"
+apple_id "nadiasiddiqah@gmail.com"
+team_id "EE4JBKVHJK"
+
+ENV["FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD"] = "dabt-ggdw-jutz-iehi"

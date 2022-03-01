@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<testsuites name='MailmoUITests.xctest' tests='4' failures='0'>
+  <testsuite name='MailmoTests.MailmoTests' tests='2' failures='0'>
+    <testcase classname='MailmoTests.MailmoTests' name='testExample' time='0.002'/>
+    <testcase classname='MailmoTests.MailmoTests' name='testPerformanceExample' time='0.322'/>
+  </testsuite>
+  <testsuite name='MailmoUITests.MailmoUITests' tests='2' failures='0'>
+    <testcase classname='MailmoUITests.MailmoUITests' name='testExample' time='1.949'/>
+    <testcase classname='MailmoUITests.MailmoUITests' name='testLaunchPerformance' time='17.151'/>
+  </testsuite>
+</testsuites>
