@@ -256,7 +256,6 @@
 				09E98E4026053A6300C4F4F7 /* Main.storyboard */,
 				0924F0FF2613CD1300C0E909 /* AudioVisualizerView.swift */,
 				093D27B22631023000C4CBCB /* HistoryCell.swift */,
-				09E98E4726053A6B00C4F4F7 /* Controllers */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -317,6 +316,7 @@
 				09E98E5B26053A9F00C4F4F7 /* Assets */,
 				096EE2AA2672E1E100FEBCEA /* Models */,
 				09438797268A863D00D26887 /* Views */,
+				09E98E4726053A6B00C4F4F7 /* Controllers */,
 				09438775268A7EB300D26887 /* ViewModels */,
 				096EE2AB2672E24900FEBCEA /* Utilities */,
 			);
