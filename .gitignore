@@ -1,1 +1,2 @@
-SendGrid_Config.xcconfig
+/Mailmo/Services/Config.xcconfig
+/Mailmo/Services/GoogleService-Info.plist
