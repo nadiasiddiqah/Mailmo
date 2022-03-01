@@ -121,10 +121,6 @@
 		09E98D4D2605397900C4F4F7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		09E98D572605397A00C4F4F7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		09E98D5C2605397A00C4F4F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		09E98D652605397A00C4F4F7 /* MailmoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailmoTests.swift; sourceTree = "<group>"; };
-		09E98D672605397A00C4F4F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		09E98D702605397A00C4F4F7 /* MailmoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailmoUITests.swift; sourceTree = "<group>"; };
-		09E98D722605397A00C4F4F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		09E98D9C260539E900C4F4F7 /* fa-solid-900.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fa-solid-900.ttf"; sourceTree = "<group>"; };
 		09E98D9D260539E900C4F4F7 /* fa-regular-400.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "fa-regular-400.svg"; sourceTree = "<group>"; };
 		09E98D9E260539E900C4F4F7 /* fa-regular-400.woff2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fa-regular-400.woff2"; sourceTree = "<group>"; };
@@ -244,8 +240,6 @@
 			isa = PBXGroup;
 			children = (
 				09E98D4A2605397900C4F4F7 /* Mailmo */,
-				09E98D642605397A00C4F4F7 /* MailmoTests */,
-				09E98D6F2605397A00C4F4F7 /* MailmoUITests */,
 				09E98D492605397900C4F4F7 /* Products */,
 				9A61292CDCD3C9BA69B1615B /* Frameworks */,
 				7AAB1092E4A92D79D2E11E80 /* Pods */,
@@ -276,24 +270,6 @@
 				096EE2AB2672E24900FEBCEA /* Utilities */,
 			);
 			path = Mailmo;
-			sourceTree = "<group>";
-		};
-		09E98D642605397A00C4F4F7 /* MailmoTests */ = {
-			isa = PBXGroup;
-			children = (
-				09E98D652605397A00C4F4F7 /* MailmoTests.swift */,
-				09E98D672605397A00C4F4F7 /* Info.plist */,
-			);
-			path = MailmoTests;
-			sourceTree = "<group>";
-		};
-		09E98D6F2605397A00C4F4F7 /* MailmoUITests */ = {
-			isa = PBXGroup;
-			children = (
-				09E98D702605397A00C4F4F7 /* MailmoUITests.swift */,
-				09E98D722605397A00C4F4F7 /* Info.plist */,
-			);
-			path = MailmoUITests;
 			sourceTree = "<group>";
 		};
 		09E98D91260539E000C4F4F7 /* Animations */ = {
