@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		09016C742614173000B11BF0 /* New_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09016C732614173000B11BF0 /* New_VC.swift */; };
 		09016C7F2614178C00B11BF0 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09016C7E2614178C00B11BF0 /* Utils.swift */; };
+		0904DAB927CF0EA900478415 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0904DAB827CF0EA900478415 /* GoogleService-Info.plist */; };
 		091DD2D42672B5990074FB10 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091DD2D32672B5990074FB10 /* Extensions.swift */; };
 		0924BB012668575600F93671 /* AppStoreReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0924BB002668575600F93671 /* AppStoreReviewManager.swift */; };
 		0924BB0E2669A0D300F93671 /* sendNowAnimation.gif in Resources */ = {isa = PBXBuildFile; fileRef = 0924BB0D2669A0D100F93671 /* sendNowAnimation.gif */; };
@@ -87,7 +88,7 @@
 		09016C732614173000B11BF0 /* New_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = New_VC.swift; sourceTree = "<group>"; };
 		09016C7E2614178C00B11BF0 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		0904DAB427CEEEB400478415 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
-		0904DAB527CEEEE000478415 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		0904DAB827CF0EA900478415 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		091DD2D32672B5990074FB10 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		0924BB002668575600F93671 /* AppStoreReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreReviewManager.swift; sourceTree = "<group>"; };
 		0924BB0D2669A0D100F93671 /* sendNowAnimation.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = sendNowAnimation.gif; sourceTree = "<group>"; };
@@ -251,7 +252,7 @@
 				09E98D4B2605397900C4F4F7 /* AppDelegate.swift */,
 				09E98D4D2605397900C4F4F7 /* SceneDelegate.swift */,
 				09E98D5C2605397A00C4F4F7 /* Info.plist */,
-				0904DAB527CEEEE000478415 /* GoogleService-Info.plist */,
+				0904DAB827CF0EA900478415 /* GoogleService-Info.plist */,
 				0904DAB427CEEEB400478415 /* Config.xcconfig */,
 				096EE2AA2672E1E100FEBCEA /* Models */,
 				09438797268A863D00D26887 /* Views */,
@@ -503,6 +504,7 @@
 				09E98DCA260539E900C4F4F7 /* fa-solid-900.svg in Resources */,
 				09E98DDF260539E900C4F4F7 /* Ubuntu-R.ttf in Resources */,
 				09E98DD2260539E900C4F4F7 /* fontawesome-all.css in Resources */,
+				0904DAB927CF0EA900478415 /* GoogleService-Info.plist in Resources */,
 				09E98D582605397A00C4F4F7 /* Assets.xcassets in Resources */,
 				09E98DCB260539E900C4F4F7 /* fa-solid-900.woff in Resources */,
 				09E98E4226053A6300C4F4F7 /* LaunchScreen.storyboard in Resources */,

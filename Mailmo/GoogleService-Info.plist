@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>214114628313-u088gs6mclhu64kg606ksgqiigqcbv9o.apps.googleusercontent.com</string>
+	<string>214114628313-ass5vj3pe2teemchq6qd0b9risikef48.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.214114628313-u088gs6mclhu64kg606ksgqiigqcbv9o</string>
+	<string>com.googleusercontent.apps.214114628313-ass5vj3pe2teemchq6qd0b9risikef48</string>
 	<key>API_KEY</key>
 	<string>$(GoogleAPI_Key)</string>
 	<key>GCM_SENDER_ID</key>
@@ -30,5 +30,7 @@
 	<true/>
 	<key>GOOGLE_APP_ID</key>
 	<string>1:214114628313:ios:f0e74f6b480b4e142784c8</string>
+	<key>DATABASE_URL</key>
+	<string>https://mailmo-app-default-rtdb.firebaseio.com</string>
 </dict>
 </plist>
