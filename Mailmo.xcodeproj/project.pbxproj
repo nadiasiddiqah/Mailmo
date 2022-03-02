@@ -193,15 +193,6 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
-		09438796268A845D00D26887 /* Services */ = {
-			isa = PBXGroup;
-			children = (
-				095ABFF02642326E00031A77 /* GoogleService-Info.plist */,
-				095AC07F2645B45800031A77 /* Config.xcconfig */,
-			);
-			path = Services;
-			sourceTree = "<group>";
-		};
 		09438797268A863D00D26887 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -261,7 +252,8 @@
 				09E98D4B2605397900C4F4F7 /* AppDelegate.swift */,
 				09E98D4D2605397900C4F4F7 /* SceneDelegate.swift */,
 				09E98D5C2605397A00C4F4F7 /* Info.plist */,
-				09438796268A845D00D26887 /* Services */,
+				095ABFF02642326E00031A77 /* GoogleService-Info.plist */,
+				095AC07F2645B45800031A77 /* Config.xcconfig */,
 				096EE2AA2672E1E100FEBCEA /* Models */,
 				09438797268A863D00D26887 /* Views */,
 				09E98E4726053A6B00C4F4F7 /* Controllers */,
