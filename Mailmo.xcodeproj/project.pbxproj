@@ -21,7 +21,6 @@
 		09438782268A812800D26887 /* SendEmail_VM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09438781268A812800D26887 /* SendEmail_VM.swift */; };
 		09438787268A813E00D26887 /* CurrentUser_VM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09438786268A813E00D26887 /* CurrentUser_VM.swift */; };
 		0943878C268A818400D26887 /* RandomNonceGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0943878B268A818400D26887 /* RandomNonceGenerator.swift */; };
-		095ABFF12642326E00031A77 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 095ABFF02642326E00031A77 /* GoogleService-Info.plist */; };
 		096EE2912672CD2800FEBCEA /* EmailInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096EE2902672CD2800FEBCEA /* EmailInfo.swift */; };
 		096EE2962672CD6C00FEBCEA /* SendGridData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096EE2952672CD6C00FEBCEA /* SendGridData.swift */; };
 		096EE29E2672CD9100FEBCEA /* FirebaseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096EE29D2672CD9100FEBCEA /* FirebaseData.swift */; };
@@ -87,6 +86,8 @@
 /* Begin PBXFileReference section */
 		09016C732614173000B11BF0 /* New_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = New_VC.swift; sourceTree = "<group>"; };
 		09016C7E2614178C00B11BF0 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		0904DAB427CEEEB400478415 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		0904DAB527CEEEE000478415 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		091DD2D32672B5990074FB10 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		0924BB002668575600F93671 /* AppStoreReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreReviewManager.swift; sourceTree = "<group>"; };
 		0924BB0D2669A0D100F93671 /* sendNowAnimation.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = sendNowAnimation.gif; sourceTree = "<group>"; };
@@ -99,8 +100,6 @@
 		09438781268A812800D26887 /* SendEmail_VM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendEmail_VM.swift; sourceTree = "<group>"; };
 		09438786268A813E00D26887 /* CurrentUser_VM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUser_VM.swift; sourceTree = "<group>"; };
 		0943878B268A818400D26887 /* RandomNonceGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomNonceGenerator.swift; sourceTree = "<group>"; };
-		095ABFF02642326E00031A77 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		095AC07F2645B45800031A77 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		096EE2902672CD2800FEBCEA /* EmailInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailInfo.swift; sourceTree = "<group>"; };
 		096EE2952672CD6C00FEBCEA /* SendGridData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendGridData.swift; sourceTree = "<group>"; };
 		096EE29D2672CD9100FEBCEA /* FirebaseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseData.swift; sourceTree = "<group>"; };
@@ -252,8 +251,8 @@
 				09E98D4B2605397900C4F4F7 /* AppDelegate.swift */,
 				09E98D4D2605397900C4F4F7 /* SceneDelegate.swift */,
 				09E98D5C2605397A00C4F4F7 /* Info.plist */,
-				095ABFF02642326E00031A77 /* GoogleService-Info.plist */,
-				095AC07F2645B45800031A77 /* Config.xcconfig */,
+				0904DAB527CEEEE000478415 /* GoogleService-Info.plist */,
+				0904DAB427CEEEB400478415 /* Config.xcconfig */,
 				096EE2AA2672E1E100FEBCEA /* Models */,
 				09438797268A863D00D26887 /* Views */,
 				09E98E4726053A6B00C4F4F7 /* Controllers */,
@@ -504,7 +503,6 @@
 				09E98DCA260539E900C4F4F7 /* fa-solid-900.svg in Resources */,
 				09E98DDF260539E900C4F4F7 /* Ubuntu-R.ttf in Resources */,
 				09E98DD2260539E900C4F4F7 /* fontawesome-all.css in Resources */,
-				095ABFF12642326E00031A77 /* GoogleService-Info.plist in Resources */,
 				09E98D582605397A00C4F4F7 /* Assets.xcassets in Resources */,
 				09E98DCB260539E900C4F4F7 /* fa-solid-900.woff in Resources */,
 				09E98E4226053A6300C4F4F7 /* LaunchScreen.storyboard in Resources */,
@@ -633,7 +631,6 @@
 /* Begin XCBuildConfiguration section */
 		09E98D732605397A00C4F4F7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 095AC07F2645B45800031A77 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -695,7 +692,6 @@
 		};
 		09E98D742605397A00C4F4F7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 095AC07F2645B45800031A77 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
